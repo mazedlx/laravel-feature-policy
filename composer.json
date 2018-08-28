@@ -1,6 +1,13 @@
 {
-  "name": "mazedlx/laravel-fp",
-  "description": "Add Feature Policy Headers to the responses of a Laravel app",
+  "name": "mazedlx/laravel-feature-policy",
+  "description": "Add Feature-Policy headers to the responses of a Laravel app",
+  "keywords": [
+    "laravel-feature-policy",
+    "feature-policy",
+    "security",
+    "headers",
+    "laravel"
+  ],
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -21,7 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Mazedlx\\Fp\\": "src"
+      "Mazedlx\\FeaturePolicy\\": "src"
     },
     "files": [
       "src/helpers.php"
@@ -29,7 +36,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Mazedlx\\Fp\\Tests\\": "tests"
+      "Mazedlx\\FeaturePolicy\\Tests\\": "tests"
     }
   },
   "scripts": {
