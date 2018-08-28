@@ -1,6 +1,6 @@
 # Set Feature-Policy headers in a Laravel app
 
-This package is strongly inspired by Spaties laravel-csp package. Thanks to Freek van der Herten and Thomas Verhelst for creating such an awesome package and doing all the heavy lifting!
+This package is strongly inspired by [Spaties](https://spatie.be) [laravel-csp](https://github.com/spatie/laravel-csp) package. Thanks to [Freek van der Herten](https://github.com/freekmurze) and [Thomas Verhelst](https://github.com/TVke) for creating such an awesome package and doing all the heavy lifting!
 
 With Feature-Policy you can control which web platform features to allow and disallow within your web applications. Feature-Policy is a Security Header (like Content-Security-Policy) that is brand new. The list of things you can restrict isn't final yet, I'll add them in time when the specification evolves.
 
@@ -61,7 +61,7 @@ Alternatively you can add the middleware to the a single route and route group:
 Route::get('/home', 'HomeController')->middleware(Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class);
 ```
 
-You could even override the policy specified in the config file:
+You could even pass a policy as a parameter and override the policy specified in the config file:
 
 ```php
 // in a routes file
@@ -98,3 +98,96 @@ The full list of restrictable directives isn't final yet, but here are some of t
 - vr
 
 You can find the feature definitions at [https://github.com/WICG/feature-policy/blob/master/features.md]
+
+You can add multiple policy options as an array or as a single string with space-sepearated options:
+
+```php
+// in a policy
+...
+    ->addDirective(Directive::CAMERA, [
+        Value::SELF,
+        'spatie.be',
+    ])
+    ->addDirective(Directive::GYROSCOPE, 'self spatie.be')
+...
+```
+
+## Creating Policies
+
+The `policy` key of the `feature-policy` config file is set to `Mazedlx\FeaturePolicy\Policies\Basic::class` by default, which allows your site to use a few of the available features. The class looks like this:
+
+```php
+<?php
+
+namespace Mazedlx\FeaturePolicy\Policies;
+
+use Mazedlx\FeaturePolicy\Value;
+use Mazedlx\FeaturePolicy\Directive;
+
+class Basic extends Policy
+{
+    public function configure()
+    {
+        $this->addDirective(Directive::GEOLOCATION, Value::SELF)
+            ->addDirective(Directive::FULLSCREEN, Value::SELF);
+    }
+}
+```
+
+Let's say you're happy with allowing `geolocation` and `fullscreen` but also wanted to add `www.awesomesite.com` to gain access to this feature, then you can easily extend the class:
+
+```php
+<?php
+
+namespace App\Services\FeaturePolicy\Policies;
+
+use Mazedlx\FeaturePolicy\Directive;
+use Mazedlx\FeaturePolicy\Policies\Basic;
+
+class MyFeaturePolicy extends Basic
+{
+    public function configure()
+    {
+        parent::configure();
+
+        $this->addDirective(Directive::GEOLOCATION, 'www.awesomesite.com')
+            ->addDirective(Directive::FULLSCREEN, 'www.awesomesite.com');
+    }
+}
+```
+
+Don't forget to change the `policy` key in the `feature-policy` config file to the class name fo your policy (e.g. `App\Services\Policies\MyFeaturePolicy`).
+
+## Testing
+
+You can run all tests with:
+
+```bash
+$ composer tests
+```
+
+## Changelog
+
+Please see CHANGELOG.md for more information what has changed recently.
+
+## Contributing
+
+Please see CONTRIBUTING.md for details.
+
+### Security
+
+If you discover any security related issues please email mazedlx@gmail.com instead of using the issue tracker.
+
+## Credits
+
+- [Freek van der Herten](https://github.com/freekmurze)
+- [Thomas Verhelst](https://github.com/TVke)
+- [All Contributors](https://github.com/mazedlx/laravel-feature-policy/contributors)
+
+## Support
+
+If you like this package please feel free to star it.
+
+## License
+
+The MIT License (MIT). Please see LICENSE.md for more information.
