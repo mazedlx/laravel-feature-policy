@@ -172,11 +172,11 @@ $ composer tests
 
 ## Changelog
 
-Please see CHANGELOG.md for more information what has changed recently.
+Please see [CHANGELOG](https://github.com/mazedlx/laravel-feature-policy/blob/master/CHANGELOG.md) for more information what has changed recently.
 
 ## Contributing
 
-Please see CONTRIBUTING.md for details.
+Please see [CONTRIBUTING](https://github.com/mazedlx/laravel-feature-policy/blob/master/CONTRIBUTING.md) for details.
 
 ### Security
 
@@ -194,4 +194,4 @@ If you like this package please feel free to star it.
 
 ## License
 
-The MIT License (MIT). Please see LICENSE.md for more information.
+The MIT License (MIT). Please see [LICENSE](https://github.com/mazedlx/laravel-feature-policy/blob/master/LICENSE.md) for more information.
