@@ -49,7 +49,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Mazedlx\\Fp\\FpServiceProvider"
+        "Mazedlx\\FeaturePolicy\\FeaturePolicyServiceProvider"
       ]
     }
   }
