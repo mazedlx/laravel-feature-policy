@@ -37,7 +37,7 @@ return [
     /*
      * Feature-policy headers will only be added if this is set to true
      */
-    'enabled' => env('CSP_ENABLED', true),
+    'enabled' => env('FPH_ENABLED', true),
 ];
 ```
 
