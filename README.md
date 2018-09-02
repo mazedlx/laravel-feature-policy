@@ -101,7 +101,7 @@ The full list of restrictable directives isn't final yet, but here are some of t
 - usb
 - vr
 
-You can find the feature definitions at [https://github.com/WICG/feature-policy/blob/master/features.md]
+You can find the feature definitions at https://github.com/WICG/feature-policy/blob/master/features.md
 
 You can add multiple policy options as an array or as a single string with space-sepearated options:
 
