@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0fff9d953e89460be6ddb6e04779a415",
+    "content-hash": "7b414af5fbc479f382c5bf92631b4423",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -278,110 +278,6 @@
                 "parser"
             ],
             "time": "2018-03-08T01:11:30+00:00"
-        },
-        {
-            "name": "illuminate/http",
-            "version": "v5.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/http.git",
-                "reference": "5bcf3e2d547a07bf98e0e71fa919fdaf513eee36"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/http/zipball/5bcf3e2d547a07bf98e0e71fa919fdaf513eee36",
-                "reference": "5bcf3e2d547a07bf98e0e71fa919fdaf513eee36",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/session": "5.7.*",
-                "illuminate/support": "5.7.*",
-                "php": "^7.1.3",
-                "symfony/http-foundation": "^4.1",
-                "symfony/http-kernel": "^4.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Illuminate\\Http\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "The Illuminate Http package.",
-            "homepage": "https://laravel.com",
-            "time": "2018-08-28T08:47:30+00:00"
-        },
-        {
-            "name": "illuminate/support",
-            "version": "v5.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/support.git",
-                "reference": "800277753547b925c9442cc4f937e3daea39c1c5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/800277753547b925c9442cc4f937e3daea39c1c5",
-                "reference": "800277753547b925c9442cc4f937e3daea39c1c5",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/inflector": "^1.1",
-                "ext-mbstring": "*",
-                "illuminate/contracts": "5.7.*",
-                "nesbot/carbon": "^1.24.1",
-                "php": "^7.1.3"
-            },
-            "conflict": {
-                "tightenco/collect": "<5.5.33"
-            },
-            "suggest": {
-                "illuminate/filesystem": "Required to use the composer class (5.7.*).",
-                "ramsey/uuid": "Required to use Str::uuid() (^3.7).",
-                "symfony/process": "Required to use the composer class (^4.1).",
-                "symfony/var-dumper": "Required to use the dd function (^4.1)."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Illuminate\\Support\\": ""
-                },
-                "files": [
-                    "helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "The Illuminate Support package.",
-            "homepage": "https://laravel.com",
-            "time": "2018-08-29T10:50:44+00:00"
         },
         {
             "name": "laravel/framework",
