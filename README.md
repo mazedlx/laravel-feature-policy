@@ -46,7 +46,7 @@ return [
 You can add Feature-Policy headers to all responses by registering `Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class` in the HTTP kernel:
 
 ```php
-// app/Htpp/Kernel.php
+// app/Http/Kernel.php
 
 ...
 
