@@ -2,7 +2,7 @@
 
 All notable changes to `laravel-feature-policy` will be documented in this file
 
-## 1.0.2 - 2019-08-27
+## 1.0.7 - 2019-08-27
 
 - get the package ready for Laravel 6.0
 
