@@ -6,7 +6,6 @@ use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Route;
-use Mazedlx\FeaturePolicy\Policies\Basic;
 use Mazedlx\FeaturePolicy\Policies\Policy;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
@@ -14,7 +13,7 @@ use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
 
 class AddFeaturePolicyHeaderTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -30,7 +29,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     {
         $headers = $this->getResponseHeaders();
 
-        $this->assertContains("geolocation 'self'", $headers->get('Feature-Policy'));
+        $this->assertStringContainsString("geolocation 'self'", $headers->get('Feature-Policy'));
     }
 
     /** @test */
