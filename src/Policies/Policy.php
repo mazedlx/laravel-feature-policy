@@ -3,6 +3,7 @@
 namespace Mazedlx\FeaturePolicy\Policies;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,14 +19,14 @@ abstract class Policy
     {
         $this->guardAgainstInvalidDirective($directive);
 
-        $rules = array_flatten(array_map(function ($values) {
+        $rules = Arr::flatten(array_map(function ($values) {
             return array_filter(explode(' ', $values));
-        }, array_wrap($values)));
+        }, Arr::wrap($values)));
 
         foreach ($rules as $rule) {
             $sanitizedValue = $this->sanitizeValue($rule);
 
-            if(! in_array($sanitizedValue, $this->directives[$directive] ?? [])) {
+            if (!in_array($sanitizedValue, $this->directives[$directive] ?? [])) {
                 $this->directives[$directive][] = $sanitizedValue;
             }
         }
@@ -63,7 +64,7 @@ abstract class Policy
 
     protected function guardAgainstInvalidDirective(string $directive)
     {
-        if (! Directive::isValid($directive)) {
+        if (!Directive::isValid($directive)) {
             throw InvalidDirective::notSupported($directive);
         }
     }
