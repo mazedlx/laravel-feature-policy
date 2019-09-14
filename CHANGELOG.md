@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-feature-policy` will be documented in this file
 
+## 1.0.9 - 2019-09-14
+
+- fix array and string helpers missing from Laravel's core
+
 ## 1.0.8 - 2019-08-27
 
 - add missing directive
