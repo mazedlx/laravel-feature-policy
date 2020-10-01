@@ -43,7 +43,7 @@ abstract class Policy
     {
         $this->configure();
 
-        $headerName = 'Feature-Policy';
+        $headerName = 'Permissions-Policy';
 
         if ($response->headers->has($headerName)) {
             return;
