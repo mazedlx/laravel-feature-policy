@@ -25,7 +25,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
     {
         $headers = $this->getResponseHeaders();
 
-        $this->assertStringContainsString("geolocation 'self'", $headers->get('Feature-Policy'));
+        $this->assertStringContainsString("geolocation 'self'", $headers->get('Permissions-Policy'));
     }
 
     protected function getResponseHeaders(string $url = 'test-route'): HeaderBag
