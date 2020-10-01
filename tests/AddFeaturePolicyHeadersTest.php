@@ -29,7 +29,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     {
         $headers = $this->getResponseHeaders();
 
-        $this->assertStringContainsString("geolocation 'self'", $headers->get('Feature-Policy'));
+        $this->assertStringContainsString("geolocation 'self'", $headers->get('Permissions-Policy'));
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
 
         $headers = $this->getResponseHeaders();
 
-        $this->assertNull($headers->get('Feature-Policy'));
+        $this->assertNull($headers->get('Permissions-Policy'));
     }
 
     /** @test */
@@ -78,7 +78,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
 
         $this->assertEquals(
             'camera src-1 src-2;fullscreen src-3 src-4',
-            $headers->get('Feature-Policy')
+            $headers->get('Permissions-Policy')
         );
     }
 
@@ -98,7 +98,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
 
         $this->assertEquals(
             'camera src-1 src-2',
-            $headers->get('Feature-Policy')
+            $headers->get('Permissions-Policy')
         );
     }
 
@@ -118,7 +118,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
 
         $this->assertEquals(
             "camera 'self'",
-            $headers->get('Feature-Policy')
+            $headers->get('Permissions-Policy')
         );
     }
 
@@ -138,7 +138,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
 
         $this->assertEquals(
             "camera src-1 'self' src-2",
-            $headers->get('Feature-Policy')
+            $headers->get('Permissions-Policy')
         );
     }
 
@@ -158,7 +158,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
 
         $this->assertEquals(
             "camera 'self'",
-            $headers->get('Feature-Policy')
+            $headers->get('Permissions-Policy')
         );
     }
 
@@ -182,7 +182,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
 
         $this->assertEquals(
             'fullscreen custom-policy',
-            $headers->get('Feature-Policy')
+            $headers->get('Permissions-Policy')
         );
     }
 
