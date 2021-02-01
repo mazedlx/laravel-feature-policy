@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-feature-policy` will be documented in this file
 
+## 1.1.2 - 2021-01-02
+
+- add PHP 8 support
+
 ## 1.0.9 - 2019-09-14
 
 - fix array and string helpers missing from Laravel's core
