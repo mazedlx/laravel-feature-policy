@@ -1,5 +1,7 @@
 # Set Feature-Policy headers in a Laravel app
 
+**NOW WITH PHP 8 SUPPORT**
+
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature.policy)
 [![Build Status](https://travis-ci.org/mazedlx/laravel-feature-policy.svg?branch=master)](https://travis-ci.org/mazedlx/laravel-feature-policy)
 [![Total Downloads](https://img.shields.io/packagist/dt/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature-policy)
@@ -167,7 +169,7 @@ Don't forget to change the `policy` key in the `feature-policy` config file to t
 You can run all tests with:
 
 ```bash
-$ composer tests
+$ composer test
 ```
 
 ## Changelog
