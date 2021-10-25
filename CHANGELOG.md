@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-feature-policy` will be documented in this file
 
+## 1.2.0 - 2021-10-25
+
+- implemented [RFC-8941](https://datatracker.ietf.org/doc/html/rfc8941) Structured Field Values for directive values
+
 ## 1.1.2 - 2021-01-02
 
 - add PHP 8 support

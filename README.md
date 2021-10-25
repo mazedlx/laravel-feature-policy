@@ -1,4 +1,4 @@
-# Set Feature-Policy headers in a Laravel app
+# Set Permissions-Policy headers in a Laravel app
 
 **NOW WITH PHP 8 SUPPORT**
 
@@ -8,7 +8,7 @@
 
 This package is strongly inspired by [Spaties](https://spatie.be) [laravel-csp](https://github.com/spatie/laravel-csp) package. Thanks to [Freek van der Herten](https://github.com/freekmurze) and [Thomas Verhelst](https://github.com/TVke) for creating such an awesome package and doing all the heavy lifting!
 
-With Feature-Policy you can control which web platform features to allow and disallow within your web applications. Feature-Policy is a Security Header (like Content-Security-Policy) that is brand new. The list of things you can restrict isn't final yet, I'll add them in time when the specification evolves.
+With Permissions-Policy you can control which web platform permissions to allow and disallow within your web applications. Permissions-Policy is a Security Header (like Content-Security-Policy) that is brand new. The list of things you can restrict isn't final yet, I'll add them in time when the specification evolves.
 
 ## Installation
 
@@ -31,7 +31,7 @@ The contents of the `config/feature-policy.php` file look like this:
 
 return [
     /*
-     * A policy will determine which Feature-Policy headers will be set.
+     * A policy will determine which Permissions-Policy headers will be set.
      * A valid policy extends `Mazedlx\FeaturePolicy\Policies\Policy`
      */
     'policy' => Mazedlx\FeaturePolicy\Policies\Basic::class,
@@ -60,7 +60,7 @@ protected $middlewareGroups = [
 ];
 ```
 
-Alternatively you can add the middleware to the a single route and route group:
+Alternatively you can add the middleware to a single route and route group:
 
 ```php
 // in a routes file
@@ -76,15 +76,15 @@ Route::get('/home', 'HomeController')->middleware(Mazedlx\FeaturePolicy\AddFeatu
 
 ## Usage
 
-This package allows you to define Feature-Policy policies. A Feature-Policy policy determines which Feature-Policy directives will be set in the headers of the response.
+This package allows you to define Permissions-Policy policies. A Feature-Policy policy determines which Permissions-Policy directives will be set in the headers of the response.
 
-An example of a Feature-Policy directive is `microphone`:
+An example of a Permissions-Policy directive is `microphone`:
 
-`Feature-Policy: microphone 'self' https://spatie.be`
+`Permissions-Policy: microphone=(self "https://spatie.be")`
 
-In the above example by specifying `microphone` and allowing it for `'self'` the feature is diabled for all origins except our own and https://spatie.be.
+In the above example by specifying `microphone` and allowing it for `self` makes the permission disabled for all origins except our own and https://spatie.be.
 
-The full list of restrictable directives isn't final yet, but here are some of the things you have access to:
+The full list of directives isn't final yet, but here are some of the things you have access to:
 
 - accelerometer
 - ambient-light-sensor
@@ -105,7 +105,7 @@ The full list of restrictable directives isn't final yet, but here are some of t
 
 You can find the feature definitions at https://github.com/WICG/feature-policy/blob/master/features.md
 
-You can add multiple policy options as an array or as a single string with space-sepearated options:
+You can add multiple policy options as an array or as a single string with space-separated options:
 
 ```php
 // in a policy
