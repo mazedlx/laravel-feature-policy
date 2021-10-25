@@ -6,5 +6,5 @@ abstract class Value
 {
     const ALL = '*';
     const SELF = 'self';
-    const NONE = 'none';
+    const NONE = '()';
 }

@@ -58,8 +58,11 @@ abstract class Policy
             ->map(function (array $values, string $directive) {
                 $valueString = implode(' ', $values);
 
-                return "{$directive} {$valueString}";
-            })->implode(';');
+                return count($values) === 1
+                    ? "{$directive}={$valueString}"
+                    : "{$directive}=({$valueString})";
+
+            })->implode(',');
     }
 
     protected function guardAgainstInvalidDirective(string $directive)
@@ -83,9 +86,9 @@ abstract class Policy
     protected function sanitizeValue(string $value): string
     {
         if ($this->isSpecialDirectiveValue($value)) {
-            return "'{$value}'";
+            return $value;
         }
 
-        return $value;
+        return "\"{$value}\"";
     }
 }
