@@ -103,7 +103,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     }
 
     /** @test */
-    public function it_quotes_special_directive_values()
+    public function it_doesnt_quotes_special_directive_values()
     {
         $policy = new class extends Policy {
             public function configure()
@@ -157,7 +157,47 @@ class AddFeaturePolicyHeaderTest extends TestCase
         $headers = $this->getResponseHeaders();
 
         $this->assertEquals(
-            "camera=self",
+            'camera=self',
+            $headers->get('Permissions-Policy')
+        );
+    }
+
+    /** @test */
+    public function it_will_render_none_value()
+    {
+        $policy = new class extends Policy {
+            public function configure()
+            {
+                $this->addDirective(Directive::CAMERA, [Value::NONE]);
+            }
+        };
+
+        config(['feature-policy.policy' => get_class($policy)]);
+
+        $headers = $this->getResponseHeaders();
+
+        $this->assertEquals(
+            'camera=()',
+            $headers->get('Permissions-Policy')
+        );
+    }
+
+    /** @test */
+    public function it_will_render_all_value()
+    {
+        $policy = new class extends Policy {
+            public function configure()
+            {
+                $this->addDirective(Directive::CAMERA, [Value::ALL]);
+            }
+        };
+
+        config(['feature-policy.policy' => get_class($policy)]);
+
+        $headers = $this->getResponseHeaders();
+
+        $this->assertEquals(
+            'camera=*',
             $headers->get('Permissions-Policy')
         );
     }
