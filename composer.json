@@ -1,56 +1,62 @@
 {
-  "name": "mazedlx/laravel-feature-policy",
-  "description": "Add Feature-Policy headers to the responses of a Laravel app",
-  "keywords": [
-    "laravel-feature-policy",
-    "feature-policy",
-    "security",
-    "headers",
-    "laravel"
-  ],
-  "type": "library",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Christian Leo-Pernold",
-      "email": "mazedlx@gmail.com"
-    }
-  ],
-  "minimum-stability": "stable",
-  "require": {
-    "php": "^7.0|^8.0|^8.1",
-    "illuminate/http": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
-    "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0"
-  },
-  "require-dev": {
-    "orchestra/testbench": "~3.5|~3.6|~3.7|~3.8|^4.0|^5.0|^6.0|^7.0",
-    "phpunit/phpunit": "^8.0|^9.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Mazedlx\\FeaturePolicy\\": "src"
+    "name": "mazedlx/laravel-feature-policy",
+    "description": "Add Feature-Policy headers to the responses of a Laravel app",
+    "keywords": [
+        "laravel-feature-policy",
+        "feature-policy",
+        "security",
+        "headers",
+        "laravel"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Leo-Pernold",
+            "email": "mazedlx@gmail.com"
+        },
+        {
+            "name": "Sebastian Fix",
+            "email": "sebastian.fix@codebar.ch",
+            "homepage": "https://www.codebar.ch",
+            "role": "Software Engineer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.0|^8.0|^8.1|^8.2",
+        "illuminate/http": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0",
+        "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0"
     },
-    "files": [
-      "src/helpers.php"
-    ]
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Mazedlx\\FeaturePolicy\\Tests\\": "tests"
+    "require-dev": {
+        "orchestra/testbench": "~3.5|~3.6|~3.7|~3.8|^4.0|^5.0|^6.0|^7.0|^8.0",
+        "phpunit/phpunit": "^8.0|^9.0|^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mazedlx\\FeaturePolicy\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mazedlx\\FeaturePolicy\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mazedlx\\FeaturePolicy\\FeaturePolicyServiceProvider"
+            ]
+        }
     }
-  },
-  "scripts": {
-    "test": "vendor/bin/phpunit",
-    "test-coverage": "phpunit --coverage-html coverage"
-  },
-  "config": {
-    "sort-packages": true
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Mazedlx\\FeaturePolicy\\FeaturePolicyServiceProvider"
-      ]
-    }
-  }
 }
