@@ -1,6 +1,6 @@
 <?php
 
-namespace CodebarAg\FeaturePolicy;
+namespace Mazedlx\FeaturePolicy;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -10,13 +10,13 @@ class FeaturePolicyServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole() && function_exists('config_path')) {
             $this->publishes([
-                __DIR__.'/../config/feature-policy.php' => config_path('feature-policy.php'),
+                __DIR__ . '/../config/feature-policy.php' => config_path('feature-policy.php'),
             ], 'config');
         }
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/feature-policy.php', 'feature-policy');
+        $this->mergeConfigFrom(__DIR__ . '/../config/feature-policy.php', 'feature-policy');
     }
 }

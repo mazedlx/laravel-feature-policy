@@ -1,6 +1,6 @@
 <?php
 
-namespace CodebarAg\FeaturePolicy\Exceptions;
+namespace Mazedlx\FeaturePolicy\Exceptions;
 
 use Exception;
 

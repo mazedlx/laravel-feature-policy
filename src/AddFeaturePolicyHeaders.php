@@ -1,6 +1,6 @@
 <?php
 
-namespace CodebarAg\FeaturePolicy;
+namespace Mazedlx\FeaturePolicy;
 
 use Closure;
 use Illuminate\Http\Request;

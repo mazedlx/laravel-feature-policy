@@ -1,15 +1,15 @@
 <?php
 
-namespace CodebarAg\FeaturePolicy\Tests;
+namespace Mazedlx\FeaturePolicy\Tests;
 
-use CodebarAg\FeaturePolicy\AddFeaturePolicyHeaders;
-use CodebarAg\FeaturePolicy\Directive;
-use CodebarAg\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
-use CodebarAg\FeaturePolicy\Policies\Policy;
-use CodebarAg\FeaturePolicy\Value;
+use Mazedlx\FeaturePolicy\Value;
+use Mazedlx\FeaturePolicy\Directive;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Route;
+use Mazedlx\FeaturePolicy\Policies\Policy;
 use Symfony\Component\HttpFoundation\HeaderBag;
+use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
+use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
 
 class AddFeaturePolicyHeaderTest extends TestCase
 {
@@ -29,7 +29,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     {
         $headers = $this->getResponseHeaders();
 
-        $this->assertStringContainsString('geolocation=self', $headers->get('Permissions-Policy'));
+        $this->assertStringContainsString("geolocation=self", $headers->get('Permissions-Policy'));
     }
 
     /** @test */
@@ -49,8 +49,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $invalidPolicyClassName = get_class(new class
-        {
+        $invalidPolicyClassName = get_class(new class {
         });
 
         config(['feature-policy.policy' => $invalidPolicyClassName]);
@@ -63,8 +62,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     /** @test */
     public function it_accepts_multiple_values_for_the_same_directive()
     {
-        $policy = new class extends Policy
-        {
+        $policy = new class extends Policy {
             public function configure()
             {
                 $this->addDirective(Directive::CAMERA, 'src-1')
@@ -87,8 +85,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     /** @test */
     public function it_can_add_multiple_values_for_the_same_directive_in_one_go()
     {
-        $policy = new class extends Policy
-        {
+        $policy = new class extends Policy {
             public function configure()
             {
                 $this->addDirective(Directive::CAMERA, ['src-1', 'src-2']);
@@ -108,8 +105,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     /** @test */
     public function it_doesnt_quotes_special_directive_values()
     {
-        $policy = new class extends Policy
-        {
+        $policy = new class extends Policy {
             public function configure()
             {
                 $this->addDirective(Directive::CAMERA, [Value::SELF]);
@@ -121,7 +117,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
         $headers = $this->getResponseHeaders();
 
         $this->assertEquals(
-            'camera=self',
+            "camera=self",
             $headers->get('Permissions-Policy')
         );
     }
@@ -129,11 +125,10 @@ class AddFeaturePolicyHeaderTest extends TestCase
     /** @test */
     public function it_can_add_values_from_a_space_separated_string()
     {
-        $policy = new class extends Policy
-        {
+        $policy = new class extends Policy {
             public function configure()
             {
-                $this->addDirective(Directive::CAMERA, 'src-1 '.Value::SELF.' src-2');
+                $this->addDirective(Directive::CAMERA, 'src-1 ' . Value::SELF . ' src-2');
             }
         };
 
@@ -150,8 +145,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     /** @test */
     public function it_will_not_add_duplicate_values()
     {
-        $policy = new class extends Policy
-        {
+        $policy = new class extends Policy {
             public function configure()
             {
                 $this->addDirective(Directive::CAMERA, [Value::SELF, Value::SELF]);
@@ -171,8 +165,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     /** @test */
     public function it_will_render_none_value()
     {
-        $policy = new class extends Policy
-        {
+        $policy = new class extends Policy {
             public function configure()
             {
                 $this->addDirective(Directive::CAMERA, [Value::NONE]);
@@ -192,8 +185,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     /** @test */
     public function it_will_render_all_value()
     {
-        $policy = new class extends Policy
-        {
+        $policy = new class extends Policy {
             public function configure()
             {
                 $this->addDirective(Directive::CAMERA, [Value::ALL]);
@@ -215,8 +207,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $customPolicy = new class extends Policy
-        {
+        $customPolicy = new class extends Policy {
             public function configure()
             {
                 $this->addDirective(Directive::FULLSCREEN, 'custom-policy');
@@ -225,7 +216,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
 
         Route::get('other-route', function () {
             return 'ok';
-        })->middleware(AddFeaturePolicyHeaders::class.':'.get_class($customPolicy));
+        })->middleware(AddFeaturePolicyHeaders::class . ':' . get_class($customPolicy));
 
         $headers = $this->getResponseHeaders('other-route');
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace CodebarAg\FeaturePolicy;
+namespace Mazedlx\FeaturePolicy;
 
-use CodebarAg\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
-use CodebarAg\FeaturePolicy\Policies\Policy;
+use Mazedlx\FeaturePolicy\Policies\Policy;
+use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
 
 class PolicyFactory
 {
