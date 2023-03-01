@@ -1,9 +1,9 @@
 <?php
 
-namespace CodebarAg\FeaturePolicy\Policies;
+namespace Mazedlx\FeaturePolicy\Policies;
 
-use CodebarAg\FeaturePolicy\Directive;
-use CodebarAg\FeaturePolicy\Value;
+use Mazedlx\FeaturePolicy\Value;
+use Mazedlx\FeaturePolicy\Directive;
 
 class Basic extends Policy
 {

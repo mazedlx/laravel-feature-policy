@@ -1,5 +1,11 @@
 # Set Permissions-Policy headers in a Laravel app
 
+**NOW WITH PHP 8 SUPPORT**
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature.policy)
+[![Build Status](https://travis-ci.org/mazedlx/laravel-feature-policy.svg?branch=master)](https://travis-ci.org/mazedlx/laravel-feature-policy)
+[![Total Downloads](https://img.shields.io/packagist/dt/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature-policy)
+
 This package is strongly inspired by [Spaties](https://spatie.be) [laravel-csp](https://github.com/spatie/laravel-csp) package. Thanks to [Freek van der Herten](https://github.com/freekmurze) and [Thomas Verhelst](https://github.com/TVke) for creating such an awesome package and doing all the heavy lifting!
 
 With Permissions-Policy you can control which web platform permissions to allow and disallow within your web applications. Permissions-Policy is a Security Header (like Content-Security-Policy) that is brand new. The list of things you can restrict isn't final yet, I'll add them in time when the specification evolves.
@@ -9,13 +15,13 @@ With Permissions-Policy you can control which web platform permissions to allow 
 You should install this package via composer:
 
 ```bash
-$ composer require codebar-ag/laravel-feature-policy
+$ composer require mazedlx/laravel-feature-policy
 ```
 
 Next, publish the config file:
 
 ```bash
-$ php artisan vendor:publish --provider="CodebarAg\FeaturePolicy\FeaturePolicyServiceProvider" --tag="config"
+$ php artisan vendor:publish --provider="Mazedlx\FeaturePolicy\FeaturePolicyServiceProvider" --tag="config"
 ```
 
 The contents of the `config/feature-policy.php` file look like this:
@@ -26,9 +32,9 @@ The contents of the `config/feature-policy.php` file look like this:
 return [
     /*
      * A policy will determine which Permissions-Policy headers will be set.
-     * A valid policy extends `CodebarAg\FeaturePolicy\Policies\Policy`
+     * A valid policy extends `Mazedlx\FeaturePolicy\Policies\Policy`
      */
-    'policy' => CodebarAg\FeaturePolicy\Policies\Basic::class,
+    'policy' => Mazedlx\FeaturePolicy\Policies\Basic::class,
 
     /*
      * Feature-policy headers will only be added if this is set to true
@@ -39,7 +45,7 @@ return [
 
 ## Middleware
 
-You can add Feature-Policy headers to all responses by registering `CodebarAg\FeaturePolicy\AddFeaturePolicyHeaders::class` in the HTTP kernel:
+You can add Feature-Policy headers to all responses by registering `Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class` in the HTTP kernel:
 
 ```php
 // app/Http/Kernel.php
@@ -49,7 +55,7 @@ You can add Feature-Policy headers to all responses by registering `CodebarAg\Fe
 protected $middlewareGroups = [
     'web' => [
         ...
-        \CodebarAg\FeaturePolicy\AddFeaturePolicyHeaders::class,
+        \Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class,
     ]
 ];
 ```
@@ -58,14 +64,14 @@ Alternatively you can add the middleware to a single route and route group:
 
 ```php
 // in a routes file
-Route::get('/home', 'HomeController')->middleware(CodebarAg\FeaturePolicy\AddFeaturePolicyHeaders::class);
+Route::get('/home', 'HomeController')->middleware(Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class);
 ```
 
 You could even pass a policy as a parameter and override the policy specified in the config file:
 
 ```php
 // in a routes file
-Route::get('/home', 'HomeController')->middleware(CodebarAg\FeaturePolicy\AddFeaturePolicyHeaders::class . ':' . MyFeaturePolicy::class);
+Route::get('/home', 'HomeController')->middleware(Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class . ':' . MyFeaturePolicy::class);
 ```
 
 ## Usage
@@ -114,15 +120,15 @@ You can add multiple policy options as an array or as a single string with space
 
 ## Creating Policies
 
-The `policy` key of the `feature-policy` config file is set to `CodebarAg\FeaturePolicy\Policies\Basic::class` by default, which allows your site to use a few of the available features. The class looks like this:
+The `policy` key of the `feature-policy` config file is set to `Mazedlx\FeaturePolicy\Policies\Basic::class` by default, which allows your site to use a few of the available features. The class looks like this:
 
 ```php
 <?php
 
-namespace CodebarAg\FeaturePolicy\Policies;
+namespace Mazedlx\FeaturePolicy\Policies;
 
-use CodebarAg\FeaturePolicy\Value;
-use CodebarAg\FeaturePolicy\Directive;
+use Mazedlx\FeaturePolicy\Value;
+use Mazedlx\FeaturePolicy\Directive;
 
 class Basic extends Policy
 {
@@ -141,8 +147,8 @@ Let's say you're happy with allowing `geolocation` and `fullscreen` but also wan
 
 namespace App\Services\FeaturePolicy\Policies;
 
-use CodebarAg\FeaturePolicy\Directive;
-use CodebarAg\FeaturePolicy\Policies\Basic;
+use Mazedlx\FeaturePolicy\Directive;
+use Mazedlx\FeaturePolicy\Policies\Basic;
 
 class MyFeaturePolicy extends Basic
 {
@@ -168,22 +174,21 @@ $ composer test
 
 ## Changelog
 
-Please see [CHANGELOG](https://github.com/codebar-ag/laravel-feature-policy/blob/master/CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](https://github.com/mazedlx/laravel-feature-policy/blob/master/CHANGELOG.md) for more information what has changed recently.
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/codebar-ag/laravel-feature-policy/blob/master/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](https://github.com/mazedlx/laravel-feature-policy/blob/master/CONTRIBUTING.md) for details.
 
 ### Security
 
-If you discover any security related issues please email helpdesk@codebar.ch instead of using the issue tracker.
+If you discover any security related issues please email mazedlx@gmail.com instead of using the issue tracker.
 
 ## Credits
 
-- [Christian Leo-Pernold](https://github.com/mazedlx/laravel-feature-policy)
 - [Freek van der Herten](https://github.com/freekmurze)
 - [Thomas Verhelst](https://github.com/TVke)
-- [All Contributors](https://github.com/codebar-ag/laravel-feature-policy/contributors)
+- [All Contributors](https://github.com/mazedlx/laravel-feature-policy/contributors)
 
 ## Support
 
@@ -191,4 +196,4 @@ If you like this package please feel free to star it.
 
 ## License
 
-The MIT License (MIT). Please see [LICENSE](https://github.com/codebar-ag/laravel-feature-policy/blob/master/LICENSE.md) for more information.
+The MIT License (MIT). Please see [LICENSE](https://github.com/mazedlx/laravel-feature-policy/blob/master/LICENSE.md) for more information.
