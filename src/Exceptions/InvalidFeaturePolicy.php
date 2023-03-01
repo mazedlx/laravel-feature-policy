@@ -2,8 +2,8 @@
 
 namespace CodebarAg\FeaturePolicy\Exceptions;
 
+use CodebarAg\FeaturePolicy\Policies\Policy;
 use Exception;
-use Mazedlx\FeaturePolicy\Policies\Policy;
 
 class InvalidFeaturePolicy extends Exception
 {

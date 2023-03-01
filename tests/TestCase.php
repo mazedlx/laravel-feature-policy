@@ -1,8 +1,8 @@
 <?php
 
-namespace Mazedlx\FeaturePolicy\Tests;
+namespace CodebarAg\FeaturePolicy\Tests;
 
-use Mazedlx\FeaturePolicy\FeaturePolicyServiceProvider;
+use CodebarAg\FeaturePolicy\FeaturePolicyServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra

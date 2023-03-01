@@ -1,10 +1,10 @@
 <?php
 
-namespace Mazedlx\FeaturePolicy\Tests;
+namespace CodebarAg\FeaturePolicy\Tests;
 
+use CodebarAg\FeaturePolicy\AddFeaturePolicyHeaders;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Route;
-use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
 class AddFeaturePolicyHeadersTest extends TestCase

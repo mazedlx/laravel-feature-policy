@@ -1,8 +1,8 @@
 <?php
 
-namespace Mazedlx\FeaturePolicy\Tests;
+namespace CodebarAg\FeaturePolicy\Tests;
 
-use Mazedlx\FeaturePolicy\Directive;
+use CodebarAg\FeaturePolicy\Directive;
 
 class DirectiveTest extends TestCase
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Mazedlx\FeaturePolicy\Tests;
+namespace CodebarAg\FeaturePolicy\Tests;
 
+use CodebarAg\FeaturePolicy\AddFeaturePolicyHeaders;
+use CodebarAg\FeaturePolicy\Directive;
+use CodebarAg\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
+use CodebarAg\FeaturePolicy\Policies\Policy;
+use CodebarAg\FeaturePolicy\Value;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Route;
-use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
-use Mazedlx\FeaturePolicy\Directive;
-use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
-use Mazedlx\FeaturePolicy\Policies\Policy;
-use Mazedlx\FeaturePolicy\Value;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
 class AddFeaturePolicyHeaderTest extends TestCase
