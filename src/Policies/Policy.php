@@ -1,13 +1,13 @@
 <?php
 
-namespace Mazedlx\FeaturePolicy\Policies;
+namespace CodebarAg\FeaturePolicy\Policies;
 
+use CodebarAg\FeaturePolicy\Directive;
+use CodebarAg\FeaturePolicy\Exceptions\InvalidDirective;
+use CodebarAg\FeaturePolicy\Value;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Mazedlx\FeaturePolicy\Value;
-use Mazedlx\FeaturePolicy\Directive;
 use Symfony\Component\HttpFoundation\Response;
-use Mazedlx\FeaturePolicy\Exceptions\InvalidDirective;
 
 abstract class Policy
 {
@@ -26,7 +26,7 @@ abstract class Policy
         foreach ($rules as $rule) {
             $sanitizedValue = $this->sanitizeValue($rule);
 
-            if (!in_array($sanitizedValue, $this->directives[$directive] ?? [])) {
+            if (! in_array($sanitizedValue, $this->directives[$directive] ?? [])) {
                 $this->directives[$directive][] = $sanitizedValue;
             }
         }
@@ -61,13 +61,12 @@ abstract class Policy
                 return count($values) === 1
                     ? "{$directive}={$valueString}"
                     : "{$directive}=({$valueString})";
-
             })->implode(',');
     }
 
     protected function guardAgainstInvalidDirective(string $directive)
     {
-        if (!Directive::isValid($directive)) {
+        if (! Directive::isValid($directive)) {
             throw InvalidDirective::notSupported($directive);
         }
     }

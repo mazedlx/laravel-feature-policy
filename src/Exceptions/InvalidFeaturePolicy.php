@@ -1,9 +1,9 @@
 <?php
 
-namespace Mazedlx\FeaturePolicy\Exceptions;
+namespace CodebarAg\FeaturePolicy\Exceptions;
 
+use CodebarAg\FeaturePolicy\Policies\Policy;
 use Exception;
-use Mazedlx\FeaturePolicy\Policies\Policy;
 
 class InvalidFeaturePolicy extends Exception
 {
@@ -11,6 +11,6 @@ class InvalidFeaturePolicy extends Exception
     {
         $className = get_class($class);
 
-        return new self("The Feature-Policy class '{$className}' is nit valid. A valid policy extends " . Policy::class);
+        return new self("The Feature-Policy class '{$className}' is nit valid. A valid policy extends ".Policy::class);
     }
 }
