@@ -23,7 +23,6 @@
             "role": "Software Engineer"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "php": "^8.1|^8.2",
         "illuminate/http": "^9.0|^10.0",
@@ -32,7 +31,9 @@
     },
     "require-dev": {
         "orchestra/testbench": "^7.0|^8.0",
-        "phpunit/phpunit": "^9.0|^10.0"
+        "phpunit/phpunit": "^9.0|^10.0",
+        "pestphp/pest": "2.x-dev",
+        "pestphp/pest-plugin-laravel": "2.x-dev"
     },
     "autoload": {
         "psr-4": {
@@ -49,7 +50,11 @@
         "test-coverage": "phpunit --coverage-html coverage"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
     },
     "extra": {
         "laravel": {
@@ -57,5 +62,7 @@
                 "CodebarAg\\FeaturePolicy\\FeaturePolicyServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
