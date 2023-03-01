@@ -2,8 +2,8 @@
 
 namespace Mazedlx\FeaturePolicy\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use Mazedlx\FeaturePolicy\FeaturePolicyServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
 {

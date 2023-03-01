@@ -1,10 +1,12 @@
 <?php
 
-namespace Mazedlx\FeaturePolicy;
+namespace CodebarAg\FeaturePolicy;
 
 abstract class Value
 {
     const ALL = '*';
+
     const SELF = 'self';
+
     const NONE = '()';
 }

@@ -4,8 +4,8 @@ namespace Mazedlx\FeaturePolicy\Tests;
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\HttpFoundation\HeaderBag;
 use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
+use Symfony\Component\HttpFoundation\HeaderBag;
 
 class AddFeaturePolicyHeadersTest extends TestCase
 {
