@@ -7,8 +7,6 @@ return [
      */
     'policy' => Mazedlx\FeaturePolicy\Policies\Basic::class,
 
-    /*
-     * Feature-policy headers will only be added if this is set to true
-     */
+    // Feature-policy headers will only be added if this is set to true
     'enabled' => env('FPH_ENABLED', true),
 ];
