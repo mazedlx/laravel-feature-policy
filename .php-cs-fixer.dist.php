@@ -1,19 +1,32 @@
 <?php
 
-return PhpCsFixer\Config::create()
-    ->setUsingCache(false)
+$finder = PhpCsFixer\Finder::create()
+    ->ignoreDotFiles(false)
+    ->ignoreVCSIgnored(true)
+    ->in([
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
+        __DIR__ . '/config',
+    ]);
+
+return (new PhpCsFixer\Config())
+    ->setFinder($finder)
     ->setRules([
         '@PSR2' => true,
         'array_syntax' => ['syntax' => 'short'],
         'combine_consecutive_unsets' => true,
-        'method_separation' => true,
-        'no_multiline_whitespace_before_semicolons' => true,
+        'phpdoc_separation' => true,
+        'multiline_whitespace_before_semicolons' => true,
         'single_quote' => true,
 
         'binary_operator_spaces' => [
-            'align_double_arrow' => false,
-            'align_equals' => false,
+            'operators' => [
+                '=' => 'single_space',
+                '=>' => 'single_space',
+                '<>' => 'single_space',
+            ],
         ],
+        'not_operator_with_successor_space' => true,
         // 'blank_line_after_opening_tag' => true,
         // 'blank_line_before_return' => true,
         'braces' => [
@@ -24,7 +37,7 @@ return PhpCsFixer\Config::create()
         'concat_space' => ['spacing' => 'one'],
         'declare_equal_normalize' => true,
         'function_typehint_space' => true,
-        'hash_to_slash_comment' => true,
+        'single_line_comment_style' => true,
         'include' => true,
         'lowercase_cast' => true,
         // 'native_function_casing' => true,
@@ -34,13 +47,15 @@ return PhpCsFixer\Config::create()
         // 'no_empty_comment' => true,
         // 'no_empty_phpdoc' => true,
         // 'no_empty_statement' => true,
-        'no_extra_consecutive_blank_lines' => [
-            'curly_brace_block',
-            'extra',
-            'parenthesis_brace_block',
-            'square_brace_block',
-            'throw',
-            'use',
+        'no_extra_blank_lines' => [
+            'tokens' => [
+                'curly_brace_block',
+                'extra',
+                'parenthesis_brace_block',
+                'square_brace_block',
+                'throw',
+                'use',
+            ],
         ],
         // 'no_leading_import_slash' => true,
         // 'no_leading_namespace_whitespace' => true,
@@ -85,7 +100,7 @@ return PhpCsFixer\Config::create()
         // 'space_after_semicolon' => true,
         // 'standardize_not_equals' => true,
         'ternary_operator_spaces' => true,
-        'trailing_comma_in_multiline_array' => true,
+        'trailing_comma_in_multiline' => true,
         'trim_array_spaces' => true,
         'unary_operator_spaces' => true,
         'whitespace_after_comma_in_array' => true,

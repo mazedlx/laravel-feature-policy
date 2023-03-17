@@ -1,0 +1,64 @@
+name: Analyse and format
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  analysis:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+        php:
+          - 7.4
+          - 8.0
+          - 8.1
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          tools: composer:v2,phpstan
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-suggest
+
+      - name: Run analysis
+        run: phpstan analyse --no-ansi --no-interaction --no-progress
+
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          tools: composer:v2,php-cs-fixer
+          coverage: none
+
+      - name: Run formatter
+        run: php-cs-fixer fix --no-ansi
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: '*.php'
+          create_branch: false
+          add_options: '-u'
+          push_options: '--force-with-lease'
+          commit_message: ":hammer: :construction_worker: formatting changes"
