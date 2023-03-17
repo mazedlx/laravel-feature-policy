@@ -29,7 +29,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
     {
         $headers = $this->getResponseHeaders();
 
-        $this->assertStringContainsString("geolocation=self", $headers->get('Permissions-Policy'));
+        $this->assertStringContainsString('geolocation=self', $headers->get('Permissions-Policy'));
     }
 
     /** @test */
@@ -117,7 +117,7 @@ class AddFeaturePolicyHeaderTest extends TestCase
         $headers = $this->getResponseHeaders();
 
         $this->assertEquals(
-            "camera=self",
+            'camera=self',
             $headers->get('Permissions-Policy')
         );
     }
