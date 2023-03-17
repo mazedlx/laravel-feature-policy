@@ -1,0 +1,21 @@
+# Default PHPStan config
+# can be overridden by copying this to phpstan.neon
+# if that file exists, then that will be used as config
+
+parameters:
+
+    paths:
+        - src
+        - tests
+
+    # The level ranges from 0 to 9 and the latter is the highest level
+    # more info at https://phpstan.org/user-guide/rule-levels
+    level: 5
+
+    reportUnmatchedIgnoredErrors: false
+
+    # Optional for having a clickable link to PHPStorm
+    # editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+
+    ignoreErrors:
+        - '#Call to an undefined method Illuminate\\Support\\HigherOrder#'
