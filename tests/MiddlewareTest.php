@@ -2,24 +2,10 @@
 
 namespace Mazedlx\FeaturePolicy\Tests;
 
-use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\HeaderBag;
-use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
 
-class AddFeaturePolicyHeadersTest extends TestCase
+class MiddlewareTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        app(Kernel::class)->pushMiddleware(AddFeaturePolicyHeaders::class);
-
-        Route::get('test-route', function () {
-            return 'ok';
-        });
-    }
-
     /** @test */
     public function it_sets_the_default_feature_policy_headers()
     {

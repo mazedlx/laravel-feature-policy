@@ -11,19 +11,8 @@ use Symfony\Component\HttpFoundation\HeaderBag;
 use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
 use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
 
-class AddFeaturePolicyHeaderTest extends TestCase
+class AddFeaturePolicyHeadersTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        app(Kernel::class)->pushMiddleware(AddFeaturePolicyHeaders::class);
-
-        Route::get('test-route', function () {
-            return 'ok';
-        });
-    }
-
     /** @test */
     public function it_sets_the_default_feature_policy_headers()
     {
