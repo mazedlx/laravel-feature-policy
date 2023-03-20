@@ -8,16 +8,18 @@ use Illuminate\Support\Facades\Route;
 use Mazedlx\FeaturePolicy\Policies\Policy;
 use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
 use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
-use Symfony\Component\HttpFoundation\HeaderBag;
 
 class AddFeaturePolicyHeadersTest extends TestCase
 {
     /** @test */
     public function it_sets_the_default_feature_policy_headers(): void
     {
-        $headers = $this->getResponseHeaders();
+        $permissionPolicyHeader = $this->get('test-route')
+            ->assertSuccessful()
+            ->headers
+            ->get('Permissions-Policy');
 
-        $this->assertStringContainsString('geolocation=self', $headers->get('Permissions-Policy'));
+        $this->assertStringContainsString('geolocation=self', $permissionPolicyHeader);
     }
 
     /** @test */
@@ -174,12 +176,5 @@ class AddFeaturePolicyHeadersTest extends TestCase
 
         $this->get('other-route')
             ->assertHeader('Permissions-Policy', 'fullscreen="custom-policy"');
-    }
-
-    protected function getResponseHeaders(string $url = 'test-route'): HeaderBag
-    {
-        return $this->get($url)
-            ->assertSuccessful()
-            ->headers;
     }
 }
