@@ -11,6 +11,6 @@ class InvalidFeaturePolicy extends Exception
     {
         $className = get_class($class);
 
-        return new self("The Feature-Policy class '{$className}' is nit valid. A valid policy extends " . Policy::class);
+        return new self("The Feature-Policy class '{$className}' is not valid. A valid policy extends " . Policy::class);
     }
 }

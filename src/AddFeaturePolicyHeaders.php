@@ -5,6 +5,7 @@ namespace Mazedlx\FeaturePolicy;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Mazedlx\FeaturePolicy\Policies\Policy;
 
 class AddFeaturePolicyHeaders
 {
@@ -13,8 +14,8 @@ class AddFeaturePolicyHeaders
         $response = $next($request);
 
         $this->getPolicies($customPolicyClass)
-            ->filter->shouldBeApplied($request, $response)
-            ->each->applyTo($response);
+            ->filter(fn (Policy $policy) => $policy->shouldBeApplied($request, $response))
+            ->each(fn (Policy $policy) => $policy->applyTo($response));
 
         return $response;
     }
