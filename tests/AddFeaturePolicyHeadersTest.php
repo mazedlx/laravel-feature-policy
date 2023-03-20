@@ -37,10 +37,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $invalidPolicyClassName = get_class(new class {
-        });
-
-        config(['feature-policy.policy' => $invalidPolicyClassName]);
+        config(['feature-policy.policy' => self::class]);
 
         $this->expectException(InvalidFeaturePolicy::class);
 
