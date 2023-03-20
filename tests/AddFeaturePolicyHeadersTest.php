@@ -6,9 +6,9 @@ use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 use Illuminate\Support\Facades\Route;
 use Mazedlx\FeaturePolicy\Policies\Policy;
-use Symfony\Component\HttpFoundation\HeaderBag;
 use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
 use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
+use Symfony\Component\HttpFoundation\HeaderBag;
 
 class AddFeaturePolicyHeadersTest extends TestCase
 {
@@ -27,9 +27,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             'feature-policy.enabled' => false,
         ]);
 
-        $headers = $this->getResponseHeaders();
-
-        $this->assertNull($headers->get('Permissions-Policy'));
+        $this->get('test-route')->assertHeaderMissing('Permissions-Policy');
     }
 
     /** @test */
@@ -41,7 +39,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
 
         $this->expectException(InvalidFeaturePolicy::class);
 
-        $this->getResponseHeaders();
+        $this->get('test-route')->assertOk();
     }
 
     /** @test */
@@ -59,12 +57,8 @@ class AddFeaturePolicyHeadersTest extends TestCase
 
         config(['feature-policy.policy' => get_class($policy)]);
 
-        $headers = $this->getResponseHeaders();
-
-        $this->assertEquals(
-            'camera=("src-1" "src-2"),fullscreen=("src-3" "src-4")',
-            $headers->get('Permissions-Policy')
-        );
+        $this->get('test-route')
+            ->assertHeader('Permissions-Policy', 'camera=("src-1" "src-2"),fullscreen=("src-3" "src-4")');
     }
 
     /** @test */
@@ -79,12 +73,8 @@ class AddFeaturePolicyHeadersTest extends TestCase
 
         config(['feature-policy.policy' => get_class($policy)]);
 
-        $headers = $this->getResponseHeaders();
-
-        $this->assertEquals(
-            'camera=("src-1" "src-2")',
-            $headers->get('Permissions-Policy')
-        );
+        $this->get('test-route')
+            ->assertHeader('Permissions-Policy', 'camera=("src-1" "src-2")');
     }
 
     /** @test */
@@ -99,12 +89,8 @@ class AddFeaturePolicyHeadersTest extends TestCase
 
         config(['feature-policy.policy' => get_class($policy)]);
 
-        $headers = $this->getResponseHeaders();
-
-        $this->assertEquals(
-            'camera=self',
-            $headers->get('Permissions-Policy')
-        );
+        $this->get('test-route')
+            ->assertHeader('Permissions-Policy', 'camera=self');
     }
 
     /** @test */
@@ -119,12 +105,8 @@ class AddFeaturePolicyHeadersTest extends TestCase
 
         config(['feature-policy.policy' => get_class($policy)]);
 
-        $headers = $this->getResponseHeaders();
-
-        $this->assertEquals(
-            'camera=("src-1" self "src-2")',
-            $headers->get('Permissions-Policy')
-        );
+        $this->get('test-route')
+            ->assertHeader('Permissions-Policy', 'camera=("src-1" self "src-2")');
     }
 
     /** @test */
@@ -139,12 +121,8 @@ class AddFeaturePolicyHeadersTest extends TestCase
 
         config(['feature-policy.policy' => get_class($policy)]);
 
-        $headers = $this->getResponseHeaders();
-
-        $this->assertEquals(
-            'camera=self',
-            $headers->get('Permissions-Policy')
-        );
+        $this->get('test-route')
+            ->assertHeader('Permissions-Policy', 'camera=self');
     }
 
     /** @test */
@@ -159,12 +137,8 @@ class AddFeaturePolicyHeadersTest extends TestCase
 
         config(['feature-policy.policy' => get_class($policy)]);
 
-        $headers = $this->getResponseHeaders();
-
-        $this->assertEquals(
-            'camera=()',
-            $headers->get('Permissions-Policy')
-        );
+        $this->get('test-route')
+            ->assertHeader('Permissions-Policy', 'camera=()');
     }
 
     /** @test */
@@ -179,12 +153,8 @@ class AddFeaturePolicyHeadersTest extends TestCase
 
         config(['feature-policy.policy' => get_class($policy)]);
 
-        $headers = $this->getResponseHeaders();
-
-        $this->assertEquals(
-            'camera=*',
-            $headers->get('Permissions-Policy')
-        );
+        $this->get('test-route')
+            ->assertHeader('Permissions-Policy', 'camera=*');
     }
 
     /** @test */
@@ -199,16 +169,11 @@ class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        Route::get('other-route', function () {
-            return 'ok';
-        })->middleware(AddFeaturePolicyHeaders::class . ':' . get_class($customPolicy));
+        Route::get('other-route', static fn () => 'ok')
+            ->middleware(AddFeaturePolicyHeaders::class . ':' . get_class($customPolicy));
 
-        $headers = $this->getResponseHeaders('other-route');
-
-        $this->assertEquals(
-            'fullscreen="custom-policy"',
-            $headers->get('Permissions-Policy')
-        );
+        $this->get('other-route')
+            ->assertHeader('Permissions-Policy', 'fullscreen="custom-policy"');
     }
 
     protected function getResponseHeaders(string $url = 'test-route'): HeaderBag
