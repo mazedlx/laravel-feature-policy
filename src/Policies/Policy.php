@@ -11,7 +11,7 @@ use Mazedlx\FeaturePolicy\Exceptions\InvalidDirective;
 
 abstract class Policy
 {
-    protected $directives = [];
+    protected array $directives = [];
 
     abstract public function configure();
 
@@ -26,7 +26,7 @@ abstract class Policy
         foreach ($rules as $rule) {
             $sanitizedValue = $this->isSpecialDirectiveValue($rule) ? $rule : "\"{$rule}\"";
 
-            if (! in_array($sanitizedValue, $this->directives[$directive] ?? [])) {
+            if (! in_array($sanitizedValue, $this->directives[$directive] ?? [], true)) {
                 $this->directives[$directive][] = $sanitizedValue;
             }
         }
@@ -39,7 +39,7 @@ abstract class Policy
         return config('feature-policy.enabled');
     }
 
-    public function applyTo(Response $response)
+    public function applyTo(Response $response): void
     {
         $this->configure();
 
@@ -72,6 +72,6 @@ abstract class Policy
             Value::ALL,
         ];
 
-        return in_array($value, $specialDirectiveValues);
+        return in_array($value, $specialDirectiveValues, true);
     }
 }
