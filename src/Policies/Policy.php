@@ -24,7 +24,7 @@ abstract class Policy
         }, Arr::wrap($values)));
 
         foreach ($rules as $rule) {
-            $sanitizedValue = $this->sanitizeValue($rule);
+            $sanitizedValue = $this->isSpecialDirectiveValue($rule) ? $rule : "\"{$rule}\"";
 
             if (! in_array($sanitizedValue, $this->directives[$directive] ?? [])) {
                 $this->directives[$directive][] = $sanitizedValue;
@@ -73,14 +73,5 @@ abstract class Policy
         ];
 
         return in_array($value, $specialDirectiveValues);
-    }
-
-    protected function sanitizeValue(string $value): string
-    {
-        if ($this->isSpecialDirectiveValue($value)) {
-            return $value;
-        }
-
-        return "\"{$value}\"";
     }
 }
