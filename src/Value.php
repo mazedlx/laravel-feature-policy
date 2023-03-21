@@ -4,7 +4,7 @@ namespace Mazedlx\FeaturePolicy;
 
 abstract class Value
 {
-    const ALL = '*';
-    const SELF = 'self';
-    const NONE = '()';
+    public const ALL = '*';
+    public const SELF = 'self';
+    public const NONE = '()';
 }
