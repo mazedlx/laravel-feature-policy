@@ -14,9 +14,9 @@ jobs:
         os:
           - ubuntu-latest
         php:
-          - 7.4
           - 8.0
           - 8.1
+          - 8.2
 
     steps:
       - name: Checkout code
@@ -31,7 +31,7 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-interaction --no-suggest
+        run: composer install --prefer-dist --no-interaction
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
