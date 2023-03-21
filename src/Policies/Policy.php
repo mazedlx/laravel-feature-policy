@@ -3,7 +3,6 @@
 namespace Mazedlx\FeaturePolicy\Policies;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,13 +14,14 @@ abstract class Policy
 
     abstract public function configure();
 
-    public function addDirective(string $directive, $values): self
+    public function addDirective(string $directive, ...$values): self
     {
         throw_if(! Directive::isValid($directive), InvalidDirective::notSupported($directive));
 
-        $rules = Arr::flatten(array_map(function ($values) {
-            return array_filter(explode(' ', $values));
-        }, Arr::wrap($values)));
+        $rules = collect(...$values)
+            ->map(fn ($values) => array_filter(explode(' ', $values)))
+            ->flatten()
+            ->all();
 
         foreach ($rules as $rule) {
             $sanitizedValue = $this->isSpecialDirectiveValue($rule) ? $rule : "\"{$rule}\"";
