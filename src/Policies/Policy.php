@@ -17,7 +17,7 @@ abstract class Policy
 
     public function addDirective(string $directive, $values): self
     {
-        $this->guardAgainstInvalidDirective($directive);
+        throw_if(! Directive::isValid($directive), InvalidDirective::notSupported($directive));
 
         $rules = Arr::flatten(array_map(function ($values) {
             return array_filter(explode(' ', $values));
@@ -64,14 +64,7 @@ abstract class Policy
             })->implode(',');
     }
 
-    protected function guardAgainstInvalidDirective(string $directive)
-    {
-        if (! Directive::isValid($directive)) {
-            throw InvalidDirective::notSupported($directive);
-        }
-    }
-
-    protected function isSpecialDirectiveValue(string $value)
+    protected function isSpecialDirectiveValue(string $value): bool
     {
         $specialDirectiveValues = [
             Value::NONE,
