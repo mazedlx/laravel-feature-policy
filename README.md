@@ -160,6 +160,9 @@ You can add multiple policy options as an array or as a single string with space
 
 The `policy` key of the `feature-policy` config file is set to `Mazedlx\FeaturePolicy\Policies\Basic::class` by default, which allows your site to use a few of the available features. The class looks like this:
 
+<details>
+<summary>Basic policy</summary>
+
 ```php
 <?php
 
@@ -178,7 +181,12 @@ class Basic extends Policy
 }
 ```
 
+</details>
+
 Let's say you're happy with allowing `geolocation` and `fullscreen` but also wanted to add `www.awesomesite.com` to gain access to this feature, then you can easily extend the class:
+
+<details>
+<summary>MyFeature policy</summary>
 
 ```php
 <?php
@@ -199,6 +207,7 @@ class MyFeaturePolicy extends Basic
     }
 }
 ```
+</details>
 
 Don't forget to change the `policy` key in the `feature-policy` config file to the class name fo your policy (e.g. `App\Services\Policies\MyFeaturePolicy`).
 
