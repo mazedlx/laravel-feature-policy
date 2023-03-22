@@ -5,7 +5,7 @@ namespace Mazedlx\FeaturePolicy\Policies;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 
-class Basic extends Policy
+final class Basic extends Policy
 {
     public function configure()
     {
