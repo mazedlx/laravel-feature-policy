@@ -6,7 +6,26 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature-policy)
 
 
-With Permissions-Policy you can control which web platform permissions to allow and disallow within your web applications. Permissions-Policy is a Security Header (like Content-Security-Policy) that is brand new. The list of things you can restrict isn't final yet, I'll add them in time when the specification evolves.
+The Permissions-Policy, which [previously](https://docs.w3cub.com/http/headers/feature-policy) was known as the Feature-Policy.
+But since it came out of draft, it was renamed to "Permissions-Policy".  
+The "Permissions-Policy" is an HTTP header which can be used to restrict the abilities of a browser.
+
+Where the Content-Security-Policy focuses on security, the "Permissions-Policy" focuses on allowing or disabling the abilities of the browser.  
+This can be done though the HTTP header, which this package focuses on, but it can also do this through the `allows` attribute on the `iframe` element.
+
+<details>
+<summary>iframe example</summary>
+
+```html
+<iframe width="643" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+```
+
+</details>
+
+More on the header itself can be found on the following sites.
+- [Feature Policy | Smashing Magazine](https://www.smashingmagazine.com/2018/12/feature-policy/)
+- [Feature Policy | Google Developers](https://developer.chrome.com/blog/feature-policy/)
+- [W3C](https://www.w3.org/TR/permissions-policy/)
 
 ## Installation
 
