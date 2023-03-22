@@ -16,9 +16,7 @@ abstract class TestCase extends Orchestra
 
         app(Kernel::class)->pushMiddleware(AddFeaturePolicyHeaders::class);
 
-        Route::get('test-route', function () {
-            return 'ok';
-        });
+        Route::get('test-route', static fn () => 'ok');
     }
 
     protected function getPackageProviders($app)

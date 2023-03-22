@@ -3,7 +3,6 @@
 namespace Mazedlx\FeaturePolicy\Policies;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,22 +10,23 @@ use Mazedlx\FeaturePolicy\Exceptions\InvalidDirective;
 
 abstract class Policy
 {
-    protected $directives = [];
+    protected array $directives = [];
 
     abstract public function configure();
 
-    public function addDirective(string $directive, $values): self
+    public function addDirective(string $directive, ...$values): self
     {
-        $this->guardAgainstInvalidDirective($directive);
+        throw_if(! Directive::isValid($directive), InvalidDirective::notSupported($directive));
 
-        $rules = Arr::flatten(array_map(function ($values) {
-            return array_filter(explode(' ', $values));
-        }, Arr::wrap($values)));
+        $rules = collect(...$values)
+            ->map(fn ($values) => array_filter(explode(' ', $values)))
+            ->flatten()
+            ->all();
 
         foreach ($rules as $rule) {
-            $sanitizedValue = $this->sanitizeValue($rule);
+            $sanitizedValue = $this->isSpecialDirectiveValue($rule) ? $rule : "\"{$rule}\"";
 
-            if (! in_array($sanitizedValue, $this->directives[$directive] ?? [])) {
+            if (! in_array($sanitizedValue, $this->directives[$directive] ?? [], true)) {
                 $this->directives[$directive][] = $sanitizedValue;
             }
         }
@@ -39,7 +39,7 @@ abstract class Policy
         return config('feature-policy.enabled');
     }
 
-    public function applyTo(Response $response)
+    public function applyTo(Response $response): void
     {
         $this->configure();
 
@@ -64,14 +64,7 @@ abstract class Policy
             })->implode(',');
     }
 
-    protected function guardAgainstInvalidDirective(string $directive)
-    {
-        if (! Directive::isValid($directive)) {
-            throw InvalidDirective::notSupported($directive);
-        }
-    }
-
-    protected function isSpecialDirectiveValue(string $value)
+    protected function isSpecialDirectiveValue(string $value): bool
     {
         $specialDirectiveValues = [
             Value::NONE,
@@ -79,15 +72,6 @@ abstract class Policy
             Value::ALL,
         ];
 
-        return in_array($value, $specialDirectiveValues);
-    }
-
-    protected function sanitizeValue(string $value): string
-    {
-        if ($this->isSpecialDirectiveValue($value)) {
-            return $value;
-        }
-
-        return "\"{$value}\"";
+        return in_array($value, $specialDirectiveValues, true);
     }
 }
