@@ -6,7 +6,14 @@ use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
 use Rector\Config\RectorConfig;
 use Rector\EarlyReturn\Rector\If_\ChangeAndIfToEarlyReturnRector;
 use Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector;
+use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
+use Rector\Php80\Rector\ClassMethod\FinalPrivateToPrivateVisibilityRector;
+use Rector\Php80\Rector\Switch_\ChangeSwitchToMatchRector;
+use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
+use Rector\Privatization\Rector\Class_\FinalizeClassesWithoutChildrenRector;
 use Rector\Set\ValueObject\LevelSetList;
+use Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
+use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictSetUpRector;
 use RectorLaravel\Set\LaravelLevelSetList;
 
 /**
@@ -23,21 +30,20 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->rules([
         InlineConstructorDefaultToPropertyRector::class,
         ChangeAndIfToEarlyReturnRector::class,
-        \Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector::class,
-        \Rector\Privatization\Rector\Class_\FinalizeClassesWithoutChildrenRector::class,
-        \Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector::class,
-        \Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictSetUpRector::class,
+        RemoveUnusedVariableInCatchRector::class,
+        FinalizeClassesWithoutChildrenRector::class,
+        AddParamTypeDeclarationRector::class,
+        TypedPropertyFromStrictSetUpRector::class,
+        ReadOnlyPropertyRector::class,
+        ChangeSwitchToMatchRector::class,
+        FinalPrivateToPrivateVisibilityRector::class,
     ]);
 
     // define sets of rules
     $rectorConfig->sets([
-        LevelSetList::UP_TO_PHP_74,
-        LaravelLevelSetList::UP_TO_LARAVEL_90,
+        LevelSetList::UP_TO_PHP_81,
+        LaravelLevelSetList::UP_TO_LARAVEL_100,
     ]);
-
-//    $rectorConfig->rule(\Rector\Php81\Rector\Property\ReadOnlyPropertyRector::class);
-//    $rectorConfig->rule(\Rector\Php80\Rector\Switch_\ChangeSwitchToMatchRector::class);
-//    $rectorConfig->rule(\Rector\Php80\Rector\ClassMethod\FinalPrivateToPrivateVisibilityRector::class);
 
     $rectorConfig->skip([
         ClosureToArrowFunctionRector::class,
