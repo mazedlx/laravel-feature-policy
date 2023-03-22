@@ -1,4 +1,4 @@
-# Set Permissions-Policy headers in a Laravel app
+# Configure the browsers abilities
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature.policy)
 [![Tests](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/test.yml/badge.svg)](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/test.yml)
