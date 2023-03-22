@@ -5,7 +5,6 @@
 [![Analyse and format](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/code-quality.yml/badge.svg)](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/code-quality.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature-policy)
 
-This package is strongly inspired by [Spaties](https://spatie.be) [laravel-csp](https://github.com/spatie/laravel-csp) package. Thanks to [Freek van der Herten](https://github.com/freekmurze) and [Thomas Verhelst](https://github.com/TVke) for creating such an awesome package and doing all the heavy lifting!
 
 With Permissions-Policy you can control which web platform permissions to allow and disallow within your web applications. Permissions-Policy is a Security Header (like Content-Security-Policy) that is brand new. The list of things you can restrict isn't final yet, I'll add them in time when the specification evolves.
 
@@ -186,6 +185,9 @@ Please see [CONTRIBUTING](https://github.com/mazedlx/laravel-feature-policy/blob
 If you discover any security related issues please email mazedlx@gmail.com instead of using the issue tracker.
 
 ## Credits
+
+This package is strongly inspired by [Spatie](https://spatie.be) [laravel-csp](https://github.com/spatie/laravel-csp) package.
+Thanks to [Freek van der Herten](https://github.com/freekmurze) and [Thomas Verhelst](https://github.com/TVke) for creating such an awesome package and doing all the heavy lifting!
 
 - [Freek van der Herten](https://github.com/freekmurze)
 - [Thomas Verhelst](https://github.com/TVke)
