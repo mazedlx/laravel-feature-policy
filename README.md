@@ -220,19 +220,15 @@ $ composer test
 ```
 
 ## Changelog
-
 Please see [CHANGELOG](https://github.com/mazedlx/laravel-feature-policy/blob/master/CHANGELOG.md) for more information what has changed recently.
 
 ## Contributing
-
 Please see [CONTRIBUTING](https://github.com/mazedlx/laravel-feature-policy/blob/master/CONTRIBUTING.md) for details.
 
-### Security
-
+## Security
 If you discover any security related issues please email mazedlx@gmail.com instead of using the issue tracker.
 
 ## Credits
-
 This package is strongly inspired by [Spatie](https://spatie.be) [laravel-csp](https://github.com/spatie/laravel-csp) package.
 Thanks to [Freek van der Herten](https://github.com/freekmurze) and [Thomas Verhelst](https://github.com/TVke) for creating such an awesome package and doing all the heavy lifting!
 
@@ -241,9 +237,7 @@ Thanks to [Freek van der Herten](https://github.com/freekmurze) and [Thomas Verh
 - [All Contributors](https://github.com/mazedlx/laravel-feature-policy/contributors)
 
 ## Support
-
 If you like this package please feel free to star it.
 
 ## License
-
 The MIT License (MIT). Please see [LICENSE](https://github.com/mazedlx/laravel-feature-policy/blob/master/LICENSE.md) for more information.
