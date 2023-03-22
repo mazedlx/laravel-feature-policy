@@ -64,7 +64,9 @@ return [
 
 ## Middleware
 
-You can add Feature-Policy headers to all responses by registering `Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class` in the HTTP kernel:
+You can add "Feature-Policy" headers to all responses by registering `Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class` in the HTTP kernel:
+<details>
+<summary>Middleware example</summary>
 
 ```php
 // app/Http/Kernel.php
@@ -78,20 +80,32 @@ protected $middlewareGroups = [
     ]
 ];
 ```
+</details>
 
 Alternatively you can add the middleware to a single route and route group:
+<details>
+<summary>Route example</summary>
 
 ```php
 // in a routes file
-Route::get('/home', 'HomeController')->middleware(Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class);
+use App\Http\Controllers\HomeController;
+use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
+
+Route::get('/home', HomeController::class)
+    ->middleware(AddFeaturePolicyHeaders::class);
 ```
 
 You could even pass a policy as a parameter and override the policy specified in the config file:
 
 ```php
 // in a routes file
-Route::get('/home', 'HomeController')->middleware(Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class . ':' . MyFeaturePolicy::class);
+use App\Http\Controllers\HomeController;
+use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
+
+Route::get('/home', HomeController::class)
+    ->middleware(AddFeaturePolicyHeaders::class . ':' . MyFeaturePolicy::class);
 ```
+</details>
 
 ## Usage
 
