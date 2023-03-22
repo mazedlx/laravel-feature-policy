@@ -1,7 +1,5 @@
 # Set Permissions-Policy headers in a Laravel app
 
-**NOW WITH PHP 8 SUPPORT**
-
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature.policy)
 [![Build Status](https://travis-ci.org/mazedlx/laravel-feature-policy.svg?branch=master)](https://travis-ci.org/mazedlx/laravel-feature-policy)
 [![Total Downloads](https://img.shields.io/packagist/dt/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature-policy)
@@ -11,6 +9,8 @@ This package is strongly inspired by [Spaties](https://spatie.be) [laravel-csp](
 With Permissions-Policy you can control which web platform permissions to allow and disallow within your web applications. Permissions-Policy is a Security Header (like Content-Security-Policy) that is brand new. The list of things you can restrict isn't final yet, I'll add them in time when the specification evolves.
 
 ## Installation
+
+**Laravel 10 users should use v2.0 or newer, otherwise stick to v1.3**
 
 You should install this package via composer:
 
