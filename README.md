@@ -109,16 +109,23 @@ Route::get('/home', HomeController::class)
 
 ## Usage
 
-This package allows you to define Permissions-Policy policies. A Feature-Policy policy determines which Permissions-Policy directives will be set in the headers of the response.
+This package allows you to configure the policies that end up in the "Permissions-Policy" header. 
 
-An example of a Permissions-Policy directive is `microphone`:
+This policy determines which directives will be set in the "Permissions-Policy" header of the response.
+
+It uses the following syntax;
+```text
+Feature-Policy: <directive> <allowlist>
+```
+
+An example of a "Permissions-Policy" directive is `microphone`:
 
 `Permissions-Policy: microphone=(self "https://spatie.be")`
 
 In the above example by specifying `microphone` and allowing it for `self` makes the permission disabled for all origins except our own and https://spatie.be.
 
-The full list of directives isn't final yet, but here are some of the things you have access to:
-
+The current list of directives can be found [here](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
+Some of these are:
 - accelerometer
 - ambient-light-sensor
 - autoplay
@@ -135,8 +142,6 @@ The full list of directives isn't final yet, but here are some of the things you
 - speaker
 - usb
 - vr
-
-You can find the feature definitions at https://github.com/WICG/feature-policy/blob/master/features.md
 
 You can add multiple policy options as an array or as a single string with space-separated options:
 
