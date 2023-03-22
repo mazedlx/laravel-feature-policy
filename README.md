@@ -1,7 +1,8 @@
 # Set Permissions-Policy headers in a Laravel app
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature.policy)
-[![Build Status](https://travis-ci.org/mazedlx/laravel-feature-policy.svg?branch=master)](https://travis-ci.org/mazedlx/laravel-feature-policy)
+[![Tests](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/test.yml/badge.svg)](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/test.yml)
+[![Analyse and format](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/code-quality.yml/badge.svg)](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/code-quality.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature-policy)
 
 This package is strongly inspired by [Spaties](https://spatie.be) [laravel-csp](https://github.com/spatie/laravel-csp) package. Thanks to [Freek van der Herten](https://github.com/freekmurze) and [Thomas Verhelst](https://github.com/TVke) for creating such an awesome package and doing all the heavy lifting!
