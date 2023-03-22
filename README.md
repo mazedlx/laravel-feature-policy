@@ -230,7 +230,7 @@ If you discover any security related issues please email mazedlx@gmail.com inste
 
 ## Credits
 This package is strongly inspired by [Spatie](https://spatie.be) [laravel-csp](https://github.com/spatie/laravel-csp) package.
-Thanks to [Freek van der Herten](https://github.com/freekmurze) and [Thomas Verhelst](https://github.com/TVke) for creating such an awesome package and doing all the heavy lifting!
+Thanks to Freek van der Herten and Thomas Verhelst for creating such an awesome package and doing all the heavy lifting!
 
 - [Freek van der Herten](https://github.com/freekmurze)
 - [Thomas Verhelst](https://github.com/TVke)
