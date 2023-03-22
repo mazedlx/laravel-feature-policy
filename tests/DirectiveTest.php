@@ -3,14 +3,36 @@
 namespace Mazedlx\FeaturePolicy\Tests;
 
 use Mazedlx\FeaturePolicy\Directive;
+use Mazedlx\FeaturePolicy\Exceptions\InvalidDirective;
+use Mazedlx\FeaturePolicy\Value;
 
 final class DirectiveTest extends TestCase
 {
     /** @test */
-    public function it_can_determine_if_a_directive_is_valid(): void
+    public function it_can_make_an_directive_from_name(): void
     {
-        $this->assertTrue(Directive::isValid(Directive::GEOLOCATION));
+        $directive = Directive::make(Directive::GEOLOCATION);
 
-        $this->assertFalse(Directive::isValid('invalid-directive'));
+        $this->assertSame(Directive::GEOLOCATION, $directive->name());
+        $this->assertIsArray($directive->rules());
+        $this->assertEmpty($directive->rules());
+    }
+
+    /** @test */
+    public function it_will_throw_an_invalid_directive_exception_for_unknown_directive(): void
+    {
+        $this->expectException(InvalidDirective::class);
+        Directive::make('invalid-directive');
+    }
+
+    /** @test */
+    public function it_can_add_an_rule(): void
+    {
+        $directive = Directive::make(Directive::GEOLOCATION);
+        $this->assertEmpty($directive->rules());
+        $directive->addRule(Value::SELF);
+        $this->assertNotEmpty($directive->rules());
+        $this->assertCount(1, $directive->rules());
+        $this->assertSame(Value::SELF, $directive->rules()[0]);
     }
 }
