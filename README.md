@@ -31,36 +31,36 @@ More on the header itself can be found on the following sites.
 
 **Laravel 10 users should use v2.0 or newer, otherwise stick to v1.3**
 
-You should install this package via composer:
-
+The package can be installed though composer:
 ```bash
 $ composer require mazedlx/laravel-feature-policy
 ```
-
-Next, publish the config file:
-
+After which the config file needs to be published:
 ```bash
 $ php artisan vendor:publish --provider="Mazedlx\FeaturePolicy\FeaturePolicyServiceProvider" --tag="config"
 ```
 
-The contents of the `config/feature-policy.php` file look like this:
+Which looks like this:
+<details>
+<summary>Config file</summary>
 
 ```php
 <?php
 
 return [
     /*
-     * A policy will determine which Permissions-Policy headers will be set.
+     * A policy will determine which "Permissions-Policy" headers will be set.
      * A valid policy extends `Mazedlx\FeaturePolicy\Policies\Policy`
      */
     'policy' => Mazedlx\FeaturePolicy\Policies\Basic::class,
 
     /*
-     * Feature-policy headers will only be added if this is set to true
+     * "Feature-Policy" headers will only be added if this is set to true
      */
     'enabled' => env('FPH_ENABLED', true),
 ];
 ```
+</details>
 
 ## Middleware
 
