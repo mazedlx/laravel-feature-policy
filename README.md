@@ -1,51 +1,72 @@
-# Set Permissions-Policy headers in a Laravel app
+# Configure the browsers abilities
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature.policy)
-[![Build Status](https://travis-ci.org/mazedlx/laravel-feature-policy.svg?branch=master)](https://travis-ci.org/mazedlx/laravel-feature-policy)
+[![Tests](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/test.yml/badge.svg)](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/test.yml)
+[![Analyse and format](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/code-quality.yml/badge.svg)](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/code-quality.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature-policy)
 
-This package is strongly inspired by [Spaties](https://spatie.be) [laravel-csp](https://github.com/spatie/laravel-csp) package. Thanks to [Freek van der Herten](https://github.com/freekmurze) and [Thomas Verhelst](https://github.com/TVke) for creating such an awesome package and doing all the heavy lifting!
 
-With Permissions-Policy you can control which web platform permissions to allow and disallow within your web applications. Permissions-Policy is a Security Header (like Content-Security-Policy) that is brand new. The list of things you can restrict isn't final yet, I'll add them in time when the specification evolves.
+The Permissions-Policy, which [previously](https://docs.w3cub.com/http/headers/feature-policy) was known as the Feature-Policy.
+But since it came out of draft, it was renamed to "Permissions-Policy".  
+The "Permissions-Policy" is an HTTP header which can be used to restrict the abilities of a browser.
+
+Where the Content-Security-Policy focuses on security, the "Permissions-Policy" focuses on allowing or disabling the abilities of the browser.  
+This can be done though the HTTP header, which this package focuses on, but it can also do this through the `allows` attribute on the `iframe` element.
+
+<details>
+<summary>iframe example</summary>
+
+```html
+<iframe width="643" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+```
+
+</details>
+
+More on the header itself can be found on the following sites.
+- [Feature Policy | Smashing Magazine](https://www.smashingmagazine.com/2018/12/feature-policy/)
+- [Feature Policy | Google Developers](https://developer.chrome.com/blog/feature-policy/)
+- [W3C](https://www.w3.org/TR/permissions-policy/)
 
 ## Installation
 
 **Laravel 10 users should use v2.0 or newer, otherwise stick to v1.3**
 
-You should install this package via composer:
-
+The package can be installed though composer:
 ```bash
 $ composer require mazedlx/laravel-feature-policy
 ```
-
-Next, publish the config file:
-
+After which the config file needs to be published:
 ```bash
 $ php artisan vendor:publish --provider="Mazedlx\FeaturePolicy\FeaturePolicyServiceProvider" --tag="config"
 ```
 
-The contents of the `config/feature-policy.php` file look like this:
+Which looks like this:
+<details>
+<summary>Config file</summary>
 
 ```php
 <?php
 
 return [
     /*
-     * A policy will determine which Permissions-Policy headers will be set.
+     * A policy will determine which "Permissions-Policy" headers will be set.
      * A valid policy extends `Mazedlx\FeaturePolicy\Policies\Policy`
      */
     'policy' => Mazedlx\FeaturePolicy\Policies\Basic::class,
 
     /*
-     * Feature-policy headers will only be added if this is set to true
+     * "Feature-Policy" headers will only be added if this is set to true
      */
     'enabled' => env('FPH_ENABLED', true),
 ];
 ```
+</details>
 
 ## Middleware
 
-You can add Feature-Policy headers to all responses by registering `Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class` in the HTTP kernel:
+You can add "Feature-Policy" headers to all responses by registering `Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class` in the HTTP kernel:
+<details>
+<summary>Middleware example</summary>
 
 ```php
 // app/Http/Kernel.php
@@ -59,33 +80,52 @@ protected $middlewareGroups = [
     ]
 ];
 ```
+</details>
 
 Alternatively you can add the middleware to a single route and route group:
+<details>
+<summary>Route example</summary>
 
 ```php
 // in a routes file
-Route::get('/home', 'HomeController')->middleware(Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class);
+use App\Http\Controllers\HomeController;
+use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
+
+Route::get('/home', HomeController::class)
+    ->middleware(AddFeaturePolicyHeaders::class);
 ```
 
 You could even pass a policy as a parameter and override the policy specified in the config file:
 
 ```php
 // in a routes file
-Route::get('/home', 'HomeController')->middleware(Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class . ':' . MyFeaturePolicy::class);
+use App\Http\Controllers\HomeController;
+use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
+
+Route::get('/home', HomeController::class)
+    ->middleware(AddFeaturePolicyHeaders::class . ':' . MyFeaturePolicy::class);
 ```
+</details>
 
 ## Usage
 
-This package allows you to define Permissions-Policy policies. A Feature-Policy policy determines which Permissions-Policy directives will be set in the headers of the response.
+This package allows you to configure the policies that end up in the "Permissions-Policy" header. 
 
-An example of a Permissions-Policy directive is `microphone`:
+This policy determines which directives will be set in the "Permissions-Policy" header of the response.
+
+It uses the following syntax;
+```text
+Feature-Policy: <directive> <allowlist>
+```
+
+An example of a "Permissions-Policy" directive is `microphone`:
 
 `Permissions-Policy: microphone=(self "https://spatie.be")`
 
 In the above example by specifying `microphone` and allowing it for `self` makes the permission disabled for all origins except our own and https://spatie.be.
 
-The full list of directives isn't final yet, but here are some of the things you have access to:
-
+The current list of directives can be found [here](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
+Some of these are:
 - accelerometer
 - ambient-light-sensor
 - autoplay
@@ -103,8 +143,6 @@ The full list of directives isn't final yet, but here are some of the things you
 - usb
 - vr
 
-You can find the feature definitions at https://github.com/WICG/feature-policy/blob/master/features.md
-
 You can add multiple policy options as an array or as a single string with space-separated options:
 
 ```php
@@ -121,6 +159,9 @@ You can add multiple policy options as an array or as a single string with space
 ## Creating Policies
 
 The `policy` key of the `feature-policy` config file is set to `Mazedlx\FeaturePolicy\Policies\Basic::class` by default, which allows your site to use a few of the available features. The class looks like this:
+
+<details>
+<summary>Basic policy</summary>
 
 ```php
 <?php
@@ -140,7 +181,12 @@ class Basic extends Policy
 }
 ```
 
+</details>
+
 Let's say you're happy with allowing `geolocation` and `fullscreen` but also wanted to add `www.awesomesite.com` to gain access to this feature, then you can easily extend the class:
+
+<details>
+<summary>MyFeature policy</summary>
 
 ```php
 <?php
@@ -161,6 +207,7 @@ class MyFeaturePolicy extends Basic
     }
 }
 ```
+</details>
 
 Don't forget to change the `policy` key in the `feature-policy` config file to the class name fo your policy (e.g. `App\Services\Policies\MyFeaturePolicy`).
 
@@ -173,27 +220,24 @@ $ composer test
 ```
 
 ## Changelog
-
 Please see [CHANGELOG](https://github.com/mazedlx/laravel-feature-policy/blob/master/CHANGELOG.md) for more information what has changed recently.
 
 ## Contributing
-
 Please see [CONTRIBUTING](https://github.com/mazedlx/laravel-feature-policy/blob/master/CONTRIBUTING.md) for details.
 
-### Security
-
+## Security
 If you discover any security related issues please email mazedlx@gmail.com instead of using the issue tracker.
 
 ## Credits
+This package is strongly inspired by [Spatie](https://spatie.be) [laravel-csp](https://github.com/spatie/laravel-csp) package.
+Thanks to Freek van der Herten and Thomas Verhelst for creating such an awesome package and doing all the heavy lifting!
 
 - [Freek van der Herten](https://github.com/freekmurze)
 - [Thomas Verhelst](https://github.com/TVke)
 - [All Contributors](https://github.com/mazedlx/laravel-feature-policy/contributors)
 
 ## Support
-
 If you like this package please feel free to star it.
 
 ## License
-
 The MIT License (MIT). Please see [LICENSE](https://github.com/mazedlx/laravel-feature-policy/blob/master/LICENSE.md) for more information.
