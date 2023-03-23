@@ -225,6 +225,14 @@ Please see [CHANGELOG](https://github.com/mazedlx/laravel-feature-policy/blob/ma
 ## Contributing
 Please see [CONTRIBUTING](https://github.com/mazedlx/laravel-feature-policy/blob/master/CONTRIBUTING.md) for details.
 
+## Contributers
+<a href="https://github.com/mazedlx/laravel-feature-policy/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mazedlx/laravel-feature-policy" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
+
 ## Security
 If you discover any security related issues please email mazedlx@gmail.com instead of using the issue tracker.
 
