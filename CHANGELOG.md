@@ -1,6 +1,21 @@
 # Changelog
 
-All notable changes to `laravel-feature-policy` will be documented in this file
+## 2.0.0 - 2023-03-22
+
+- add Github Action workflows for testing and code quality
+  * PHPStan
+  * PHP CS Fixer
+- replace PHPCS with PHP CS Fixer
+- drop support for PHP < 7.4
+- add support for PHP 7.4 - 8.2
+- drop support for Laravel < 7.0
+- add support for Laravel 7.x - 10.x
+- update PHPUnit configuration
+
+## 1.3.0 - 2022-01-31
+
+- add support for PHP 8.1
+- add support for Laravel 9
 
 ## 1.2.0 - 2021-10-25
 
