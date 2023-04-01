@@ -1,0 +1,43 @@
+name: Change request
+description: Request a new feature, propose a change or if you just have a question.
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees:
+  -
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improving this package.
+
+        Let us know if there is something that can be improved; an awesome new feature that should be added or if you just have a question.
+
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: Type of request
+      description: What kind of request is this?
+      options:
+        - improvement
+        - new feature
+        - question
+    validations:
+      required: true
+
+  - type: textarea
+    id: request
+    attributes:
+      label: Requested change or question
+      description: What is your proposed change or improvement.
+      placeholder: What's you idea or request, or if you just have a question.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
