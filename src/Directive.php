@@ -2,10 +2,13 @@
 
 namespace Mazedlx\FeaturePolicy;
 
-use ReflectionClass;
+use Mazedlx\FeaturePolicy\Directives\DefaultDirective;
+use Mazedlx\FeaturePolicy\Exceptions\InvalidDirective;
 
 abstract class Directive
 {
+    protected array $rules = [];
+
     public const ACCELEROMETER = 'accelerometer';
     public const AMBIENT_LIGHT_SENSOR = 'ambient-light-sensor';
     public const AUTOPLAY = 'autoplay';
@@ -29,10 +32,27 @@ abstract class Directive
     public const WAKE_LOCK = 'wake-lock';
     public const XR = 'vr';
 
-    public static function isValid(string $directive): bool
+    public static function make(string $directive, string $type = 'default'): DirectiveContract
     {
-        $constants = (new ReflectionClass(static::class))->getConstants();
+        return match ($type) {
+            'default' => DefaultDirective::directive($directive),
+            default => throw InvalidDirective::unknownDirectiveType($type),
+        };
+    }
 
-        return in_array($directive, $constants);
+    public function addRule(string $rule): static
+    {
+        if (in_array($rule, $this->rules, true)) {
+            return $this;
+        }
+
+        $this->rules[] = $rule;
+
+        return $this;
+    }
+
+    public function rules(): array
+    {
+        return $this->rules;
     }
 }

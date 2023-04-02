@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 use Symfony\Component\HttpFoundation\Response;
-use Mazedlx\FeaturePolicy\Exceptions\InvalidDirective;
 
 abstract class Policy
 {
@@ -14,22 +13,20 @@ abstract class Policy
 
     abstract public function configure();
 
-    public function addDirective(string $directive, ...$values): self
+    public function addDirective(string $directive, $values, ?string $type = 'default'): self
     {
-        throw_if(! Directive::isValid($directive), InvalidDirective::notSupported($directive));
+        $currentDirective = Directive::make($directive, type: $type);
 
-        $rules = collect(...$values)
+        collect($values)
             ->map(fn ($values) => array_filter(explode(' ', $values)))
             ->flatten()
-            ->all();
+            ->map(fn (string $rule) => $this->isSpecialDirectiveValue($rule) ? $rule : "\"{$rule}\"")
+            ->each(fn (string $rule) => $currentDirective->addRule($rule));
 
-        foreach ($rules as $rule) {
-            $sanitizedValue = $this->isSpecialDirectiveValue($rule) ? $rule : "\"{$rule}\"";
-
-            if (! in_array($sanitizedValue, $this->directives[$directive] ?? [], true)) {
-                $this->directives[$directive][] = $sanitizedValue;
-            }
-        }
+        $this->directives[$directive] = [
+            ...$this->directives[$directive] ?? [],
+            ...$currentDirective->rules(),
+        ];
 
         return $this;
     }
@@ -55,12 +52,14 @@ abstract class Policy
     public function __toString()
     {
         return collect($this->directives)
-            ->map(function (array $values, string $directive) {
-                $valueString = implode(' ', $values);
+            ->map(function (array $rules, string $directive) {
+                $formattedRules = implode(' ', $rules);
 
-                return count($values) === 1
-                    ? "{$directive}={$valueString}"
-                    : "{$directive}=({$valueString})";
+                if (count($rules) === 1) {
+                    return "{$directive}={$formattedRules}";
+                }
+
+                return "{$directive}=({$formattedRules})";
             })->implode(',');
     }
 

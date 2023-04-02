@@ -57,7 +57,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config(['feature-policy.policy' => get_class($policy)]);
+        config()->set('feature-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=("src-1" "src-2"),fullscreen=("src-3" "src-4")');
@@ -73,7 +73,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config(['feature-policy.policy' => get_class($policy)]);
+        config()->set('feature-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=("src-1" "src-2")');
@@ -89,7 +89,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config(['feature-policy.policy' => get_class($policy)]);
+        config()->set('feature-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=self');
@@ -105,7 +105,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config(['feature-policy.policy' => get_class($policy)]);
+        config()->set('feature-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=("src-1" self "src-2")');
@@ -121,7 +121,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config(['feature-policy.policy' => get_class($policy)]);
+        config()->set('feature-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=self');
@@ -137,7 +137,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config(['feature-policy.policy' => get_class($policy)]);
+        config()->set('feature-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=()');
@@ -153,7 +153,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
 
-        config(['feature-policy.policy' => get_class($policy)]);
+        config()->set('feature-policy.policy', $policy::class);
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=*');
