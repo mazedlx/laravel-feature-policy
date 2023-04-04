@@ -9,4 +9,6 @@ interface DirectiveContract
     public function rules(): array;
 
     public function addRule(string $rule): static;
+
+    public function note(): string;
 }

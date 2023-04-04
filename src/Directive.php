@@ -55,4 +55,9 @@ abstract class Directive
     {
         return $this->rules;
     }
+
+    public function note(): string
+    {
+        return '';
+    }
 }
