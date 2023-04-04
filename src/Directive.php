@@ -60,4 +60,9 @@ abstract class Directive
     {
         return '';
     }
+
+    public function isDeprecated(): bool
+    {
+        return false;
+    }
 }

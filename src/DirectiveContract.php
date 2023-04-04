@@ -11,4 +11,6 @@ interface DirectiveContract
     public function addRule(string $rule): static;
 
     public function note(): string;
+
+    public function isDeprecated(): bool;
 }
