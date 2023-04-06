@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mazedlx\FeaturePolicy\Directives;
+namespace Mazedlx\FeaturePolicy\FeatureGroups;
 
 use Mazedlx\FeaturePolicy\Directive;
-use Mazedlx\FeaturePolicy\DirectiveContract;
 use Mazedlx\FeaturePolicy\Exceptions\UnsupportedPermissionException;
 
-final class DefaultDirective
+final class DefaultFeatureGroup implements FeatureGroupContract
 {
     public static function directive(string $directive): DirectiveContract
     {
