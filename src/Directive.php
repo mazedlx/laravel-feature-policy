@@ -4,6 +4,7 @@ namespace Mazedlx\FeaturePolicy;
 
 use Mazedlx\FeaturePolicy\FeatureGroups\DefaultFeatureGroup;
 use Mazedlx\FeaturePolicy\Exceptions\UnknownPermissionGroupException;
+use Mazedlx\FeaturePolicy\FeatureGroups\DirectiveContract;
 
 abstract class Directive
 {
@@ -61,10 +62,10 @@ abstract class Directive
     /** @see Implemented in Chrome as vr prior to Chrome 79 */
     final public const XR_SPATIAL_TRACKING = 'xr-spatial-tracking';
 
-    public static function make(string $directive, string $type = 'default'): DirectiveContract
+    public static function make(string $directive, string $type = DefaultFeatureGroup::class): DirectiveContract
     {
         return match ($type) {
-            'default' => DefaultFeatureGroup::directive($directive),
+            DefaultFeatureGroup::class => DefaultFeatureGroup::directive($directive),
             default => throw new UnknownPermissionGroupException($type),
         };
     }
