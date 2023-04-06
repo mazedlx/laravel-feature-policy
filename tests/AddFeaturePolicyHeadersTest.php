@@ -10,7 +10,7 @@ use Mazedlx\FeaturePolicy\Policies\Policy;
 use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
 use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
 
-class AddFeaturePolicyHeadersTest extends TestCase
+final class AddFeaturePolicyHeadersTest extends TestCase
 {
     #[Test]
     public function it_sets_the_default_feature_policy_headers(): void
