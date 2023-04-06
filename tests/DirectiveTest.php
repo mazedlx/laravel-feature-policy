@@ -2,13 +2,14 @@
 
 namespace Mazedlx\FeaturePolicy\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Mazedlx\FeaturePolicy\Directive;
 use Mazedlx\FeaturePolicy\Exceptions\InvalidDirective;
 use Mazedlx\FeaturePolicy\Value;
 
 final class DirectiveTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_make_an_directive_from_name(): void
     {
         $directive = Directive::make(Directive::GEOLOCATION);
@@ -18,14 +19,14 @@ final class DirectiveTest extends TestCase
         $this->assertEmpty($directive->rules());
     }
 
-    /** @test */
+    #0Test]
     public function it_will_throw_an_invalid_directive_exception_for_unknown_directive(): void
     {
         $this->expectException(InvalidDirective::class);
         Directive::make('invalid-directive');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_an_rule(): void
     {
         $directive = Directive::make(Directive::GEOLOCATION);

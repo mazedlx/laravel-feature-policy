@@ -2,6 +2,7 @@
 
 namespace Mazedlx\FeaturePolicy\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +12,7 @@ use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
 
 class AddFeaturePolicyHeadersTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_sets_the_default_feature_policy_headers(): void
     {
         $permissionPolicyHeader = $this->get('test-route')
@@ -22,7 +23,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
         $this->assertStringContainsString('geolocation=self', $permissionPolicyHeader);
     }
 
-    /** @test */
+    #[Test]
     public function it_wont_set_headers_if_it_is_not_enabled_in_the_config(): void
     {
         config([
@@ -32,7 +33,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
         $this->get('test-route')->assertHeaderMissing('Permissions-Policy');
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_invalid_policy_class_exception_when_using_an_invalid_policy(): void
     {
         $this->withoutExceptionHandling();
@@ -44,7 +45,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
         $this->get('test-route')->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function it_accepts_multiple_values_for_the_same_directive(): void
     {
         $policy = new class extends Policy {
@@ -63,7 +64,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             ->assertHeader('Permissions-Policy', 'camera=("src-1" "src-2"),fullscreen=("src-3" "src-4")');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_multiple_values_for_the_same_directive_in_one_go(): void
     {
         $policy = new class extends Policy {
@@ -79,7 +80,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             ->assertHeader('Permissions-Policy', 'camera=("src-1" "src-2")');
     }
 
-    /** @test */
+    #[Test]
     public function it_doesnt_quotes_special_directive_values(): void
     {
         $policy = new class extends Policy {
@@ -95,7 +96,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             ->assertHeader('Permissions-Policy', 'camera=self');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_values_from_a_space_separated_string(): void
     {
         $policy = new class extends Policy {
@@ -111,7 +112,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             ->assertHeader('Permissions-Policy', 'camera=("src-1" self "src-2")');
     }
 
-    /** @test */
+    #[Test]
     public function it_will_not_add_duplicate_values(): void
     {
         $policy = new class extends Policy {
@@ -127,7 +128,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             ->assertHeader('Permissions-Policy', 'camera=self');
     }
 
-    /** @test */
+    #[Test]
     public function it_will_render_none_value(): void
     {
         $policy = new class extends Policy {
@@ -143,7 +144,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             ->assertHeader('Permissions-Policy', 'camera=()');
     }
 
-    /** @test */
+    #[Test]
     public function it_will_render_all_value(): void
     {
         $policy = new class extends Policy {
@@ -159,7 +160,7 @@ class AddFeaturePolicyHeadersTest extends TestCase
             ->assertHeader('Permissions-Policy', 'camera=*');
     }
 
-    /** @test */
+    #[Test]
     public function a_route_middleware_will_overwrite_a_global_middleware_for_a_given_route(): void
     {
         $this->withoutExceptionHandling();
