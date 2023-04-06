@@ -80,6 +80,13 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction
 
+      - name: Rector Cache
+        uses: actions/cache@v3
+        with:
+          path: ./.cache/rector
+          key: ${{ runner.os }}-rector-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-rector-
+
       - name: Run Rector upgrades
         run: ./vendor/bin/rector process --no-ansi --no-diffs
 
