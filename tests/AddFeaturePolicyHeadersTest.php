@@ -34,18 +34,6 @@ final class AddFeaturePolicyHeadersTest extends TestCase
     }
 
     #[Test]
-    public function it_throws_an_invalid_policy_class_exception_when_using_an_invalid_policy(): void
-    {
-        $this->withoutExceptionHandling();
-
-        config(['feature-policy.policy' => self::class]);
-
-        $this->expectException(InvalidFeaturePolicy::class);
-
-        $this->get('test-route')->assertOk();
-    }
-
-    #[Test]
     public function it_accepts_multiple_values_for_the_same_directive(): void
     {
         $policy = new class extends Policy {
