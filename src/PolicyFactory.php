@@ -5,7 +5,7 @@ namespace Mazedlx\FeaturePolicy;
 use Mazedlx\FeaturePolicy\Policies\Policy;
 use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
 
-class PolicyFactory
+final class PolicyFactory
 {
     public static function create(string $className): Policy
     {

@@ -4,7 +4,7 @@ namespace Mazedlx\FeaturePolicy\Exceptions;
 
 use Exception;
 
-class InvalidDirective extends Exception
+final class InvalidDirective extends Exception
 {
     public static function notSupported(string $directive): self
     {
