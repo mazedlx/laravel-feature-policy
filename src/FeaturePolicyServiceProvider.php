@@ -4,18 +4,24 @@ namespace Mazedlx\FeaturePolicy;
 
 use Illuminate\Support\ServiceProvider;
 
-class FeaturePolicyServiceProvider extends ServiceProvider
+final class FeaturePolicyServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
-        if ($this->app->runningInConsole() && function_exists('config_path')) {
-            $this->publishes([
-                __DIR__ . '/../config/feature-policy.php' => config_path('feature-policy.php'),
-            ], 'config');
+        if (! $this->app->runningInConsole()) {
+            return;
         }
+
+        if (! function_exists('config_path')) {
+            return;
+        }
+
+        $this->publishes([
+            __DIR__ . '/../config/feature-policy.php' => config_path('feature-policy.php'),
+        ], 'config');
     }
 
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/feature-policy.php', 'feature-policy');
     }

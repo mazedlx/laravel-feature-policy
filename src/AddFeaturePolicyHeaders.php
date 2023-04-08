@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Mazedlx\FeaturePolicy\Policies\Policy;
 
-class AddFeaturePolicyHeaders
+final class AddFeaturePolicyHeaders
 {
     public function handle(Request $request, Closure $next, $customPolicyClass = null)
     {

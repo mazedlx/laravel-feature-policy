@@ -5,9 +5,10 @@ namespace Mazedlx\FeaturePolicy\Policies;
 use Illuminate\Http\Request;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
+use Stringable;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class Policy
+abstract class Policy implements Stringable
 {
     protected array $directives = [];
 
@@ -18,7 +19,7 @@ abstract class Policy
         $currentDirective = Directive::make($directive, type: $type);
 
         collect($values)
-            ->map(fn ($values) => array_filter(explode(' ', $values)))
+            ->map(fn ($values) => array_filter(explode(' ', (string) $values)))
             ->flatten()
             ->map(fn (string $rule) => $this->isSpecialDirectiveValue($rule) ? $rule : "\"{$rule}\"")
             ->each(fn (string $rule) => $currentDirective->addRule($rule));
@@ -49,7 +50,7 @@ abstract class Policy
         $response->headers->set($headerName, (string) $this);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return collect($this->directives)
             ->map(function (array $rules, string $directive) {

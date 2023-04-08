@@ -8,7 +8,6 @@ use Mazedlx\FeaturePolicy\Directive;
 use Illuminate\Support\Facades\Route;
 use Mazedlx\FeaturePolicy\Policies\Policy;
 use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
-use Mazedlx\FeaturePolicy\Exceptions\InvalidFeaturePolicy;
 
 final class AddFeaturePolicyHeadersTest extends TestCase
 {
@@ -161,7 +160,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
         };
 
         Route::get('other-route', static fn () => 'ok')
-            ->middleware(AddFeaturePolicyHeaders::class . ':' . get_class($customPolicy));
+            ->middleware(AddFeaturePolicyHeaders::class . ':' . $customPolicy::class);
 
         $this->get('other-route')
             ->assertHeader('Permissions-Policy', 'fullscreen="custom-policy"');

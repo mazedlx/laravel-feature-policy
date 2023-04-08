@@ -19,7 +19,7 @@ final class DirectiveTest extends TestCase
         $this->assertEmpty($directive->rules());
     }
 
-    #0Test]
+    #[Test]
     public function it_will_throw_an_invalid_directive_exception_for_unknown_directive(): void
     {
         $this->expectException(InvalidDirective::class);
