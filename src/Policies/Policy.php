@@ -8,7 +8,7 @@ use Mazedlx\FeaturePolicy\Directive;
 use Stringable;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class Policy implements Stringable
+abstract class Policy implements PolicyContract, Stringable
 {
     protected array $directives = [];
 
