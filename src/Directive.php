@@ -3,7 +3,7 @@
 namespace Mazedlx\FeaturePolicy;
 
 use Mazedlx\FeaturePolicy\Directives\DefaultDirective;
-use Mazedlx\FeaturePolicy\Exceptions\InvalidDirective;
+use Mazedlx\FeaturePolicy\Exceptions\UnknownPermissionGroupException;
 
 abstract class Directive
 {
@@ -36,7 +36,7 @@ abstract class Directive
     {
         return match ($type) {
             'default' => DefaultDirective::directive($directive),
-            default => throw InvalidDirective::unknownDirectiveType($type),
+            default => throw new UnknownPermissionGroupException($type),
         };
     }
 
