@@ -3,8 +3,9 @@
 namespace Mazedlx\FeaturePolicy;
 
 use Mazedlx\FeaturePolicy\FeatureGroups\DefaultFeatureGroup;
-use Mazedlx\FeaturePolicy\Exceptions\UnknownPermissionGroupException;
 use Mazedlx\FeaturePolicy\FeatureGroups\DirectiveContract;
+use Mazedlx\FeaturePolicy\FeatureGroups\ProposedFeatureGroup;
+use Mazedlx\FeaturePolicy\Exceptions\UnknownPermissionGroupException;
 
 abstract class Directive
 {
@@ -66,6 +67,7 @@ abstract class Directive
     {
         return match ($type) {
             DefaultFeatureGroup::class => DefaultFeatureGroup::directive($directive),
+            ProposedFeatureGroup::class => ProposedFeatureGroup::directive($directive),
             default => throw new UnknownPermissionGroupException($type),
         };
     }
