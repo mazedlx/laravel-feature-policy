@@ -3,6 +3,7 @@
 namespace Mazedlx\FeaturePolicy\Policies;
 
 use Illuminate\Http\Request;
+use Mazedlx\FeaturePolicy\FeatureGroups\DefaultFeatureGroup;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 use Stringable;
@@ -14,7 +15,7 @@ abstract class Policy implements PolicyContract, Stringable
 
     abstract public function configure();
 
-    public function addDirective(string $directive, $values, ?string $type = 'default'): self
+    public function addDirective(string $directive, $values, ?string $type = DefaultFeatureGroup::class): self
     {
         $currentDirective = Directive::make($directive, type: $type);
 
