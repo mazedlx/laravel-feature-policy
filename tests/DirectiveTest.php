@@ -4,7 +4,7 @@ namespace Mazedlx\FeaturePolicy\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
 use Mazedlx\FeaturePolicy\Directive;
-use Mazedlx\FeaturePolicy\Exceptions\InvalidDirective;
+use Mazedlx\FeaturePolicy\Exceptions\UnsupportedPermissionException;
 use Mazedlx\FeaturePolicy\Value;
 
 final class DirectiveTest extends TestCase
@@ -22,7 +22,7 @@ final class DirectiveTest extends TestCase
     #[Test]
     public function it_will_throw_an_invalid_directive_exception_for_unknown_directive(): void
     {
-        $this->expectException(InvalidDirective::class);
+        $this->expectException(UnsupportedPermissionException::class);
         Directive::make('invalid-directive');
     }
 

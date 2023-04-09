@@ -6,7 +6,7 @@ namespace Mazedlx\FeaturePolicy\Directives;
 
 use Mazedlx\FeaturePolicy\Directive;
 use Mazedlx\FeaturePolicy\DirectiveContract;
-use Mazedlx\FeaturePolicy\Exceptions\InvalidDirective;
+use Mazedlx\FeaturePolicy\Exceptions\UnsupportedPermissionException;
 
 final class DefaultDirective
 {
@@ -139,7 +139,7 @@ final class DefaultDirective
                     return 'vr';
                 }
             },
-            default => throw InvalidDirective::notSupported($directive),
+            default => throw new UnsupportedPermissionException($directive),
         };
     }
 }
