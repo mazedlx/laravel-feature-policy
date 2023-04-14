@@ -12,7 +12,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
     public static function directive(string $directive): DirectiveContract
     {
         return match ($directive) {
-            Directive::ACCELEROMETER => new class extends Directive implements DirectiveContract {
+            Directive::ACCELEROMETER => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::ACCELEROMETER;
@@ -38,7 +38,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5758486868656128';
                 }
             },
-            Directive::AMBIENT_LIGHT_SENSOR => new class extends Directive implements DirectiveContract {
+            Directive::AMBIENT_LIGHT_SENSOR => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::AMBIENT_LIGHT_SENSOR;
@@ -64,7 +64,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5758486868656128';
                 }
             },
-            Directive::AUTOPLAY => new class extends Directive implements DirectiveContract {
+            Directive::AUTOPLAY => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::AUTOPLAY;
@@ -90,7 +90,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5100524789563392';
                 }
             },
-            Directive::BATTERY => new class extends Directive implements DirectiveContract {
+            Directive::BATTERY => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::BATTERY;
@@ -116,7 +116,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://bugs.chromium.org/p/chromium/issues/detail?id=1007264';
                 }
             },
-            Directive::BLUETOOTH => new class extends Directive implements DirectiveContract {
+            Directive::BLUETOOTH => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::BLUETOOTH;
@@ -142,7 +142,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/6439287120723968';
                 }
             },
-            Directive::CAMERA => new class extends Directive implements DirectiveContract {
+            Directive::CAMERA => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CAMERA;
@@ -168,7 +168,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5023919287304192';
                 }
             },
-            Directive::CH_UA => new class extends Directive implements DirectiveContract {
+            Directive::CH_UA => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CH_UA;
@@ -194,7 +194,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
-            Directive::CH_UA_ARCH => new class extends Directive implements DirectiveContract {
+            Directive::CH_UA_ARCH => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CH_UA_ARCH;
@@ -220,7 +220,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
-            Directive::CH_UA_BITNESS => new class extends Directive implements DirectiveContract {
+            Directive::CH_UA_BITNESS => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CH_UA_BITNESS;
@@ -246,7 +246,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
-            Directive::CH_UA_FULL_VERSION => new class extends Directive implements DirectiveContract {
+            Directive::CH_UA_FULL_VERSION => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CH_UA_FULL_VERSION;
@@ -272,7 +272,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
-            Directive::CH_UA_FULL_VERSION_LIST => new class extends Directive implements DirectiveContract {
+            Directive::CH_UA_FULL_VERSION_LIST => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CH_UA_FULL_VERSION_LIST;
@@ -298,7 +298,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
-            Directive::CH_UA_MOBILE => new class extends Directive implements DirectiveContract {
+            Directive::CH_UA_MOBILE => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CH_UA_MOBILE;
@@ -324,7 +324,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
-            Directive::CH_UA_MODEL => new class extends Directive implements DirectiveContract {
+            Directive::CH_UA_MODEL => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CH_UA_MODEL;
@@ -350,7 +350,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
-            Directive::CH_UA_PLATFORM => new class extends Directive implements DirectiveContract {
+            Directive::CH_UA_PLATFORM => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CH_UA_PLATFORM;
@@ -376,7 +376,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
-            Directive::CH_UA_PLATFORM_VERSION => new class extends Directive implements DirectiveContract {
+            Directive::CH_UA_PLATFORM_VERSION => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CH_UA_PLATFORM_VERSION;
@@ -402,7 +402,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
-            Directive::CH_UA_WOW64 => new class extends Directive implements DirectiveContract {
+            Directive::CH_UA_WOW64 => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CH_UA_WOW64;
@@ -428,7 +428,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
-            Directive::CROSS_ORIGIN_ISOLATED => new class extends Directive implements DirectiveContract {
+            Directive::CROSS_ORIGIN_ISOLATED => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::CROSS_ORIGIN_ISOLATED;
@@ -454,7 +454,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            Directive::DISPLAY_CAPTURE => new class extends Directive implements DirectiveContract {
+            Directive::DISPLAY_CAPTURE => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::DISPLAY_CAPTURE;
@@ -480,7 +480,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5144822362931200';
                 }
             },
-            Directive::DOCUMENT_DOMAIN => new class extends Directive implements DirectiveContract {
+            Directive::DOCUMENT_DOMAIN => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::DOCUMENT_DOMAIN;
@@ -516,7 +516,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return true;
                 }
             },
-            Directive::ENCRYPTED_MEDIA => new class extends Directive implements DirectiveContract {
+            Directive::ENCRYPTED_MEDIA => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::ENCRYPTED_MEDIA;
@@ -542,7 +542,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5023919287304192';
                 }
             },
-            Directive::EXECUTION_WHILE_NOT_RENDERED => new class extends Directive implements DirectiveContract {
+            Directive::EXECUTION_WHILE_NOT_RENDERED => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::EXECUTION_WHILE_NOT_RENDERED;
@@ -573,7 +573,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'To enable these, use the Chrome command line flag --enable-blink-features=ExperimentalProductivityFeatures.';
                 }
             },
-            Directive::EXECUTION_WHILE_OUT_OF_VIEWPORT => new class extends Directive implements DirectiveContract {
+            Directive::EXECUTION_WHILE_OUT_OF_VIEWPORT => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::EXECUTION_WHILE_OUT_OF_VIEWPORT;
@@ -604,7 +604,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'To enable these, use the Chrome command line flag --enable-blink-features=ExperimentalProductivityFeatures.';
                 }
             },
-            Directive::FULLSCREEN => new class extends Directive implements DirectiveContract {
+            Directive::FULLSCREEN => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::FULLSCREEN;
@@ -630,7 +630,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5094837900541952';
                 }
             },
-            Directive::GEOLOCATION => new class extends Directive implements DirectiveContract {
+            Directive::GEOLOCATION => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::GEOLOCATION;
@@ -656,7 +656,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5023919287304192';
                 }
             },
-            Directive::GYROSCOPE => new class extends Directive implements DirectiveContract {
+            Directive::GYROSCOPE => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::GYROSCOPE;
@@ -682,7 +682,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5758486868656128';
                 }
             },
-            Directive::HID => new class extends Directive implements DirectiveContract {
+            Directive::HID => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::HID;
@@ -708,7 +708,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            Directive::IDLE_DETECTION => new class extends Directive implements DirectiveContract {
+            Directive::IDLE_DETECTION => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::IDLE_DETECTION;
@@ -734,7 +734,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/4590256452009984';
                 }
             },
-            Directive::KEYBOARD_MAP => new class extends Directive implements DirectiveContract {
+            Directive::KEYBOARD_MAP => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::KEYBOARD_MAP;
@@ -760,7 +760,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5657965899022336';
                 }
             },
-            Directive::MAGNETOMETER => new class extends Directive implements DirectiveContract {
+            Directive::MAGNETOMETER => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::MAGNETOMETER;
@@ -786,7 +786,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5758486868656128';
                 }
             },
-            Directive::MICROPHONE => new class extends Directive implements DirectiveContract {
+            Directive::MICROPHONE => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::MICROPHONE;
@@ -812,7 +812,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5023919287304192';
                 }
             },
-            Directive::MIDI => new class extends Directive implements DirectiveContract {
+            Directive::MIDI => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::MIDI;
@@ -838,7 +838,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5023919287304192';
                 }
             },
-            Directive::NAVIGATION_OVERRIDE => new class extends Directive implements DirectiveContract {
+            Directive::NAVIGATION_OVERRIDE => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::NAVIGATION_OVERRIDE;
@@ -864,7 +864,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            Directive::PAYMENT => new class extends Directive implements DirectiveContract {
+            Directive::PAYMENT => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::PAYMENT;
@@ -890,7 +890,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            Directive::PICTURE_IN_PICTURE => new class extends Directive implements DirectiveContract {
+            Directive::PICTURE_IN_PICTURE => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::PICTURE_IN_PICTURE;
@@ -921,7 +921,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'Shipped in Chrome';
                 }
             },
-            Directive::PUBLICKEY_CREDENTIALS_GET => new class extends Directive implements DirectiveContract {
+            Directive::PUBLICKEY_CREDENTIALS_GET => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::PUBLICKEY_CREDENTIALS_GET;
@@ -947,7 +947,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://bugs.chromium.org/p/chromium/issues/detail?id=993007';
                 }
             },
-            Directive::SCREEN_WAKE_LOCK => new class extends Directive implements DirectiveContract {
+            Directive::SCREEN_WAKE_LOCK => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::SCREEN_WAKE_LOCK;
@@ -973,7 +973,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/4636879949398016';
                 }
             },
-            Directive::SERIAL => new class extends Directive implements DirectiveContract {
+            Directive::SERIAL => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::SERIAL;
@@ -999,7 +999,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            Directive::SPEAKER => new class extends Directive implements DirectiveContract {
+            Directive::SPEAKER => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::SPEAKER;
@@ -1035,7 +1035,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return true;
                 }
             },
-            Directive::SYNC_XHR => new class extends Directive implements DirectiveContract {
+            Directive::SYNC_XHR => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::SYNC_XHR;
@@ -1061,7 +1061,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5154875084111872';
                 }
             },
-            Directive::USB => new class extends Directive implements DirectiveContract {
+            Directive::USB => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::USB;
@@ -1087,7 +1087,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            Directive::WAKE_LOCK => new class extends Directive implements DirectiveContract {
+            Directive::WAKE_LOCK => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::WAKE_LOCK;
@@ -1123,7 +1123,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return true;
                 }
             },
-            Directive::WEB_SHARE => new class extends Directive implements DirectiveContract {
+            Directive::WEB_SHARE => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::WEB_SHARE;
@@ -1149,7 +1149,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            Directive::XR_SPATIAL_TRACKING, Directive::XR, Directive::VR => new class extends Directive implements DirectiveContract {
+            Directive::XR_SPATIAL_TRACKING, Directive::XR, Directive::VR => new class extends Directive {
                 public function name(): string
                 {
                     return 'vr';

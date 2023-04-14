@@ -7,7 +7,7 @@ use Mazedlx\FeaturePolicy\FeatureGroups\DirectiveContract;
 use Mazedlx\FeaturePolicy\FeatureGroups\ProposedFeatureGroup;
 use Mazedlx\FeaturePolicy\Exceptions\UnknownPermissionGroupException;
 
-abstract class Directive
+abstract class Directive implements DirectiveContract
 {
     protected array $rules = [];
 
