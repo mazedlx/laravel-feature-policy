@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mazedlx\FeaturePolicy\Policies;
 
 use Illuminate\Http\Request;
@@ -25,10 +27,7 @@ abstract class Policy implements PolicyContract
             ->map(fn (string $rule) => $this->isSpecialDirectiveValue($rule) ? $rule : "\"{$rule}\"")
             ->each(fn (string $rule) => $currentDirective->addRule($rule));
 
-        $this->directives[$directive] = [
-            ...$this->directives[$directive] ?? [],
-            ...$currentDirective->rules(),
-        ];
+        $this->directives[] = $currentDirective;
 
         return $this;
     }
@@ -40,7 +39,9 @@ abstract class Policy implements PolicyContract
 
     public function applyTo(Response $response): void
     {
-        $this->configure();
+        if (! $this->directives) {
+            $this->configure();
+        }
 
         $headerName = 'Permissions-Policy';
 
