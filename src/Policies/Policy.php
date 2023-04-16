@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 use Mazedlx\FeaturePolicy\FeatureGroups\DefaultFeatureGroup;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
-use Stringable;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class Policy implements PolicyContract, Stringable
+abstract class Policy implements PolicyContract
 {
     protected array $directives = [];
 
