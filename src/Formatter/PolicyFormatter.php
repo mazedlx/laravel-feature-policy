@@ -29,10 +29,6 @@ final class PolicyFormatter implements FormatContract, Stringable
 
                 return "{$directive->name()}=({$formattedRules})";
             })
-            ->when(
-                config('feature-policy.reporting.enabled'),
-                fn (Collection $headers) => $headers->push('report-to=violation-reports')
-            )
             ->implode(',');
     }
 }

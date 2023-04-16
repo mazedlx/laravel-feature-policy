@@ -21,9 +21,8 @@ abstract class Policy implements PolicyContract
 
     public function addDirective(string $directive, $values, ?string $type = DefaultFeatureGroup::class): self
     {
-        $this->rules[$directive] ??= [];
         $currentDirective = Directive::make($directive, type: $type);
-        collect($this->rules[$directive])
+        collect($this->rules[$directive] ??= [])
             ->each(fn (string $rule) => $currentDirective->addRule($rule));
 
         collect($values)
