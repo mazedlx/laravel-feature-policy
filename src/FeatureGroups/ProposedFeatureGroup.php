@@ -21,7 +21,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
         throw_unless(config('feature-policy.directives.proposal'), new DisabledFeatureGroupException($directive));
 
         return match ($directive) {
-            self::CLIPBOARD_READ => new class extends Directive implements DirectiveContract {
+            self::CLIPBOARD_READ => new class extends Directive {
                 public function name(): string
                 {
                     return ProposedFeatureGroup::CLIPBOARD_READ;
@@ -47,7 +47,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            self::CLIPBOARD_WRITE => new class extends Directive implements DirectiveContract {
+            self::CLIPBOARD_WRITE => new class extends Directive {
                 public function name(): string
                 {
                     return ProposedFeatureGroup::CLIPBOARD_WRITE;
@@ -73,7 +73,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            self::GAMEPAD => new class extends Directive implements DirectiveContract {
+            self::GAMEPAD => new class extends Directive {
                 public function name(): string
                 {
                     return ProposedFeatureGroup::GAMEPAD;
@@ -99,7 +99,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            self::SHARED_AUTOFILL => new class extends Directive implements DirectiveContract {
+            self::SHARED_AUTOFILL => new class extends Directive {
                 public function name(): string
                 {
                     return ProposedFeatureGroup::SHARED_AUTOFILL;
@@ -125,7 +125,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
-            self::SPEAKER_SELECTION => new class extends Directive implements DirectiveContract {
+            self::SPEAKER_SELECTION => new class extends Directive {
                 public function name(): string
                 {
                     return ProposedFeatureGroup::SPEAKER_SELECTION;

@@ -1,34 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mazedlx\FeaturePolicy\Policies;
 
 use Illuminate\Http\Request;
 use Mazedlx\FeaturePolicy\FeatureGroups\DefaultFeatureGroup;
+use Mazedlx\FeaturePolicy\Formatter\PolicyFormatter;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
-use Stringable;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class Policy implements PolicyContract, Stringable
+abstract class Policy implements PolicyContract
 {
     protected array $directives = [];
+
+    private array $rules = [];
 
     abstract public function configure();
 
     public function addDirective(string $directive, $values, ?string $type = DefaultFeatureGroup::class): self
     {
         $currentDirective = Directive::make($directive, type: $type);
+        collect($this->rules[$directive] ??= [])
+            ->each(fn (string $rule) => $currentDirective->addRule($rule));
 
         collect($values)
             ->map(fn ($values) => array_filter(explode(' ', (string) $values)))
             ->flatten()
             ->map(fn (string $rule) => $this->isSpecialDirectiveValue($rule) ? $rule : "\"{$rule}\"")
-            ->each(fn (string $rule) => $currentDirective->addRule($rule));
+            ->each(fn (string $rule) => $currentDirective->addRule($rule))
+            ->each(fn (string $rule) => $this->rules[$directive][] = $rule);
 
-        $this->directives[$directive] = [
-            ...$this->directives[$directive] ?? [],
-            ...$currentDirective->rules(),
-        ];
+        $this->directives[$directive] = $currentDirective;
 
         return $this;
     }
@@ -40,7 +44,9 @@ abstract class Policy implements PolicyContract, Stringable
 
     public function applyTo(Response $response): void
     {
-        $this->configure();
+        if (! $this->directives) {
+            $this->configure();
+        }
 
         $headerName = 'Permissions-Policy';
 
@@ -53,16 +59,7 @@ abstract class Policy implements PolicyContract, Stringable
 
     public function __toString(): string
     {
-        return collect($this->directives)
-            ->map(function (array $rules, string $directive) {
-                $formattedRules = implode(' ', $rules);
-
-                if (count($rules) === 1) {
-                    return "{$directive}={$formattedRules}";
-                }
-
-                return "{$directive}=({$formattedRules})";
-            })->implode(',');
+        return (string) new PolicyFormatter($this->directives);
     }
 
     protected function isSpecialDirectiveValue(string $value): bool
