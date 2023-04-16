@@ -4,6 +4,7 @@ namespace Mazedlx\FeaturePolicy\Policies;
 
 use Illuminate\Http\Request;
 use Mazedlx\FeaturePolicy\FeatureGroups\DefaultFeatureGroup;
+use Mazedlx\FeaturePolicy\Formatter\PolicyFormatter;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,16 +53,7 @@ abstract class Policy implements PolicyContract
 
     public function __toString(): string
     {
-        return collect($this->directives)
-            ->map(function (array $rules, string $directive) {
-                $formattedRules = implode(' ', $rules);
-
-                if (count($rules) === 1) {
-                    return "{$directive}={$formattedRules}";
-                }
-
-                return "{$directive}=({$formattedRules})";
-            })->implode(',');
+        return (string) new PolicyFormatter($this->directives);
     }
 
     protected function isSpecialDirectiveValue(string $value): bool
