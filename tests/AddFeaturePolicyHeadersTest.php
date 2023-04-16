@@ -14,12 +14,10 @@ final class AddFeaturePolicyHeadersTest extends TestCase
     #[Test]
     public function it_sets_the_default_feature_policy_headers(): void
     {
-        $permissionPolicyHeader = $this->get('test-route')
-            ->assertSuccessful()
-            ->headers
-            ->get('Permissions-Policy');
+        $response = $this->get('test-route')
+            ->assertSuccessful();
 
-        $this->assertStringContainsString('geolocation=self', $permissionPolicyHeader);
+        $response->assertHeader('Permissions-Policy', 'geolocation=self,fullscreen=self');
     }
 
     #[Test]
@@ -153,7 +151,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
         $this->withoutExceptionHandling();
 
         $customPolicy = new class extends Policy {
-            public function configure()
+            public function configure(): void
             {
                 $this->addDirective(Directive::FULLSCREEN, 'custom-policy');
             }
