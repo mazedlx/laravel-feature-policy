@@ -15,19 +15,25 @@ abstract class Policy implements PolicyContract
 {
     protected array $directives = [];
 
+    private array $rules = [];
+
     abstract public function configure();
 
     public function addDirective(string $directive, $values, ?string $type = DefaultFeatureGroup::class): self
     {
+        $this->rules[$directive] ??= [];
         $currentDirective = Directive::make($directive, type: $type);
+        collect($this->rules[$directive])
+            ->each(fn (string $rule) => $currentDirective->addRule($rule));
 
         collect($values)
             ->map(fn ($values) => array_filter(explode(' ', (string) $values)))
             ->flatten()
             ->map(fn (string $rule) => $this->isSpecialDirectiveValue($rule) ? $rule : "\"{$rule}\"")
-            ->each(fn (string $rule) => $currentDirective->addRule($rule));
+            ->each(fn (string $rule) => $currentDirective->addRule($rule))
+            ->each(fn (string $rule) => $this->rules[$directive][] = $rule);
 
-        $this->directives[] = $currentDirective;
+        $this->directives[$directive] = $currentDirective;
 
         return $this;
     }
