@@ -8,7 +8,7 @@ use Stringable;
 use Illuminate\Support\Collection;
 use Mazedlx\FeaturePolicy\FeatureGroups\DirectiveContract;
 
-final class PolicyFormatter implements FormatContract, Stringable
+final class PolicyFormatter implements FormatContract
 {
     private readonly Collection $directives;
 
