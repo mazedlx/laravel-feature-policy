@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.0 - 2023-05-02
+
+- update standardised permission policies by @Treggats in #26
+- introduced proposed permission policies by @Treggats in #27
+- PHPUnit upgrade to version 10 by @Treggats in #22
+- templates for new issues and bug reports
+- a lot of under the hood changes
+
 ## 2.0.0 - 2023-03-22
 
 - add Github Action workflows for testing and code quality
