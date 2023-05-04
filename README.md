@@ -232,7 +232,6 @@ Please see [CONTRIBUTING](https://github.com/mazedlx/laravel-feature-policy/blob
 
 Made with [contrib.rocks](https://contrib.rocks).
 
-
 ## Security
 If you discover any security related issues please email mazedlx@gmail.com instead of using the issue tracker.
 
@@ -242,7 +241,6 @@ Thanks to Freek van der Herten and Thomas Verhelst for creating such an awesome 
 
 - [Freek van der Herten](https://github.com/freekmurze)
 - [Thomas Verhelst](https://github.com/TVke)
-- [All Contributors](https://github.com/mazedlx/laravel-feature-policy/contributors)
 
 ## Support
 If you like this package please feel free to star it.
