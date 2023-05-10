@@ -8,7 +8,7 @@ use Stringable;
 use Illuminate\Support\Collection;
 use Mazedlx\FeaturePolicy\FeatureGroups\DirectiveContract;
 
-final class PolicyFormatter implements FormatContract, Stringable
+final class PolicyFormatter implements FormatContract
 {
     private readonly Collection $directives;
 
@@ -29,6 +29,12 @@ final class PolicyFormatter implements FormatContract, Stringable
 
                 return "{$directive->name()}=({$formattedRules})";
             })
+            ->when(
+                config('feature-policy.reporting.enabled'),
+                function (Collection $collection) {
+                    $collection->add('report-to=violation-reports');
+                }
+            )
             ->implode(',');
     }
 }

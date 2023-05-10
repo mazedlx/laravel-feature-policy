@@ -14,12 +14,10 @@ final class AddFeaturePolicyHeadersTest extends TestCase
     #[Test]
     public function it_sets_the_default_feature_policy_headers(): void
     {
-        $permissionPolicyHeader = $this->get('test-route')
-            ->assertSuccessful()
-            ->headers
-            ->get('Permissions-Policy');
+        $response = $this->get('test-route')
+            ->assertSuccessful();
 
-        $this->assertStringContainsString('geolocation=self', $permissionPolicyHeader);
+        $response->assertHeader('Permissions-Policy', 'geolocation=self,fullscreen=self');
     }
 
     #[Test]
@@ -153,7 +151,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
         $this->withoutExceptionHandling();
 
         $customPolicy = new class extends Policy {
-            public function configure()
+            public function configure(): void
             {
                 $this->addDirective(Directive::FULLSCREEN, 'custom-policy');
             }
@@ -164,5 +162,50 @@ final class AddFeaturePolicyHeadersTest extends TestCase
 
         $this->get('other-route')
             ->assertHeader('Permissions-Policy', 'fullscreen="custom-policy"');
+    }
+
+    #[Test]
+    public function it_can_enable_reporting_of_permission_violations(): void
+    {
+        config()->set('feature-policy.reporting.enabled', true);
+
+        $policy = new class extends Policy {
+            public function configure(): void
+            {
+                $this->addDirective(Directive::CAMERA, [Value::ALL]);
+            }
+        };
+
+        config()->set('feature-policy.policy', $policy::class);
+
+        $response = $this->get('test-route')->assertSuccessful();
+
+        $response->assertHeader('Reporting-Endpoints', 'violation-reports="' . config('feature-policy.reporting.url') . '"');
+        $response->assertHeader('Permissions-Policy', 'camera=*,report-to=violation-reports');
+
+        $response->assertHeaderMissing('Permissions-Policy-Report-Only');
+    }
+
+    #[Test]
+    public function it_can_enable_report_only_permission_violations(): void
+    {
+        config()->set('feature-policy.reporting.enabled', true);
+        config()->set('feature-policy.reporting.report_only', true);
+
+        $policy = new class extends Policy {
+            public function configure(): void
+            {
+                $this->addDirective(Directive::CAMERA, [Value::ALL]);
+            }
+        };
+
+        config()->set('feature-policy.policy', $policy::class);
+
+        $response = $this->get('test-route')->assertSuccessful();
+
+        $response->assertHeader('Reporting-Endpoints', 'violation-reports="' . config('feature-policy.reporting.url') . '"');
+        $response->assertHeader('Permissions-Policy', 'camera=*,report-to=violation-reports');
+        $response->assertHeader('Permissions-Policy-Report-Only', 'camera=*,report-to=violation-reports');
+
     }
 }

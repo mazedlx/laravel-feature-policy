@@ -55,6 +55,24 @@ abstract class Policy implements PolicyContract
         }
 
         $response->headers->set($headerName, (string) $this);
+
+        if (! config('feature-policy.reporting.enabled')) {
+            return;
+        }
+
+        $response->headers->set('Reporting-Endpoints', 'violation-reports="' . config('feature-policy.reporting.url') . '"');
+
+        if (! config('feature-policy.reporting.report_only')) {
+            return;
+        }
+
+        $headerName = 'Permissions-Policy-Report-Only';
+
+        if ($response->headers->has($headerName)) {
+            return;
+        }
+
+        $response->headers->set($headerName, (string) $this);
     }
 
     public function __toString(): string
