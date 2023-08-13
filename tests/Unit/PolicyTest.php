@@ -6,6 +6,8 @@ namespace Mazedlx\FeaturePolicy\Tests\Unit;
 
 use Illuminate\Http\Response;
 use Mazedlx\FeaturePolicy\Directive;
+use Mazedlx\FeaturePolicy\FeatureGroups\DeprecatedDirective;
+use Mazedlx\FeaturePolicy\FeatureGroups\DirectiveContract;
 use Mazedlx\FeaturePolicy\Policies\Policy;
 use Mazedlx\FeaturePolicy\Tests\TestCase;
 use Mazedlx\FeaturePolicy\Value;
@@ -98,4 +100,46 @@ final class PolicyTest extends TestCase
     public function deprecated_directives_must_have_a_specification_url(string $directive): void
     {
         self::assertNotSame('', Directive::make($directive)->specificationUrl());
-    }}
+    }
+
+    #[Test]
+    public function it_can_add_the_deprecation_header_using_the_apply_deprecation_notice(): void
+    {
+        $policy = new class extends Policy {
+            public function configure(): void
+            {
+                $this->addDirective(Directive::SPEAKER, Value::NONE);
+                $this->addDirective(Directive::DOCUMENT_DOMAIN, Value::ALL);
+            }
+        };
+        config()->set('feature-policy.policy', $policy::class);
+
+        $response = new Response();
+
+        $policy->applyDeprecationNotice($response);
+
+        $deprecationHeaders = $response->headers->all('Link');
+
+        /** @var DirectiveContract&DeprecatedDirective $speaker */
+        $speaker = Directive::make('speaker');
+        /** @var DirectiveContract&DeprecatedDirective $documentDomain */
+        $documentDomain = Directive::make('document-domain');
+        $expectedDirectiveNotes = [
+            sprintf(
+                '<%s>; rel="deprecation"; feature="%s"; title="%s"; since="%s"',
+                $speaker->specificationUrl(),
+                $speaker->name(),
+                $speaker->note(),
+                $speaker->deprecatedSince()->format('Y-m-d'),
+            ),
+            sprintf(
+                '<%s>; rel="deprecation"; feature="%s"; title="%s"; since="%s"',
+                $documentDomain->specificationUrl(),
+                $documentDomain->name(),
+                $documentDomain->note(),
+                $documentDomain->deprecatedSince()->format('Y-m-d'),
+            ),
+        ];
+        $this->assertSame($expectedDirectiveNotes, $deprecationHeaders);
+    }
+}
