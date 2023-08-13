@@ -3,6 +3,7 @@ composer.lock
 docs
 vendor
 coverage
+phpunit.xml
 .phpunit.cache
 .cache
 .php-cs-fixer.cache
