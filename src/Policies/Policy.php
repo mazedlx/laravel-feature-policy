@@ -6,6 +6,8 @@ namespace Mazedlx\FeaturePolicy\Policies;
 
 use Illuminate\Http\Request;
 use Mazedlx\FeaturePolicy\FeatureGroups\DefaultFeatureGroup;
+use Mazedlx\FeaturePolicy\FeatureGroups\DeprecatedDirective;
+use Mazedlx\FeaturePolicy\FeatureGroups\DirectiveContract;
 use Mazedlx\FeaturePolicy\Formatter\PolicyFormatter;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
@@ -73,6 +75,34 @@ abstract class Policy implements PolicyContract
         }
 
         $response->headers->set($headerName, (string) $this);
+    }
+
+    public function applyDeprecationNotice(Response $response): void
+    {
+        if (! $this->directives) {
+            $this->configure();
+        }
+
+        $deprecatedDirectives = collect($this->directives)
+            ->filter(fn (DirectiveContract $directive) => $directive instanceof DeprecatedDirective);
+
+        if ($deprecatedDirectives->isEmpty()) {
+            return;
+        }
+
+        $deprecatedDirectives->each(function (DirectiveContract&DeprecatedDirective $directive) use ($response) {
+            $response->headers->set(
+                'Link',
+                sprintf(
+                    '<%s>; rel="deprecation"; feature="%s"; title="%s"; since="%s"',
+                    $directive->specificationUrl(),
+                    $directive->name(),
+                    $directive->note(),
+                    $directive->deprecatedSince()->format('Y-m-d'),
+                ),
+                replace: false
+            );
+        });
     }
 
     public function __toString(): string
