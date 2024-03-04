@@ -235,6 +235,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             }
         };
         config()->set('feature-policy.policy', $policy::class);
+        config()->set('feature-policy.deprecations.enabled', true);
         $directive = Directive::make(Directive::SPEAKER);
         assert($directive instanceof DeprecatedDirective);
 

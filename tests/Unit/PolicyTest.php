@@ -113,6 +113,7 @@ final class PolicyTest extends TestCase
             }
         };
         config()->set('feature-policy.policy', $policy::class);
+        config()->set('feature-policy.deprecations.enabled', true);
 
         $response = new Response();
 

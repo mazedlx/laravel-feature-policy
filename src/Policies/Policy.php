@@ -79,6 +79,10 @@ abstract class Policy implements PolicyContract
 
     public function applyDeprecationNotice(Response $response): void
     {
+        if (! config('feature-policy.deprecations.enabled')) {
+            return;
+        }
+
         if (! $this->directives) {
             $this->configure();
         }
