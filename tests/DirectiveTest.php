@@ -36,4 +36,11 @@ final class DirectiveTest extends TestCase
         $this->assertCount(1, $directive->rules());
         $this->assertSame(Value::SELF, $directive->rules()[0]);
     }
+
+    #[Test]
+    public function xr_spatial_tracking_adds_the_correct_header_directive_instead_of_the_deprecated_one(): void
+    {
+        $directive = Directive::make(Directive::XR_SPATIAL_TRACKING);
+        $this->assertSame(Directive::XR_SPATIAL_TRACKING, $directive->name());
+    }
 }
