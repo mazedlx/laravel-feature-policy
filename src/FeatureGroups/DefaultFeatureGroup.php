@@ -1152,7 +1152,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
             Directive::XR_SPATIAL_TRACKING, Directive::XR, Directive::VR => new class extends Directive {
                 public function name(): string
                 {
-                    return 'vr';
+                    return Directive::XR_SPATIAL_TRACKING;
                 }
 
                 public function specificationName(): string
