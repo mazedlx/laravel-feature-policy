@@ -220,10 +220,10 @@ $ composer test
 ```
 
 ## Changelog
-Please see [CHANGELOG](https://github.com/mazedlx/laravel-feature-policy/blob/master/CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](https://github.com/mazedlx/laravel-feature-policy/blob/main/CHANGELOG.md) for more information what has changed recently.
 
 ## Contributing
-Please see [CONTRIBUTING](https://github.com/mazedlx/laravel-feature-policy/blob/master/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](https://github.com/mazedlx/laravel-feature-policy/blob/main/CONTRIBUTING.md) for details.
 
 ## Contributers
 <a href="https://github.com/mazedlx/laravel-feature-policy/graphs/contributors">
@@ -246,4 +246,4 @@ Thanks to Freek van der Herten and Thomas Verhelst for creating such an awesome 
 If you like this package please feel free to star it.
 
 ## License
-The MIT License (MIT). Please see [LICENSE](https://github.com/mazedlx/laravel-feature-policy/blob/master/LICENSE.md) for more information.
+The MIT License (MIT). Please see [LICENSE](https://github.com/mazedlx/laravel-feature-policy/blob/main/LICENSE.md) for more information.
