@@ -2,19 +2,24 @@
 
 namespace Mazedlx\FeaturePolicy\Tests;
 
+use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Mazedlx\FeaturePolicy\Directive;
 use Mazedlx\FeaturePolicy\Exceptions\UnsupportedPermissionException;
 use Mazedlx\FeaturePolicy\Value;
+use ReflectionClass;
 
 final class DirectiveTest extends TestCase
 {
     #[Test]
-    public function it_can_make_an_directive_from_name(): void
+    #[DataProvider('provide_directives')]
+    public function it_can_make_an_directive_from_name(string $constant, string $value): void
     {
-        $directive = Directive::make(Directive::GEOLOCATION);
+        $directive = Directive::make($value);
 
-        $this->assertSame(Directive::GEOLOCATION, $directive->name());
+        $this->assertSame(constant(Directive::class . '::' . $constant), $directive->name());
+        $this->assertSame($value, $directive->name());
         $this->assertIsArray($directive->rules());
         $this->assertEmpty($directive->rules());
     }
@@ -42,6 +47,28 @@ final class DirectiveTest extends TestCase
     {
         $directive = Directive::make(Directive::XR_SPATIAL_TRACKING);
         $this->assertSame(Directive::XR_SPATIAL_TRACKING, $directive->name());
+    }
+
+    public static function provide_directives(): Generator
+    {
+        $directiveClass = new ReflectionClass(Directive::class);
+        $constants = array_filter($directiveClass->getConstants(), static function ($constant) {
+            $skippableDirectives = [
+                Directive::VR,
+                Directive::XR,
+                Directive::XR_SPATIAL_TRACKING,
+                Directive::FLOC,
+            ];
+
+            return ! in_array($constant, $skippableDirectives, strict: true);
+        });
+
+        foreach ($constants as $const => $constantValue) {
+            yield $const => [
+                $const,
+                $constantValue,
+            ];
+        }
     }
 
     #[Test]

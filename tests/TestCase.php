@@ -19,7 +19,7 @@ abstract class TestCase extends Orchestra
         Route::get('test-route', static fn () => 'ok');
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             FeaturePolicyServiceProvider::class,
