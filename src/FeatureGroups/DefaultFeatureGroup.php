@@ -6,6 +6,7 @@ namespace Mazedlx\FeaturePolicy\FeatureGroups;
 
 use Mazedlx\FeaturePolicy\Directive;
 use Mazedlx\FeaturePolicy\Exceptions\UnsupportedPermissionException;
+use Mazedlx\FeaturePolicy\Value;
 
 final class DefaultFeatureGroup implements FeatureGroupContract
 {
@@ -604,6 +605,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'To enable these, use the Chrome command line flag --enable-blink-features=ExperimentalProductivityFeatures.';
                 }
             },
+            Directive::FLOC => (new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::FLOC;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Federated Learning of Cohorts';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://github.com/WICG/floc';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome 90';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return '';
+                }
+            })->addRule(Value::NONE),
             Directive::FULLSCREEN => new class extends Directive {
                 public function name(): string
                 {

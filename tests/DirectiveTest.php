@@ -43,4 +43,13 @@ final class DirectiveTest extends TestCase
         $directive = Directive::make(Directive::XR_SPATIAL_TRACKING);
         $this->assertSame(Directive::XR_SPATIAL_TRACKING, $directive->name());
     }
+
+    #[Test]
+    public function floc_is_disabled_by_default()
+    {
+        $directive = Directive::make(Directive::FLOC);
+        $this->assertNotEmpty($directive->rules());
+        $this->assertCount(1, $directive->rules());
+        $this->assertSame(Value::NONE, $directive->rules()[0]);
+    }
 }

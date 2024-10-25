@@ -35,6 +35,7 @@ abstract class Directive implements DirectiveContract
     final public const ENCRYPTED_MEDIA = 'encrypted-media';
     final public const EXECUTION_WHILE_NOT_RENDERED = 'execution-while-not-rendered';
     final public const EXECUTION_WHILE_OUT_OF_VIEWPORT = 'execution-while-out-of-viewport';
+    final public const FLOC = 'interest-cohort';
     final public const FULLSCREEN = 'fullscreen';
     final public const GEOLOCATION = 'geolocation';
     final public const GYROSCOPE = 'gyroscope';
