@@ -5,13 +5,12 @@ declare(strict_types=1);
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
 use Rector\Config\RectorConfig;
-use Rector\EarlyReturn\Rector\If_\ChangeAndIfToEarlyReturnRector;
+use Rector\EarlyReturn\Rector\If_\ChangeIfElseValueAssignToEarlyReturnRector;
 use Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
 use Rector\Php80\Rector\ClassMethod\FinalPrivateToPrivateVisibilityRector;
 use Rector\Php80\Rector\Switch_\ChangeSwitchToMatchRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
-use Rector\Privatization\Rector\Class_\FinalizeClassesWithoutChildrenRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictSetUpRector;
 
@@ -31,9 +30,8 @@ return static function (RectorConfig $rectorConfig): void {
     // register a single rule
     $rectorConfig->rules([
         InlineConstructorDefaultToPropertyRector::class,
-        ChangeAndIfToEarlyReturnRector::class,
+        ChangeIfElseValueAssignToEarlyReturnRector::class,
         RemoveUnusedVariableInCatchRector::class,
-        FinalizeClassesWithoutChildrenRector::class,
         TypedPropertyFromStrictSetUpRector::class,
         ReadOnlyPropertyRector::class,
         ChangeSwitchToMatchRector::class,
