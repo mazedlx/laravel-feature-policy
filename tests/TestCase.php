@@ -2,7 +2,6 @@
 
 namespace Mazedlx\FeaturePolicy\Tests;
 
-use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Route;
 use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -14,12 +13,11 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
 
-        app(Kernel::class)->pushMiddleware(AddFeaturePolicyHeaders::class);
-
-        Route::get('test-route', static fn () => 'ok');
+        Route::middleware(AddFeaturePolicyHeaders::class)
+            ->get('test-route', static fn () => 'ok');
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             FeaturePolicyServiceProvider::class,
