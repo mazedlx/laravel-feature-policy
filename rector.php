@@ -13,9 +13,7 @@ use Rector\Php80\Rector\Switch_\ChangeSwitchToMatchRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Privatization\Rector\Class_\FinalizeClassesWithoutChildrenRector;
 use Rector\Set\ValueObject\LevelSetList;
-use Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
 use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictSetUpRector;
-use RectorLaravel\Set\LaravelLevelSetList;
 
 /**
  * @see https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md
@@ -36,7 +34,6 @@ return static function (RectorConfig $rectorConfig): void {
         ChangeAndIfToEarlyReturnRector::class,
         RemoveUnusedVariableInCatchRector::class,
         FinalizeClassesWithoutChildrenRector::class,
-        AddParamTypeDeclarationRector::class,
         TypedPropertyFromStrictSetUpRector::class,
         ReadOnlyPropertyRector::class,
         ChangeSwitchToMatchRector::class,
@@ -46,7 +43,7 @@ return static function (RectorConfig $rectorConfig): void {
     // define sets of rules
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_81,
-        // LaravelLevelSetList::UP_TO_LARAVEL_100,
+        // \RectorLaravel\Set\LaravelLevelSetList::UP_TO_LARAVEL_100,
     ]);
 
     $rectorConfig->skip([
