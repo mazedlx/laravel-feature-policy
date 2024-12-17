@@ -20,7 +20,6 @@ final class DirectiveTest extends TestCase
 
         $this->assertSame(constant(Directive::class . '::' . $constant), $directive->name());
         $this->assertSame($value, $directive->name());
-        $this->assertIsArray($directive->rules());
         $this->assertEmpty($directive->rules());
     }
 
