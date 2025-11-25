@@ -20,7 +20,7 @@ final class AddFeaturePolicyHeaders
         return $response;
     }
 
-    protected function getPolicies(string $customPolicyClass = null): Collection
+    protected function getPolicies(?string $customPolicyClass = null): Collection
     {
         $policies = collect();
 
