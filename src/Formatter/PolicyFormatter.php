@@ -19,7 +19,7 @@ final class PolicyFormatter implements FormatContract
 
     public function __toString(): string
     {
-        return $this->directives
+        $policy = $this->directives
             ->map(function (DirectiveContract $directive) {
                 $formattedRules = implode(' ', $directive->rules());
 
@@ -29,12 +29,13 @@ final class PolicyFormatter implements FormatContract
 
                 return "{$directive->name()}=({$formattedRules})";
             })
-            ->when(
-                config('feature-policy.reporting.enabled'),
-                function (Collection $collection) {
-                    $collection->add('report-to=violation-reports');
-                }
-            )
             ->implode(',');
+
+        if (config('feature-policy.reporting.enabled')) {
+            $policy .= '; report-to=violation-reports';
+        }
+
+        return $policy;
     }
+
 }
