@@ -181,7 +181,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
         $response = $this->get('test-route')->assertSuccessful();
 
         $response->assertHeader('Reporting-Endpoints', 'violation-reports="' . config('feature-policy.reporting.url') . '"');
-        $response->assertHeader('Permissions-Policy', 'camera=*,report-to=violation-reports');
+        $response->assertHeader('Permissions-Policy', 'camera=*; report-to=violation-reports');
 
         $response->assertHeaderMissing('Permissions-Policy-Report-Only');
     }
@@ -204,8 +204,8 @@ final class AddFeaturePolicyHeadersTest extends TestCase
         $response = $this->get('test-route')->assertSuccessful();
 
         $response->assertHeader('Reporting-Endpoints', 'violation-reports="' . config('feature-policy.reporting.url') . '"');
-        $response->assertHeader('Permissions-Policy', 'camera=*,report-to=violation-reports');
-        $response->assertHeader('Permissions-Policy-Report-Only', 'camera=*,report-to=violation-reports');
+        $response->assertHeader('Permissions-Policy', 'camera=*; report-to=violation-reports');
+        $response->assertHeader('Permissions-Policy-Report-Only', 'camera=*; report-to=violation-reports');
 
     }
 }
