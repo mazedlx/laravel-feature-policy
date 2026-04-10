@@ -57,7 +57,7 @@ jobs:
           create_branch: false
           add_options: -u
           push_options: --force-with-lease
-          commit_message: :hammer: :construction_worker: formatting changes
+          commit_message: ":hammer: :construction_worker: formatting changes"
 
   rector:
     runs-on: ubuntu-latest
@@ -94,4 +94,4 @@ jobs:
           create_branch: false
           add_options: -u
           push_options: --force-with-lease
-          commit_message: :toolbox: :construction_worker: updating code
+          commit_message: ":toolbox: :construction_worker: updating code"
