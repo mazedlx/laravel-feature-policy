@@ -62,7 +62,7 @@ final class PolicyTest extends TestCase
 
         $this->assertTrue($response->headers->has('Permissions-Policy'));
 
-        $this->assertSame('camera=self', $response->headers->get('Permissions-Policy'));
+        $this->assertSame('camera=(self)', $response->headers->get('Permissions-Policy'));
     }
 
     #[Test]
@@ -80,6 +80,6 @@ final class PolicyTest extends TestCase
 
         $policy->addDirective(Directive::CAMERA, Value::SELF);
 
-        $this->assertSame('camera=self', (string) $policy);
+        $this->assertSame('camera=(self)', (string) $policy);
     }
 }

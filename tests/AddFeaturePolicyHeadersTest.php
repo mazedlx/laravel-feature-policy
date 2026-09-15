@@ -17,7 +17,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
         $response = $this->get('test-route')
             ->assertSuccessful();
 
-        $response->assertHeader('Permissions-Policy', 'geolocation=self,fullscreen=self');
+        $response->assertHeader('Permissions-Policy', 'geolocation=(self),fullscreen=(self)');
     }
 
     #[Test]
@@ -78,7 +78,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
         config()->set('feature-policy.policy', $policy::class);
 
         $this->get('test-route')
-            ->assertHeader('Permissions-Policy', 'camera=self');
+            ->assertHeader('Permissions-Policy', 'camera=(self)');
     }
 
     #[Test]
@@ -110,7 +110,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
         config()->set('feature-policy.policy', $policy::class);
 
         $this->get('test-route')
-            ->assertHeader('Permissions-Policy', 'camera=self');
+            ->assertHeader('Permissions-Policy', 'camera=(self)');
     }
 
     #[Test]
@@ -127,6 +127,22 @@ final class AddFeaturePolicyHeadersTest extends TestCase
 
         $this->get('test-route')
             ->assertHeader('Permissions-Policy', 'camera=()');
+    }
+
+    #[Test]
+    public function it_will_parenthesise_a_single_origin_allowlist(): void
+    {
+        $policy = new class extends Policy {
+            public function configure(): void
+            {
+                $this->addDirective(Directive::CAMERA, 'https://example.com');
+            }
+        };
+
+        config()->set('feature-policy.policy', $policy::class);
+
+        $this->get('test-route')
+            ->assertHeader('Permissions-Policy', 'camera=("https://example.com")');
     }
 
     #[Test]
@@ -161,7 +177,7 @@ final class AddFeaturePolicyHeadersTest extends TestCase
             ->middleware(AddFeaturePolicyHeaders::class . ':' . $customPolicy::class);
 
         $this->get('other-route')
-            ->assertHeader('Permissions-Policy', 'fullscreen="custom-policy"');
+            ->assertHeader('Permissions-Policy', 'fullscreen=("custom-policy")');
     }
 
     #[Test]
