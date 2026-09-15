@@ -7,6 +7,7 @@ namespace Mazedlx\FeaturePolicy\Formatter;
 use Stringable;
 use Illuminate\Support\Collection;
 use Mazedlx\FeaturePolicy\FeatureGroups\DirectiveContract;
+use Mazedlx\FeaturePolicy\Value;
 
 final class PolicyFormatter implements FormatContract
 {
@@ -21,9 +22,12 @@ final class PolicyFormatter implements FormatContract
     {
         $policy = $this->directives
             ->map(function (DirectiveContract $directive) {
-                $formattedRules = implode(' ', $directive->rules());
+                $rules = $directive->rules();
+                $formattedRules = implode(' ', $rules);
 
-                if (count($directive->rules()) === 1) {
+                // `*` and `()` are written bare; every other allowlist is an inner list
+                // and must be parenthesised. See https://www.w3.org/TR/permissions-policy/
+                if ($rules === [Value::ALL] || $rules === [Value::NONE]) {
                     return "{$directive->name()}={$formattedRules}";
                 }
 
