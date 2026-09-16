@@ -1,5 +1,38 @@
 # Changelog
 
+## 3.0.0 - 2026-08-18
+
+- drop support for PHP 8.1
+- add support for PHP 8.5
+- drop support for Laravel < 12
+- add support for Laravel 13
+- narrow `orchestra/testbench` to `^10.0|^11.0`
+
+## 2.4.0 - 2026-04-13
+
+- Laravel 13 compatibility
+- bump `actions/cache` from 4 to 5
+
+## 2.3.2 - 2026-01-06
+
+- fix `report-to` directive (thanks @Lucasmeteenc)
+
+## 2.3.1 - 2025-06-17
+
+- bump `stefanzweifel/git-auto-commit-action` from 5 to 6
+
+## 2.3.0 - 2025-02-17
+
+- Laravel 12 compatibility
+- add FLOC to default directives, set its rule to `none`
+- add code of conduct
+- clean up PHPUnit configuration
+
+## 2.2.0 - 2024-03-06
+
+- fix a bug reported in #55
+- update `driftingly/rector-laravel` requirement range
+
 ## 2.1.0 - 2023-05-02
 
 - update standardised permission policies by @Treggats in #26
