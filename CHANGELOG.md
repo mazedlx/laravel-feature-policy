@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.0 - 2026-09-16
+
+- fix single-value allowlist parenthesization by @SanderMuller in #78
+- bump `actions/checkout` from 6 to 7
+- bump `actions/cache` from 5 to 6
+
 ## 3.0.0 - 2026-08-18
 
 - drop support for PHP 8.1
