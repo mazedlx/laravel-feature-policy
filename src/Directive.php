@@ -65,16 +65,16 @@ abstract class Directive implements DirectiveContract
     final public const SYNC_XHR = 'sync-xhr';
     final public const TOOLS = 'tools';
     final public const USB = 'usb';
-    final public const VR = 'vr'; // after Chrome 79 replaced by xr-spatial-tracking
+    /** @deprecated renamed to 'xr-spatial-tracking' in Chrome 79 */
+    final public const VR = 'vr';
     /** @deprecated renamed to 'screen-wake-lock' in the spec (~2020) */
     final public const WAKE_LOCK = 'wake-lock';
     final public const WEB_SHARE = 'web-share';
     final public const WINDOW_MANAGEMENT = 'window-management';
     /** @deprecated formerly in Chrome, changed to 'window-management' in Chrome 111 */
     final public const WINDOW_PLACEMENT = 'window-placement';
-    /** @deprecated unknown directive */
+    /** @deprecated alias of VR; renamed to 'xr-spatial-tracking' in Chrome 79 */
     final public const XR = 'vr';
-    /** @see Implemented in Chrome as vr prior to Chrome 79 */
     final public const XR_SPATIAL_TRACKING = 'xr-spatial-tracking';
 
     public static function make(string $directive, string $type = DefaultFeatureGroup::class): DirectiveContract
