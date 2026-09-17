@@ -13,6 +13,7 @@ abstract class Directive implements DirectiveContract
 
     final public const ACCELEROMETER = 'accelerometer';
     final public const AMBIENT_LIGHT_SENSOR = 'ambient-light-sensor';
+    final public const ATTRIBUTION_REPORTING = 'attribution-reporting';
     final public const AUTOPLAY = 'autoplay';
     final public const BATTERY = 'battery';
     final public const BLUETOOTH = 'bluetooth';
@@ -22,12 +23,15 @@ abstract class Directive implements DirectiveContract
     final public const CH_UA_BITNESS = 'ch-ua-bitness';
     final public const CH_UA_FULL_VERSION = 'ch-ua-full-version';
     final public const CH_UA_FULL_VERSION_LIST = 'ch-ua-full-version-list';
+    final public const CH_UA_HIGH_ENTROPY_VALUES = 'ch-ua-high-entropy-values';
     final public const CH_UA_MOBILE = 'ch-ua-mobile';
     final public const CH_UA_MODEL = 'ch-ua-model';
     final public const CH_UA_PLATFORM = 'ch-ua-platform';
     final public const CH_UA_PLATFORM_VERSION = 'ch-ua-platform-version';
     final public const CH_UA_WOW64 = 'ch-ua-wow64';
+    final public const COMPUTE_PRESSURE = 'compute-pressure';
     final public const CROSS_ORIGIN_ISOLATED = 'cross-origin-isolated';
+    final public const DIRECT_SOCKETS = 'direct-sockets';
     final public const DISPLAY_CAPTURE = 'display-capture';
 
     /** @deprecated formerly in Chrome, behind a flag */
@@ -40,12 +44,15 @@ abstract class Directive implements DirectiveContract
     final public const GEOLOCATION = 'geolocation';
     final public const GYROSCOPE = 'gyroscope';
     final public const HID = 'hid';
+    final public const IDENTITY_CREDENTIALS_GET = 'identity-credentials-get';
     final public const IDLE_DETECTION = 'idle-detection';
     final public const KEYBOARD_MAP = 'keyboard-map';
     final public const MAGNETOMETER = 'magnetometer';
+    final public const MEDIASESSION = 'mediasession';
     final public const MICROPHONE = 'microphone';
     final public const MIDI = 'midi';
     final public const NAVIGATION_OVERRIDE = 'navigation-override';
+    final public const OTP_CREDENTIALS = 'otp-credentials';
     final public const PAYMENT = 'payment';
     final public const PICTURE_IN_PICTURE = 'picture-in-picture';
     final public const PUBLICKEY_CREDENTIALS_GET = 'publickey-credentials-get';
@@ -53,12 +60,15 @@ abstract class Directive implements DirectiveContract
     final public const SERIAL = 'serial';
     /** @deprecated unknown directive */
     final public const SPEAKER = 'speaker';
+    final public const STORAGE_ACCESS = 'storage-access';
     final public const SYNC_XHR = 'sync-xhr';
+    final public const TOOLS = 'tools';
     final public const USB = 'usb';
     final public const VR = 'vr'; // after Chrome 79 replaced by xr-spatial-tracking
     /** @deprecated known as 'screen-wake-rock' */
     final public const WAKE_LOCK = 'wake-lock';
     final public const WEB_SHARE = 'web-share';
+    final public const WINDOW_MANAGEMENT = 'window-management';
     /** @deprecated unknown directive */
     final public const XR = 'vr';
     /** @see Implemented in Chrome as vr prior to Chrome 79 */
