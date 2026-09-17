@@ -65,6 +65,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5758486868656128';
                 }
             },
+            Directive::ATTRIBUTION_REPORTING => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::ATTRIBUTION_REPORTING;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Attribution Reporting API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://wicg.github.io/attribution-reporting-api/#permission-policy-integration';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome 115';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://chromestatus.com/feature/6412002824028160';
+                }
+            },
             Directive::AUTOPLAY => new class extends Directive {
                 public function name(): string
                 {
@@ -299,6 +325,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
+            Directive::CH_UA_HIGH_ENTROPY_VALUES => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::CH_UA_HIGH_ENTROPY_VALUES;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'User-Agent Client Hints';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://wicg.github.io/ua-client-hints/';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome 89';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://chromestatus.com/feature/5995832180473856';
+                }
+            },
             Directive::CH_UA_MOBILE => new class extends Directive {
                 public function name(): string
                 {
@@ -429,6 +481,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5995832180473856';
                 }
             },
+            Directive::COMPUTE_PRESSURE => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::COMPUTE_PRESSURE;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Compute Pressure API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://www.w3.org/TR/compute-pressure/#policy-control';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome 125';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://chromestatus.com/feature/5597608644968448';
+                }
+            },
             Directive::CROSS_ORIGIN_ISOLATED => new class extends Directive {
                 public function name(): string
                 {
@@ -453,6 +531,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function browserSupportUrl(): string
                 {
                     return '';
+                }
+            },
+            Directive::DIRECT_SOCKETS => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::DIRECT_SOCKETS;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Direct Sockets API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://wicg.github.io/direct-sockets/#permissions-policy';
+                }
+
+                public function browserSupport(): string
+                {
+                    return "Status 'Started' in Chrome";
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://chromestatus.com/feature/6398297361088512';
                 }
             },
             Directive::DISPLAY_CAPTURE => new class extends Directive {
@@ -735,6 +839,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return '';
                 }
             },
+            Directive::IDENTITY_CREDENTIALS_GET => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::IDENTITY_CREDENTIALS_GET;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Federated Credential Management API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://fedidcg.github.io/FedCM/#permissions-policy-integration';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome 110';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://chromestatus.com/feature/5162418615877632';
+                }
+            },
             Directive::IDLE_DETECTION => new class extends Directive {
                 public function name(): string
                 {
@@ -813,6 +943,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://www.chromestatus.com/feature/5758486868656128';
                 }
             },
+            Directive::MEDIASESSION => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::MEDIASESSION;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Media Session API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://w3c.github.io/mediasession/#permissions-policy';
+                }
+
+                public function browserSupport(): string
+                {
+                    return '';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return '';
+                }
+            },
             Directive::MICROPHONE => new class extends Directive {
                 public function name(): string
                 {
@@ -889,6 +1045,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function browserSupportUrl(): string
                 {
                     return '';
+                }
+            },
+            Directive::OTP_CREDENTIALS => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::OTP_CREDENTIALS;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'WebOTP API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://wicg.github.io/web-otp/#otp-credentials-feature';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome 84';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://chromestatus.com/feature/5873577578463232';
                 }
             },
             Directive::PAYMENT => new class extends Directive {
@@ -1062,6 +1244,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return true;
                 }
             },
+            Directive::STORAGE_ACCESS => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::STORAGE_ACCESS;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Storage Access API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://privacycg.github.io/storage-access/#permissions-policy-integration';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome 115';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://chromestatus.com/feature/5612590694662144';
+                }
+            },
             Directive::SYNC_XHR => new class extends Directive {
                 public function name(): string
                 {
@@ -1086,6 +1294,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function browserSupportUrl(): string
                 {
                     return 'https://www.chromestatus.com/feature/5154875084111872';
+                }
+            },
+            Directive::TOOLS => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::TOOLS;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'WebMCP';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://webmachinelearning.github.io/webmcp/#permissions-policy';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Available as a Chrome Origin Trial';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://developers.chrome.com/origintrials/#/trials/active';
                 }
             },
             Directive::USB => new class extends Directive {
@@ -1174,6 +1408,37 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function browserSupportUrl(): string
                 {
                     return '';
+                }
+            },
+            Directive::WINDOW_MANAGEMENT => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::WINDOW_MANAGEMENT;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Window Management API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://w3c.github.io/window-management/#api-permission-policy-integration';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome 111';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://chromestatus.com/feature/5146352391028736';
+                }
+
+                public function note(): string
+                {
+                    return "Implemented in Chrome as 'window-placement' prior to Chrome 111";
                 }
             },
             Directive::XR_SPATIAL_TRACKING, Directive::XR, Directive::VR => new class extends Directive {
