@@ -1441,6 +1441,42 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return "Implemented in Chrome as 'window-placement' prior to Chrome 111";
                 }
             },
+            Directive::WINDOW_PLACEMENT => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::WINDOW_PLACEMENT;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Window Management API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://w3c.github.io/window-management/#api-permission-policy-integration';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome 100';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://chromestatus.com/feature/5252960583942144';
+                }
+
+                public function note(): string
+                {
+                    return "Renamed to 'window-management' in Chrome 111; use that directive instead";
+                }
+
+                public function isDeprecated(): bool
+                {
+                    return true;
+                }
+            },
             Directive::XR_SPATIAL_TRACKING, Directive::XR, Directive::VR => new class extends Directive {
                 public function name(): string
                 {
