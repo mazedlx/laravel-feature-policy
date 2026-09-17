@@ -13,6 +13,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
     public const CLIPBOARD_READ = 'clipboard-read';
     public const CLIPBOARD_WRITE = 'clipboard-write';
     public const GAMEPAD = 'gamepad';
+    /** @deprecated replaced by the 'autofill' and 'manual-text' proposals in 2025 */
     public const SHARED_AUTOFILL = 'shared-autofill';
     public const SPEAKER_SELECTION = 'speaker-selection';
 
@@ -123,6 +124,16 @@ final class ProposedFeatureGroup implements FeatureGroupContract
                 public function browserSupportUrl(): string
                 {
                     return '';
+                }
+
+                public function note(): string
+                {
+                    return "Replaced by the 'autofill' and 'manual-text' proposals in 2025";
+                }
+
+                public function isDeprecated(): bool
+                {
+                    return true;
                 }
             },
             self::SPEAKER_SELECTION => new class extends Directive {
