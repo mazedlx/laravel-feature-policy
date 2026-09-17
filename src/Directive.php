@@ -69,6 +69,8 @@ abstract class Directive implements DirectiveContract
     final public const WAKE_LOCK = 'wake-lock';
     final public const WEB_SHARE = 'web-share';
     final public const WINDOW_MANAGEMENT = 'window-management';
+    /** @deprecated formerly in Chrome, changed to 'window-management' in Chrome 111 */
+    final public const WINDOW_PLACEMENT = 'window-placement';
     /** @deprecated unknown directive */
     final public const XR = 'vr';
     /** @see Implemented in Chrome as vr prior to Chrome 79 */
