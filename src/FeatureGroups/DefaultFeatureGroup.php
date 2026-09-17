@@ -1376,7 +1376,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function note(): string
                 {
-                    return "Probably known as 'screen-wake-rock'";
+                    return "Renamed to 'screen-wake-lock' in the spec (~2020); use that directive instead";
                 }
 
                 public function isDeprecated(): bool

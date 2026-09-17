@@ -58,14 +58,14 @@ abstract class Directive implements DirectiveContract
     final public const PUBLICKEY_CREDENTIALS_GET = 'publickey-credentials-get';
     final public const SCREEN_WAKE_LOCK = 'screen-wake-lock';
     final public const SERIAL = 'serial';
-    /** @deprecated unknown directive */
+    /** @deprecated removed from the spec; audio output device access is no longer a Permissions-Policy directive */
     final public const SPEAKER = 'speaker';
     final public const STORAGE_ACCESS = 'storage-access';
     final public const SYNC_XHR = 'sync-xhr';
     final public const TOOLS = 'tools';
     final public const USB = 'usb';
     final public const VR = 'vr'; // after Chrome 79 replaced by xr-spatial-tracking
-    /** @deprecated known as 'screen-wake-rock' */
+    /** @deprecated renamed to 'screen-wake-lock' in the spec (~2020) */
     final public const WAKE_LOCK = 'wake-lock';
     final public const WEB_SHARE = 'web-share';
     final public const WINDOW_MANAGEMENT = 'window-management';
