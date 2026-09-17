@@ -734,6 +734,16 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 {
                     return '';
                 }
+
+                public function note(): string
+                {
+                    return 'Chrome-only origin trial (FLOC); killed and replaced by the Topics API in 2022';
+                }
+
+                public function isDeprecated(): bool
+                {
+                    return true;
+                }
             })->addRule(Value::NONE),
             Directive::FULLSCREEN => new class extends Directive {
                 public function name(): string
