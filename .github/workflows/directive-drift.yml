@@ -1,0 +1,56 @@
+name: Directive Registry Drift Check
+
+on:
+  schedule:
+    - cron: '0 6 1 * *' # 06:00 UTC on the 1st of every month
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  check-drift:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction
+
+      - name: Check for directive drift
+        id: drift
+        run: php .github/scripts/check-directive-drift.php
+        continue-on-error: true
+
+      - name: Ensure tracking label exists
+        if: steps.drift.outputs.has_drift == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh label create directive-drift --color FBCA04 --description "Package directive metadata has drifted from the W3C registry" --force
+
+      - name: File or update tracking issue
+        if: steps.drift.outputs.has_drift == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPORT: ${{ steps.drift.outputs.report }}
+        run: |
+          existing=$(gh issue list --label directive-drift --state open --json number --jq '.[0].number // empty')
+
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body "$REPORT"
+            gh issue comment "$existing" --body "Re-checked on $(date -u +%Y-%m-%d) - report above is current as of this run."
+          else
+            gh issue create --title "Directive registry drift detected" --label directive-drift --body "$REPORT"
+          fi
+
+      - name: Fail the job if drift was found
+        if: steps.drift.outputs.has_drift == 'true'
+        run: exit 1
