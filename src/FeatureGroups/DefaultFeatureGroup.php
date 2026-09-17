@@ -1236,7 +1236,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function note(): string
                 {
-                    return 'Unknown directive';
+                    return 'Removed from the spec; audio output device access is no longer a Permissions-Policy directive';
                 }
 
                 public function isDeprecated(): bool
