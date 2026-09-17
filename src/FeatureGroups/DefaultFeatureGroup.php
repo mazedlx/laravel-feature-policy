@@ -1487,7 +1487,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return true;
                 }
             },
-            Directive::XR_SPATIAL_TRACKING, Directive::XR, Directive::VR => new class extends Directive {
+            Directive::XR_SPATIAL_TRACKING => new class extends Directive {
                 public function name(): string
                 {
                     return Directive::XR_SPATIAL_TRACKING;
@@ -1516,6 +1516,42 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function note(): string
                 {
                     return 'Implemented in Chrome as vr prior to Chrome 79.';
+                }
+            },
+            Directive::XR, Directive::VR => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::VR;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'WebXR Device API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://immersive-web.github.io/webxr/#permissions-policy';
+                }
+
+                public function browserSupport(): string
+                {
+                    return '';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return '';
+                }
+
+                public function note(): string
+                {
+                    return 'Renamed to xr-spatial-tracking in Chrome 79; use that directive instead.';
+                }
+
+                public function isDeprecated(): bool
+                {
+                    return true;
                 }
             },
             default => throw new UnsupportedPermissionException($directive),
