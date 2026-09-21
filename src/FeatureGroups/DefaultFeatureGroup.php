@@ -745,7 +745,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 {
                     return new DateTimeImmutable('2022-01-25');
                 }
-            })->addRule(Value::NONE),
+            }),
             Directive::FULLSCREEN => new class extends Directive {
                 public function name(): string
                 {
