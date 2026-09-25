@@ -831,7 +831,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function specificationName(): string
                 {
-                    return '';
+                    return 'WebHID API';
                 }
 
                 public function specificationUrl(): string
