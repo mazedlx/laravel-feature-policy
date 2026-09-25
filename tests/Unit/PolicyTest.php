@@ -9,6 +9,7 @@ use Mazedlx\FeaturePolicy\Directive;
 use Mazedlx\FeaturePolicy\Policies\Policy;
 use Mazedlx\FeaturePolicy\Tests\TestCase;
 use Mazedlx\FeaturePolicy\Value;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
 final class PolicyTest extends TestCase
@@ -82,4 +83,19 @@ final class PolicyTest extends TestCase
 
         $this->assertSame('camera=(self)', (string) $policy);
     }
-}
+
+    public static function provide_directives(): \Generator
+    {
+        $directiveClass = new \ReflectionClass(Directive::class);
+        $directives = array_unique(array_values($directiveClass->getConstants()));
+        foreach ($directives as $directive) {
+            yield $directive => [$directive];
+        }
+    }
+
+    #[Test]
+    #[DataProvider('provide_directives')]
+    public function deprecated_directives_must_have_a_specification_url(string $directive): void
+    {
+        self::assertNotSame('', Directive::make($directive)->specificationUrl());
+    }}
