@@ -1226,7 +1226,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function specificationName(): string
                 {
-                    return '';
+                    return 'Speaker Selection';
                 }
 
                 public function specificationUrl(): string
