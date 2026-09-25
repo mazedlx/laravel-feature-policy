@@ -1371,7 +1371,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function specificationUrl(): string
                 {
-                    return '';
+                    return 'https://w3c.github.io/screen-wake-lock/#policy-control';
                 }
 
                 public function browserSupport(): string
