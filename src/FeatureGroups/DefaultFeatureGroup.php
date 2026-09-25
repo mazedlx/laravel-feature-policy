@@ -836,7 +836,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function specificationUrl(): string
                 {
-                    return '';
+                    return 'https://hid.spec.whatwg.org/#permissions-policy';
                 }
 
                 public function browserSupport(): string
