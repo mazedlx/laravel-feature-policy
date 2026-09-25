@@ -1366,7 +1366,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function specificationName(): string
                 {
-                    return '';
+                    return 'Wake Lock API';
                 }
 
                 public function specificationUrl(): string
