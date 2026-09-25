@@ -1231,7 +1231,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function specificationUrl(): string
                 {
-                    return '';
+                    return 'https://github.com/w3c/webappsec-permissions-policy/pull/360';
                 }
 
                 public function browserSupport(): string
