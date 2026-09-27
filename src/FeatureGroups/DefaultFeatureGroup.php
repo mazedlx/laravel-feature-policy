@@ -1106,7 +1106,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://chromestatus.com/feature/5694225681219584';
                 }
             },
             Directive::PICTURE_IN_PICTURE => new class extends Directive {
