@@ -1132,7 +1132,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://chromestatus.com/feature/5729206566649856';
                 }
 
                 public function note(): string
