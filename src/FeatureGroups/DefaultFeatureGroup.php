@@ -1376,12 +1376,12 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return '';
+                    return 'Chrome 84';
                 }
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://www.chromestatus.com/feature/4636879949398016';
                 }
 
                 public function note(): string
