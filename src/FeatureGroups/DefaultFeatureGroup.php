@@ -603,12 +603,12 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return 'Formerly in Chrome, behind a flag';
+                    return 'Formerly enabled by default in Chrome 77';
                 }
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://chromestatus.com/feature/5341992867332096';
                 }
 
                 public function note(): string
