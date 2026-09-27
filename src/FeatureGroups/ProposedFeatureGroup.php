@@ -92,12 +92,12 @@ final class ProposedFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return '';
+                    return 'Chrome 103';
                 }
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://chromestatus.com/feature/5138714634223616';
                 }
             },
             self::SHARED_AUTOFILL => new class extends Directive {
