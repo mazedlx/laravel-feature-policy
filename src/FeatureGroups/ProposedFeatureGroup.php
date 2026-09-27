@@ -45,7 +45,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://chromestatus.com/feature/5767075295395840';
                 }
             },
             self::CLIPBOARD_WRITE => new class extends Directive {
