@@ -1536,12 +1536,12 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return '';
+                    return 'Available as a Chrome Origin Trial';
                 }
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://developers.chrome.com/origintrials/#/trials/active';
                 }
 
                 public function note(): string
