@@ -1236,12 +1236,12 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return '';
+                    return 'Formerly partially implemented in Chrome, since removed';
                 }
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://github.com/w3c/mediacapture-output/issues/91';
                 }
 
                 public function note(): string
