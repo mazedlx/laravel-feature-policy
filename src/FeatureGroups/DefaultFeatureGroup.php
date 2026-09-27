@@ -530,7 +530,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://chromestatus.com/feature/5690888397258752';
                 }
             },
             Directive::DIRECT_SOCKETS => new class extends Directive {
