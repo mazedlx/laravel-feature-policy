@@ -971,12 +971,12 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return '';
+                    return 'Chrome 73';
                 }
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://chromestatus.com/feature/5639924124483584';
                 }
             },
             Directive::MICROPHONE => new class extends Directive {
