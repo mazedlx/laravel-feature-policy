@@ -1355,7 +1355,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://chromestatus.com/feature/5651917954875392';
                 }
             },
             Directive::WAKE_LOCK => new class extends Directive {
