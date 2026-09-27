@@ -841,12 +841,12 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return '';
+                    return 'Chrome 89';
                 }
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://developer.chrome.com/blog/new-in-chrome-89';
                 }
             },
             Directive::IDENTITY_CREDENTIALS_GET => new class extends Directive {
