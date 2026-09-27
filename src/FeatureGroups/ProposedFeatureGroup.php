@@ -118,12 +118,12 @@ final class ProposedFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return '';
+                    return 'Available behind a flag in Chrome 93+';
                 }
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://developer.chrome.com/blog/shared-autofill';
                 }
 
                 public function note(): string
