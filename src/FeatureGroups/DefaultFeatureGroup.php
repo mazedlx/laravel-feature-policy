@@ -1215,7 +1215,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://chromestatus.com/feature/6577673212002304';
                 }
             },
             Directive::SPEAKER => new class extends Directive {
