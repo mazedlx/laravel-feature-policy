@@ -154,7 +154,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return '';
+                    return 'No shipped browser support (proposal, not yet implemented)';
                 }
 
                 public function browserSupportUrl(): string
