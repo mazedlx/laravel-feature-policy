@@ -9,8 +9,8 @@ declare(strict_types=1);
  *  - missing:  a Standardized or Retired registry entry has no matching package constant.
  *              (Proposed/Experimental tiers are intentionally excluded - this package does
  *              not aim for exhaustive proposal coverage, so flagging those would just be noise.)
- *  - stale:    a package directive is not flagged isDeprecated(), but no longer appears in
- *              the registry's Standardized, Proposed, or Experimental tables (i.e. it has
+ *  - stale:    a package directive doesn't implement deprecatedSince(), but no longer appears
+ *              in the registry's Standardized, Proposed, or Experimental tables (i.e. it has
  *              been silently retired or dropped upstream without the package catching up).
  */
 
@@ -84,7 +84,7 @@ function is_deprecated(string $token): bool
 {
     foreach ([DefaultFeatureGroup::class, ProposedFeatureGroup::class] as $group) {
         try {
-            return $group::directive($token)->isDeprecated();
+            return method_exists($group::directive($token), 'deprecatedSince');
         } catch (Throwable) {
             continue;
         }
@@ -130,7 +130,7 @@ if ($missing !== []) {
 
 if ($stale !== []) {
     $report .= "### Possibly stale in the package\n\n";
-    $report .= "These directives are not flagged `isDeprecated()`, but no longer appear in the registry's Standardized, Proposed, or Experimental tables:\n\n";
+    $report .= "These directives don't implement `deprecatedSince()`, but no longer appear in the registry's Standardized, Proposed, or Experimental tables:\n\n";
     foreach ($stale as $token) {
         $report .= "- `{$token}`\n";
     }
