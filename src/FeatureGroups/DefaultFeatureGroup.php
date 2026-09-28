@@ -617,11 +617,6 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'Directive is retired';
                 }
 
-                public function isDeprecated(): bool
-                {
-                    return true;
-                }
-
                 public function deprecatedSince(): DateTimeImmutable
                 {
                     return new DateTimeImmutable('2022-12-05');
@@ -744,11 +739,6 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function note(): string
                 {
                     return 'Chrome-only origin trial (FLOC); killed and replaced by the Topics API in 2022';
-                }
-
-                public function isDeprecated(): bool
-                {
-                    return true;
                 }
 
                 public function deprecatedSince(): DateTimeImmutable
@@ -1260,11 +1250,6 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'Removed from the spec; audio output device access is no longer a Permissions-Policy directive';
                 }
 
-                public function isDeprecated(): bool
-                {
-                    return true;
-                }
-
                 public function deprecatedSince(): DateTimeImmutable
                 {
                     return new DateTimeImmutable('2020-01-15');
@@ -1405,11 +1390,6 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return "Renamed to 'screen-wake-lock' in the spec (~2020); use that directive instead";
                 }
 
-                public function isDeprecated(): bool
-                {
-                    return true;
-                }
-
                 public function deprecatedSince(): DateTimeImmutable
                 {
                     return new DateTimeImmutable('2020-08-24');
@@ -1503,11 +1483,6 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return "Renamed to 'window-management' in Chrome 111; use that directive instead";
                 }
 
-                public function isDeprecated(): bool
-                {
-                    return true;
-                }
-
                 public function deprecatedSince(): DateTimeImmutable
                 {
                     return new DateTimeImmutable('2023-12-18');
@@ -1573,11 +1548,6 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function note(): string
                 {
                     return 'Renamed to xr-spatial-tracking in Chrome 79; use that directive instead.';
-                }
-
-                public function isDeprecated(): bool
-                {
-                    return true;
                 }
 
                 public function deprecatedSince(): DateTimeImmutable

@@ -132,11 +132,6 @@ final class ProposedFeatureGroup implements FeatureGroupContract
                     return "Replaced by the 'autofill' and 'manual-text' proposals in 2025";
                 }
 
-                public function isDeprecated(): bool
-                {
-                    return true;
-                }
-
                 public function deprecatedSince(): DateTimeImmutable
                 {
                     return new DateTimeImmutable('2025-07-18');

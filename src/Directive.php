@@ -106,9 +106,4 @@ abstract class Directive implements DirectiveContract
     {
         return '';
     }
-
-    public function isDeprecated(): bool
-    {
-        return false;
-    }
 }
