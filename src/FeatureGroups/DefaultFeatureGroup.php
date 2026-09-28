@@ -1049,7 +1049,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return '';
+                    return 'No shipped browser support (spec-defined, never implemented)';
                 }
 
                 public function browserSupportUrl(): string
