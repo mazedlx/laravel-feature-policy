@@ -1412,12 +1412,12 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return 'Chrome 86';
+                    return 'Chrome 110';
                 }
 
                 public function browserSupportUrl(): string
                 {
-                    return '';
+                    return 'https://chromestatus.com/feature/6362499966304256';
                 }
             },
             Directive::WINDOW_MANAGEMENT => new class extends Directive {
