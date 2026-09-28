@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mazedlx\FeaturePolicy\FeatureGroups;
 
+use DateTimeImmutable;
 use Mazedlx\FeaturePolicy\Directive;
 use Mazedlx\FeaturePolicy\Exceptions\DisabledFeatureGroupException;
 use Mazedlx\FeaturePolicy\Exceptions\UnsupportedPermissionException;
@@ -13,7 +14,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
     public const CLIPBOARD_READ = 'clipboard-read';
     public const CLIPBOARD_WRITE = 'clipboard-write';
     public const GAMEPAD = 'gamepad';
-    /** @deprecated replaced by the 'autofill' and 'manual-text' proposals in 2025 */
+    /** @deprecated replaced by the 'autofill' and 'manual-text' proposals (2025-07-18) */
     public const SHARED_AUTOFILL = 'shared-autofill';
     public const SPEAKER_SELECTION = 'speaker-selection';
 
@@ -100,7 +101,7 @@ final class ProposedFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5138714634223616';
                 }
             },
-            self::SHARED_AUTOFILL => new class extends Directive {
+            self::SHARED_AUTOFILL => new class extends Directive implements DeprecatedDirective {
                 public function name(): string
                 {
                     return ProposedFeatureGroup::SHARED_AUTOFILL;
@@ -134,6 +135,11 @@ final class ProposedFeatureGroup implements FeatureGroupContract
                 public function isDeprecated(): bool
                 {
                     return true;
+                }
+
+                public function deprecatedSince(): DateTimeImmutable
+                {
+                    return new DateTimeImmutable('2025-07-18');
                 }
             },
             self::SPEAKER_SELECTION => new class extends Directive {
