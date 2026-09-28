@@ -14,8 +14,6 @@ interface DirectiveContract
 
     public function note(): string;
 
-    public function isDeprecated(): bool;
-
     public function specificationName(): string;
 
     public function specificationUrl(): string;
