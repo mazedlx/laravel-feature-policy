@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mazedlx\FeaturePolicy\FeatureGroups;
 
+use DateTimeImmutable;
 use Mazedlx\FeaturePolicy\Directive;
 use Mazedlx\FeaturePolicy\Exceptions\UnsupportedPermissionException;
 use Mazedlx\FeaturePolicy\Value;
@@ -585,7 +586,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5144822362931200';
                 }
             },
-            Directive::DOCUMENT_DOMAIN => new class extends Directive {
+            Directive::DOCUMENT_DOMAIN => new class extends Directive implements DeprecatedDirective {
                 public function name(): string
                 {
                     return Directive::DOCUMENT_DOMAIN;
@@ -619,6 +620,11 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function isDeprecated(): bool
                 {
                     return true;
+                }
+
+                public function deprecatedSince(): DateTimeImmutable
+                {
+                    return new DateTimeImmutable('2022-12-05');
                 }
             },
             Directive::ENCRYPTED_MEDIA => new class extends Directive {
@@ -709,7 +715,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'To enable these, use the Chrome command line flag --enable-blink-features=ExperimentalProductivityFeatures.';
                 }
             },
-            Directive::FLOC => (new class extends Directive {
+            Directive::FLOC => (new class extends Directive implements DeprecatedDirective {
                 public function name(): string
                 {
                     return Directive::FLOC;
@@ -743,6 +749,11 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function isDeprecated(): bool
                 {
                     return true;
+                }
+
+                public function deprecatedSince(): DateTimeImmutable
+                {
+                    return new DateTimeImmutable('2022-01-25');
                 }
             })->addRule(Value::NONE),
             Directive::FULLSCREEN => new class extends Directive {
@@ -1218,7 +1229,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/6577673212002304';
                 }
             },
-            Directive::SPEAKER => new class extends Directive {
+            Directive::SPEAKER => new class extends Directive implements DeprecatedDirective {
                 public function name(): string
                 {
                     return Directive::SPEAKER;
@@ -1252,6 +1263,11 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function isDeprecated(): bool
                 {
                     return true;
+                }
+
+                public function deprecatedSince(): DateTimeImmutable
+                {
+                    return new DateTimeImmutable('2020-01-15');
                 }
             },
             Directive::STORAGE_ACCESS => new class extends Directive {
@@ -1358,7 +1374,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://chromestatus.com/feature/5651917954875392';
                 }
             },
-            Directive::WAKE_LOCK => new class extends Directive {
+            Directive::WAKE_LOCK => new class extends Directive implements DeprecatedDirective {
                 public function name(): string
                 {
                     return Directive::WAKE_LOCK;
@@ -1392,6 +1408,11 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function isDeprecated(): bool
                 {
                     return true;
+                }
+
+                public function deprecatedSince(): DateTimeImmutable
+                {
+                    return new DateTimeImmutable('2020-08-24');
                 }
             },
             Directive::WEB_SHARE => new class extends Directive {
@@ -1451,7 +1472,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return "Implemented in Chrome as 'window-placement' prior to Chrome 111";
                 }
             },
-            Directive::WINDOW_PLACEMENT => new class extends Directive {
+            Directive::WINDOW_PLACEMENT => new class extends Directive implements DeprecatedDirective {
                 public function name(): string
                 {
                     return Directive::WINDOW_PLACEMENT;
@@ -1486,6 +1507,11 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 {
                     return true;
                 }
+
+                public function deprecatedSince(): DateTimeImmutable
+                {
+                    return new DateTimeImmutable('2023-12-18');
+                }
             },
             Directive::XR_SPATIAL_TRACKING => new class extends Directive {
                 public function name(): string
@@ -1518,7 +1544,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'Implemented in Chrome as vr prior to Chrome 79.';
                 }
             },
-            Directive::XR, Directive::VR => new class extends Directive {
+            Directive::XR, Directive::VR => new class extends Directive implements DeprecatedDirective {
                 public function name(): string
                 {
                     return Directive::VR;
@@ -1552,6 +1578,11 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                 public function isDeprecated(): bool
                 {
                     return true;
+                }
+
+                public function deprecatedSince(): DateTimeImmutable
+                {
+                    return new DateTimeImmutable('2019-10-15');
                 }
             },
             default => throw new UnsupportedPermissionException($directive),
