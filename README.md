@@ -1,6 +1,6 @@
 # Configure the browsers abilities
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature.policy)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature-policy)
 [![Tests](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/test.yml/badge.svg)](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/test.yml)
 [![Analyse and format](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/code-quality.yml/badge.svg)](https://github.com/mazedlx/laravel-feature-policy/actions/workflows/code-quality.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/mazedlx/laravel-feature-policy.svg?style=flat-square)](https://packagist.org/packages/mazedlx/laravel-feature-policy)
@@ -29,7 +29,7 @@ More on the header itself can be found on the following sites.
 
 ## Installation
 
-**Laravel 10 users should use v2.0 or newer, otherwise stick to v1.3**
+**Requires Laravel 12 or 13, and PHP 8.2+.** Laravel 10 users should use the 2.x series, Laravel < 10 users should stick to v1.3.
 
 The package can be installed though composer:
 ```bash
@@ -49,29 +49,55 @@ Which looks like this:
 
 return [
     /*
+     * "Permissions-Policy" headers will only be added if this is set to true
+     */
+    'enabled' => env('FPH_ENABLED', true),
+
+    /*
      * A policy will determine which "Permissions-Policy" headers will be set.
      * A valid policy extends `Mazedlx\FeaturePolicy\Policies\Policy`
      */
     'policy' => Mazedlx\FeaturePolicy\Policies\Basic::class,
 
-    /*
-     * "Feature-Policy" headers will only be added if this is set to true
-     */
-    'enabled' => env('FPH_ENABLED', true),
+    /** @see https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md */
+    'directives' => [
+        // enable proposed, not-yet-standardized directives
+        'proposal' => env('FPH_PROPOSAL_ENABLED', false),
+        // enable experimental directives
+        'experimental' => env('FPH_EXPERIMENTAL_ENABLED', false),
+    ],
+
+    'reporting' => [
+        'enabled' => env('FPH_REPORTING_ENABLED', false),
+        'report_only' => env('FPH_REPORT_ONLY', false),
+        'url' => env('FPH_REPORTING_URL', 'https://reportingapi.tools/public/submit'),
+    ],
 ];
 ```
 </details>
 
 ## Middleware
 
-You can add "Feature-Policy" headers to all responses by registering `Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class` in the HTTP kernel:
+You can add "Permissions-Policy" headers to all responses by registering `Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class` as web middleware in `bootstrap/app.php`:
 <details>
 <summary>Middleware example</summary>
 
 ```php
-// app/Http/Kernel.php
+// bootstrap/app.php
 
-...
+use Illuminate\Foundation\Configuration\Middleware;
+
+->withMiddleware(function (Middleware $middleware) {
+    $middleware->web(append: [
+        \Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders::class,
+    ]);
+})
+```
+
+If your app still uses the older `app/Http/Kernel.php` structure, register it in `$middlewareGroups` there instead:
+
+```php
+// app/Http/Kernel.php
 
 protected $middlewareGroups = [
     'web' => [
@@ -115,7 +141,7 @@ This policy determines which directives will be set in the "Permissions-Policy" 
 
 It uses the following syntax;
 ```text
-Feature-Policy: <directive> <allowlist>
+Permissions-Policy: <directive> <allowlist>
 ```
 
 An example of a "Permissions-Policy" directive is `microphone`:
@@ -139,9 +165,9 @@ Some of these are:
 - midi
 - payment
 - picture-in-picture
-- speaker
+- screen-wake-lock
 - usb
-- vr
+- xr-spatial-tracking
 
 You can add multiple policy options as an array or as a single string with space-separated options:
 
@@ -171,7 +197,7 @@ namespace Mazedlx\FeaturePolicy\Policies;
 use Mazedlx\FeaturePolicy\Value;
 use Mazedlx\FeaturePolicy\Directive;
 
-class Basic extends Policy
+final class Basic extends Policy
 {
     public function configure()
     {

@@ -4,7 +4,7 @@ namespace Mazedlx\FeaturePolicy;
 
 use Mazedlx\FeaturePolicy\FeatureGroups\DefaultFeatureGroup;
 use Mazedlx\FeaturePolicy\FeatureGroups\DirectiveContract;
-use Mazedlx\FeaturePolicy\FeatureGroups\ProposedFeatureGroup;
+use Mazedlx\FeaturePolicy\FeatureGroups\FeatureGroupContract;
 use Mazedlx\FeaturePolicy\Exceptions\UnknownPermissionGroupException;
 
 abstract class Directive implements DirectiveContract
@@ -79,11 +79,11 @@ abstract class Directive implements DirectiveContract
 
     public static function make(string $directive, string $type = DefaultFeatureGroup::class): DirectiveContract
     {
-        return match ($type) {
-            DefaultFeatureGroup::class => DefaultFeatureGroup::directive($directive),
-            ProposedFeatureGroup::class => ProposedFeatureGroup::directive($directive),
-            default => throw new UnknownPermissionGroupException($type),
-        };
+        if (! is_a($type, FeatureGroupContract::class, true)) {
+            throw new UnknownPermissionGroupException($type);
+        }
+
+        return $type::directive($directive);
     }
 
     public function addRule(string $rule): static
@@ -105,10 +105,5 @@ abstract class Directive implements DirectiveContract
     public function note(): string
     {
         return '';
-    }
-
-    public function isDeprecated(): bool
-    {
-        return false;
     }
 }
