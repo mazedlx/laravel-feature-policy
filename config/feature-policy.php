@@ -3,6 +3,10 @@
 return [
     'enabled' => env('FPH_ENABLED', true),
 
+    'deprecations' => [
+        'enabled' => env('FPH_DEPRECATION_NOTICES') ?? false,
+    ],
+
     /*
      * A policy will determine which Feature-Policy headers will be set.
      * A valid policy extends `Mazedlx\FeaturePolicy\Policies\Policy`

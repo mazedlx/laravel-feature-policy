@@ -8,6 +8,7 @@ use Mazedlx\FeaturePolicy\Directive;
 use Illuminate\Support\Facades\Route;
 use Mazedlx\FeaturePolicy\Policies\Policy;
 use Mazedlx\FeaturePolicy\AddFeaturePolicyHeaders;
+use Mazedlx\FeaturePolicy\FeatureGroups\DeprecatedDirective;
 
 final class AddFeaturePolicyHeadersTest extends TestCase
 {
@@ -222,6 +223,33 @@ final class AddFeaturePolicyHeadersTest extends TestCase
         $response->assertHeader('Reporting-Endpoints', 'violation-reports="' . config('feature-policy.reporting.url') . '"');
         $response->assertHeader('Permissions-Policy', 'camera=*; report-to=violation-reports');
         $response->assertHeader('Permissions-Policy-Report-Only', 'camera=*; report-to=violation-reports');
+    }
 
+    #[Test]
+    public function it_can_add_a_deprecation_header_for_old_features(): void
+    {
+        $policy = new class extends Policy {
+            public function configure(): void
+            {
+                $this->addDirective(Directive::SPEAKER, Value::SELF);
+            }
+        };
+        config()->set('feature-policy.policy', $policy::class);
+        config()->set('feature-policy.deprecations.enabled', true);
+        $directive = Directive::make(Directive::SPEAKER);
+        assert($directive instanceof DeprecatedDirective);
+
+        $response = $this->get('test-route');
+        $response->assertHeader('Permissions-Policy', 'speaker=(self)');
+
+        $response->assertHeader(
+            'Link',
+            sprintf(
+                '<%s>; rel="deprecation"; feature="speaker"; title="%s"; since="%s"',
+                $directive->specificationUrl(),
+                $directive->note(),
+                $directive->deprecatedSince()->format('Y-m-d'),
+            ),
+        );
     }
 }

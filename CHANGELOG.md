@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- **Breaking:** `DirectiveContract::isDeprecated()` removed; a directive's deprecated status is now
+  determined by whether it implements the new `DeprecatedDirective` interface (`deprecatedSince(): DateTimeImmutable`)
+- add `feature-policy.deprecations.enabled` config option
+- emit one `Link: rel="deprecation"` response header per deprecated directive in the active policy
+  (with `feature`, `title`, `since` parameters) when enabled
+
 ## 3.1.0 - 2026-09-16
 
 - fix single-value allowlist parenthesization by @SanderMuller in #78
