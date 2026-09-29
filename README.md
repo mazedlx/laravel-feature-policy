@@ -54,6 +54,13 @@ return [
     'enabled' => env('FPH_ENABLED', true),
 
     /*
+     * See "Deprecation Notices" below.
+     */
+    'deprecations' => [
+        'enabled' => env('FPH_DEPRECATION_NOTICES') ?? false,
+    ],
+
+    /*
      * A policy will determine which "Permissions-Policy" headers will be set.
      * A valid policy extends `Mazedlx\FeaturePolicy\Policies\Policy`
      */
@@ -236,6 +243,61 @@ class MyFeaturePolicy extends Basic
 </details>
 
 Don't forget to change the `policy` key in the `feature-policy` config file to the class name fo your policy (e.g. `App\Services\Policies\MyFeaturePolicy`).
+
+## Deprecation Notices
+
+Some directives get renamed, retired, or dropped from the spec over time (`speaker` was removed
+entirely, `vr` was renamed to `xr-spatial-tracking`, and so on). Rather than silently keep sending a
+directive that no longer does anything, this package can surface that to API consumers/tooling
+through standard `Link` response headers.
+
+This is opt-in, via the `deprecations.enabled` config key (`FPH_DEPRECATION_NOTICES` env var,
+defaults to `false`):
+
+```php
+'deprecations' => [
+    'enabled' => env('FPH_DEPRECATION_NOTICES') ?? false,
+],
+```
+
+When enabled, every deprecated directive present in the resolved policy gets its own `Link`
+header ([RFC 8288](https://www.rfc-editor.org/rfc/rfc8288)), instead of one bespoke combined
+header, so it's safe to have several deprecated directives active at once, each with its own
+target, reason, and date:
+
+```
+Link: <https://github.com/w3c/webappsec-permissions-policy/pull/360>; rel="deprecation"; feature="speaker"; title="Removed from the spec; audio output device access is no longer a Permissions-Policy directive"; since="2020-01-15"
+```
+
+- `rel="deprecation"` marks it as a deprecation notice, filterable independently of any other
+  `Link` headers a response might carry.
+- `feature` is the directive name.
+- `title` is a human-readable explanation of what happened.
+- `since` is the date the directive was actually deprecated upstream (not when this package
+  happened to notice), sourced from a primary reference: the removing spec PR, a browser vendor's
+  own deprecation announcement, etc.
+- The link target itself points at that same primary source.
+
+If you're writing a custom directive and want it to participate in this, implement
+`Mazedlx\FeaturePolicy\FeatureGroups\DeprecatedDirective` on top of the usual `DirectiveContract`
+methods:
+
+```php
+use Mazedlx\FeaturePolicy\FeatureGroups\DeprecatedDirective;
+
+final class MyOldDirective extends Directive implements DeprecatedDirective
+{
+    // ...name(), specificationName(), specificationUrl(), browserSupport(), browserSupportUrl()
+
+    public function deprecatedSince(): DateTimeImmutable
+    {
+        return new DateTimeImmutable('2024-01-01');
+    }
+}
+```
+
+A directive is only considered deprecated if it implements this interface; there's no separate
+boolean flag to keep in sync.
 
 ## Testing
 

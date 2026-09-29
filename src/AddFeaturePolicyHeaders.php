@@ -15,7 +15,10 @@ final class AddFeaturePolicyHeaders
 
         $this->getPolicies($customPolicyClass)
             ->filter(fn (Policy $policy) => $policy->shouldBeApplied($request, $response))
-            ->each(fn (Policy $policy) => $policy->applyTo($response));
+            ->each(function (Policy $policy) use ($response) {
+                $policy->applyTo($response);
+                $policy->applyDeprecationNotice($response);
+            });
 
         return $response;
     }
