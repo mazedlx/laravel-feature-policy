@@ -78,7 +78,8 @@ from a big `match` inside a **FeatureGroup**:
   `ProposedFeatureGroup::directive()`.
 - **`DefaultFeatureGroup`** — the standard/shipped directives. Each `match` arm returns an anonymous
   `Directive` subclass carrying metadata (`name()`, `specificationName/Url()`, `browserSupport()`,
-  and optionally `note()` / `isDeprecated()`).
+  and optionally `note()`). A deprecated directive additionally implements `DeprecatedDirective`
+  (`deprecatedSince(): DateTimeImmutable`) instead of an `isDeprecated()` method.
 - **`ProposedFeatureGroup`** — proposed/experimental directives, gated by
   `config('feature-policy.directives.proposal')`; throws `DisabledFeatureGroupException` when disabled.
 - Unknown names throw `UnsupportedPermissionException`; unknown group types throw
