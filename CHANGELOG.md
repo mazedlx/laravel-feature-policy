@@ -1,12 +1,30 @@
 # Changelog
 
-## Unreleased
+## 3.3.0 - 2026-09-30
 
 - **Breaking:** `DirectiveContract::isDeprecated()` removed; a directive's deprecated status is now
   determined by whether it implements the new `DeprecatedDirective` interface (`deprecatedSince(): DateTimeImmutable`)
 - add `feature-policy.deprecations.enabled` config option
 - emit one `Link: rel="deprecation"` response header per deprecated directive in the active policy
   (with `feature`, `title`, `since` parameters) when enabled
+- fix `FLOC`/`interest-cohort` shipping a pre-seeded `none` rule that merged with (instead of being
+  replaced by) a consumer's own configured rule, producing an invalid directive value
+- correct `WEB_SHARE`'s recorded browser support (was `Chrome 86`, matched neither the general Web
+  Share API nor its Permissions-Policy integration; now `Chrome 110`)
+- `FeatureGroupContract` is now actually used for `Directive::make()` dispatch instead of a
+  hardcoded `match`
+- add `browserSupport()`/`browserSupportUrl()` for 18 directives, and specification name/URL for
+  `hid`, `speaker`, and `wake-lock`
+- add `AGENTS.md`
+- enforce LF line endings via `.gitattributes`
+
+## 3.2.0 - 2026-09-17
+
+- add 10 missing standardized directives and `window-placement` as a retired directive
+- flag `vr`/`xr`, `shared-autofill`, and `interest-cohort` (FLOC) as deprecated; correct the
+  `speaker` and `wake-lock` deprecation notes
+- add a scheduled directive registry drift check
+- rename `phpunit.xml` to `phpunit.xml.dist`
 
 ## 3.1.0 - 2026-09-16
 
