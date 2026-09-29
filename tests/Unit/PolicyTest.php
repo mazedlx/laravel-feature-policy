@@ -69,6 +69,22 @@ final class PolicyTest extends TestCase
     }
 
     #[Test]
+    public function explicitly_configuring_floc_does_not_produce_a_malformed_value(): void
+    {
+        $policy = new class extends Policy {
+            public function configure(): void
+            {
+                //
+            }
+        };
+        config()->set('feature-policy.policy', $policy::class);
+
+        $policy->addDirective(Directive::FLOC, Value::SELF);
+
+        $this->assertSame('interest-cohort=(self)', (string) $policy);
+    }
+
+    #[Test]
     public function it_can_add_a_directive_with_add_directive(): void
     {
         $policy = new class extends Policy {

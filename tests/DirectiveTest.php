@@ -56,7 +56,6 @@ final class DirectiveTest extends TestCase
                 Directive::VR,
                 Directive::XR,
                 Directive::XR_SPATIAL_TRACKING,
-                Directive::FLOC,
             ];
 
             return ! in_array($constant, $skippableDirectives, strict: true);
@@ -68,14 +67,5 @@ final class DirectiveTest extends TestCase
                 $constantValue,
             ];
         }
-    }
-
-    #[Test]
-    public function floc_is_disabled_by_default()
-    {
-        $directive = Directive::make(Directive::FLOC);
-        $this->assertNotEmpty($directive->rules());
-        $this->assertCount(1, $directive->rules());
-        $this->assertSame(Value::NONE, $directive->rules()[0]);
     }
 }
