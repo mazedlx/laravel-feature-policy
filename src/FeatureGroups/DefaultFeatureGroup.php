@@ -1167,6 +1167,32 @@ final class DefaultFeatureGroup implements FeatureGroupContract
                     return 'https://bugs.chromium.org/p/chromium/issues/detail?id=993007';
                 }
             },
+            Directive::PUBLICKEY_CREDENTIALS_REMOTE_CLIENT_DATA_JSON => new class extends Directive {
+                public function name(): string
+                {
+                    return Directive::PUBLICKEY_CREDENTIALS_REMOTE_CLIENT_DATA_JSON;
+                }
+
+                public function specificationName(): string
+                {
+                    return 'Web Authentication API';
+                }
+
+                public function specificationUrl(): string
+                {
+                    return 'https://w3c.github.io/webauthn/#sctn-permissions-policy';
+                }
+
+                public function browserSupport(): string
+                {
+                    return 'Chrome';
+                }
+
+                public function browserSupportUrl(): string
+                {
+                    return 'https://issues.chromium.org/issues/506062130';
+                }
+            },
             Directive::SCREEN_WAKE_LOCK => new class extends Directive {
                 public function name(): string
                 {

@@ -57,6 +57,7 @@ abstract class Directive implements DirectiveContract
     final public const PAYMENT = 'payment';
     final public const PICTURE_IN_PICTURE = 'picture-in-picture';
     final public const PUBLICKEY_CREDENTIALS_GET = 'publickey-credentials-get';
+    final public const PUBLICKEY_CREDENTIALS_REMOTE_CLIENT_DATA_JSON = 'publickey-credentials-remote-client-data-json';
     final public const SCREEN_WAKE_LOCK = 'screen-wake-lock';
     final public const SERIAL = 'serial';
     /** @deprecated removed from the spec; audio output device access is no longer a Permissions-Policy directive */
