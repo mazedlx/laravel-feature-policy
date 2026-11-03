@@ -1185,7 +1185,7 @@ final class DefaultFeatureGroup implements FeatureGroupContract
 
                 public function browserSupport(): string
                 {
-                    return 'Chrome';
+                    return 'Chrome - Open';
                 }
 
                 public function browserSupportUrl(): string
